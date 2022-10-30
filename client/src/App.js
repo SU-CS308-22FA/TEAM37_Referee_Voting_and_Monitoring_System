@@ -18,6 +18,7 @@ function App() {
           Learn React
         </a>
         <p> YUNUS KRALojşoj </p>
+        <p> MERT KRAL </p>
       </header>
     </div>
   );
