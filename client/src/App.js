@@ -17,7 +17,7 @@ function App() {
         >
           Learn React
         </a>
-        <p> YUNUS KRALojşoj </p>
+        <p> YUNUS KRAL </p>
         <p> MERT KRAL </p>
       </header>
     </div>
