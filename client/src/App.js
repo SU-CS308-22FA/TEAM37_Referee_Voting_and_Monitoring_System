@@ -11,7 +11,7 @@ const App = () => {
     <Container maxWidth="lg">
       <AppBar className={classes.AppBar} position="static" color="inherit">
         <Typography className={classes.heading} variant="h2" align="center">
-          Refree System
+          Referee Voting and Monitoring System
         </Typography>
       </AppBar>
 
