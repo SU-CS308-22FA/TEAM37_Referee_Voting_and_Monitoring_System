@@ -105,7 +105,7 @@ const Register = () => {
           >
             {errMsg}
           </p>
-          <h1>Register</h1>
+          <h1>Referee Voting and Monitoring System</h1>
           <form onSubmit={handleSubmit}>
             <label htmlFor="username">
               Username:
