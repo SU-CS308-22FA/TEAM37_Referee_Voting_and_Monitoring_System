@@ -9,3 +9,6 @@ export const login = async (formData) =>
 
 export const register = async (formData) =>
   await HTTP.post("/users/signup", formData);
+
+  export const change = async (formData) =>
+  await HTTP.put("/users/:id", formData);
