@@ -2,7 +2,6 @@ import express from "express";
 import mongoose from "mongoose";
 import bcrypt from 'bcryptjs'
 import User from '../models/userModel.js';
-const validator = require('validator')
 const router = express.Router();
 
 // localhost:5000/users/signup POST request
@@ -12,18 +11,6 @@ router.post("/signup", async (req, res)=>{
         const { fullname, password, phoneNumber, email } = req.body;
         
         const userExists = await User.findOne({ email })
-        if(!email || !password ||!fullname){
-            return res.status(400).json({ message:'All fields must be filled'})
-
-        }
-        if(!validator.isEmail(email))
-        {
-            return res.status(400).json({ message:'Email is not valid'})
-
-        }
-        if(!validator.isStrongPassword(password)){
-            return res.status(400).json({ message:'Password is not strong enough'})
-        }
         if(userExists)
             return res.status(400).json({ message: 'User already exists.'})
 
@@ -34,7 +21,8 @@ router.post("/signup", async (req, res)=>{
             email,
             password: hashedPassword,
             phoneNumber
-        })
+        }
+        )
 
         return res.status(201).json(createdUser);
     } catch (error) {

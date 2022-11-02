@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-const validator = require('validator')
+
 
 const userSchema = mongoose.Schema({
     fullname: {
