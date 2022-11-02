@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { change } from "../axios";
+import { change, handleEdit } from "../axios";
+
+import axios from "axios";
+const apiEndPoint = "http://localhost:5000/users";
+
 const HomeScreen = ({ user }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullname: "",
   });
+
 
   return (
     <div>
@@ -19,7 +24,7 @@ const HomeScreen = ({ user }) => {
           <Form
             onSubmit={(e) => {
               e.preventDefault();        
-              change(formData)
+              handleEdit(formData, user._id)
                 .then((res) => {
                   navigate("/");
                 })
@@ -55,6 +60,29 @@ const HomeScreen = ({ user }) => {
                 </Button>
               </Col>
             </Row>
+          </Form>
+          <Form
+          onSubmit={(e) => {
+            e.preventDefault();        
+            handleEdit(formData, user._id)
+              .then((res) => {
+                navigate("/");
+              })
+              .catch((err) => console.log(err));
+          }}
+          >
+            
+          <Col xs="auto">
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <Button type="submit" className="mb-2" variant="danger">
+                  Delete Account :/
+                </Button>
+              </Col>
           </Form>
         </>
       ) : (

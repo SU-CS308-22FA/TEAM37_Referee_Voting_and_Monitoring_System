@@ -64,7 +64,7 @@ router.put("/:id", async (req,res)=>{
         
         return res.status(200).json({ updatedUser, message: 'Informations changed succesfully' })
     } catch (error) {
-        return res.status(400).json({ message: error.message + req.params.id })
+        return res.status(400).json({ message: error.message + req.params })
     }
 })
 
