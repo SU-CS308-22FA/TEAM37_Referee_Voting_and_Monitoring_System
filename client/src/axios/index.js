@@ -10,5 +10,11 @@ export const login = async (formData) =>
 export const register = async (formData) =>
   await HTTP.post("/users/signup", formData);
 
-  export const change = async (formData) =>
-  await HTTP.put("/users/:id", formData);
+export const handleEdit = async (formdata, id) => {    
+    try {
+      const response = await HTTP.put(`/users/${id}`, formdata);
+      
+    } catch (err) {
+      console.log(`Error: ${err.message}`);
+    }
+}

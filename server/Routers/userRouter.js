@@ -55,18 +55,16 @@ router.put("users/:id", async (req, res) => {
     const { fullname } = req.body;
     // const hashedPassword = await bcrypt.hash(password, 10)
 
-    console.log(req);
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      { $set: { fullname } },
-      { new: true }
-    );
-    return res
-      .status(200)
-      .json({ updatedUser, message: "Informations changed succesfully" });
-  } catch (error) {
-    return res.status(400).json({ message: error.message + req.params.id });
-  }
-});
+        const updatedUser = await User.findByIdAndUpdate(
+            req.params.id,
+            { $set: {fullname} },
+            { new: true }
+          );
+        
+        return res.status(200).json({ updatedUser, message: 'Informations changed succesfully' })
+    } catch (error) {
+        return res.status(400).json({ message: error.message + req.params })
+    }
+})
 
 export default router;
