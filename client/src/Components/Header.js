@@ -22,14 +22,15 @@ const Header = ({ user, setUser }) => {
               title={<span className="text-white">Hakkımızda</span>}
               id="basic-nav-dropdown"
             >
-              <NavDropdown.Item>Futbol Hakkında</NavDropdown.Item>
-              <NavDropdown.Item>Hakem Listesi</NavDropdown.Item>
-              <NavDropdown.Item>Ekibimiz</NavDropdown.Item>
+              <NavDropdown.Item>About Football</NavDropdown.Item>
+              <NavDropdown.Item>Referee List</NavDropdown.Item>
+              <NavDropdown.Item>Our Team </NavDropdown.Item>
               <NavDropdown.Divider />
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
         {user ? (
+        <> <h2> {user.fullname} </h2>
           <Button
             variant="outline-light"
             onClick={(e) => {
@@ -40,6 +41,7 @@ const Header = ({ user, setUser }) => {
             {" "}
             Sign Out{" "}
           </Button>
+        </>
         ) : (
           <Button variant="outline-light">
             <Link className="text-white text-decoration-none" to="/signin">
