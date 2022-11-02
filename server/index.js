@@ -1,23 +1,21 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import cors from 'cors';
+import express from "express";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import userRouter from "./Routers/userRouter.js";
+import cors from "cors";
+
+dotenv.config();
 
 const app = express();
 
-import userRouter from "./routes/user.js";
-
-app.use(bodyParser.json({ limit: '30mb', extended: true }));
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
+app.use(express.json());
+app.use("/users", userRouter);
 
-
-app.use("/user", userRouter);
-
-const CONNECTION_URL = 'mongodb+srv://ydelipinar:ydelipinar123123@cluster0.mqafbuk.mongodb.net/?retryWrites=true&w=majority';
-const PORT = process.env.PORT|| 5000;
-
-mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true})
-  .then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
-  .catch((error) => console.log(error.message));
-
+app.listen(5000, () => {
+  // connect to database
+  mongoose
+    .connect(process.env.DB_CONNECTION_STRING)
+    .then(() => console.log("connected to db"))
+    .catch((error) => console.log(error));
+});
