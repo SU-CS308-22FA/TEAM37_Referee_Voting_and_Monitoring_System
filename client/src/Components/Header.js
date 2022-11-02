@@ -16,7 +16,7 @@ const Header = ({ user, setUser }) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link className="text-white">Anasayfa</Nav.Link>
+            <Nav.Link className="text-white">Homepage</Nav.Link>
             <Nav.Link></Nav.Link>
             <NavDropdown
               title={<span className="text-white">Hakkımızda</span>}
@@ -38,12 +38,12 @@ const Header = ({ user, setUser }) => {
             }}
           >
             {" "}
-            Çıkış yap{" "}
+            Sign Out{" "}
           </Button>
         ) : (
           <Button variant="outline-light">
             <Link className="text-white text-decoration-none" to="/signin">
-              Giriş yap
+              Sign In
             </Link>
           </Button>
         )}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../axios";
+
 const AuthScreen = ({ setUser }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -36,6 +37,7 @@ const AuthScreen = ({ setUser }) => {
                 type="email"
                 placeholder="Enter email"
               />
+              
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
