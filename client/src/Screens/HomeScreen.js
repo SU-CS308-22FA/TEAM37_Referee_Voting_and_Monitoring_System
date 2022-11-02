@@ -12,13 +12,13 @@ const HomeScreen = ({ user }) => {
     <div>
       {user ? (
         <>
-          <h1>{"Welcome " + user.fullname}</h1>
+          <h1>{"Welcome " + user.fullname + user._id}</h1>
           <br></br>
           <h2>My Profile</h2>
           <hr></hr>
           <Form
             onSubmit={(e) => {
-              e.preventDefault();
+              e.preventDefault();        
               change(formData)
                 .then((res) => {
                   navigate("/");
