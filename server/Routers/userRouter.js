@@ -5,7 +5,7 @@ import User from '../models/userModel.js';
 
 const router = express.Router();
 
-// localhost:5000/users 'a yapılan post isteği
+// localhost:5000/users/signup POST request
 router.post("/signup", async (req, res)=>{
     try {
         //console.log(req.body)
@@ -27,7 +27,7 @@ router.post("/signup", async (req, res)=>{
         return res.status(201).json(createdUser);
     } catch (error) {
         console.log(error)
-        return res.json({message: "create user failed"})
+        return res.json({message: "User creation failed!"})
     }
 })
 
@@ -37,13 +37,13 @@ router.post("/signin", async (req,res)=>{
         const {email, password} = req.body;
         const user = await User.findOne({email})
         if(!user)
-            return res.status(400).json({message: "user does not exist"})
+            return res.status(400).json({message: "User does not exist."})
         
         const isPasswordCorrect = await bcrypt.compare(password, user.password)
         if(!isPasswordCorrect)
-            return res.status(400).json({message: "Wrong Password"})
+            return res.status(400).json({message: "Wrong password"})
         
-        return res.status(200).json({ user, message: 'Authentication successful' })
+        return res.status(200).json({ user, message: 'Authentication successful.' })
     } catch (error) {
         return res.status(400).json({ message: error.message })
     }

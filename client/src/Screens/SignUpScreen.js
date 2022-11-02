@@ -12,6 +12,7 @@ const SignUpScreen = () => {
     phoneNumber: "",
     email: "",
   });
+
   return (
     <Container>
       <Row className="justify-content-center">

@@ -1,4 +1,3 @@
-import "./App.css";
 import Header from "./Components/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
@@ -22,7 +21,6 @@ function App() {
         </Container>
       </main>
     </Router>
-    /* Selam */
   );
 }
 
