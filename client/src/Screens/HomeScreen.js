@@ -3,7 +3,7 @@ import { Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { change, handledelete, handleEdit } from "../axios";
 
-import axios from "axios";
+
 const apiEndPoint = "http://localhost:5000/users";
 
 const HomeScreen = ({ user }) => {
@@ -23,7 +23,7 @@ const HomeScreen = ({ user }) => {
           <Form
             onSubmit={(e) => {
               e.preventDefault();
-              change(formData)
+              handleEdit(formData, user._id)
                 .then((res) => {
                   navigate("/");
                 })

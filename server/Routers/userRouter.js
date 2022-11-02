@@ -50,7 +50,7 @@ router.post("/signin", async (req, res) => {
 });
 
 // localhost:5000/users/changename put request
-router.put("users/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const { fullname } = req.body;
     // const hashedPassword = await bcrypt.hash(password, 10)
@@ -73,7 +73,7 @@ router.delete("/:id", async (req,res)=>{
         res.status(200).json("User has been deleted.");
       } 
       catch (err) {
-        return res.status(400).json({ message: error.message })
+        return res.status(400).json({ message: err.message })
       }
 })
 
