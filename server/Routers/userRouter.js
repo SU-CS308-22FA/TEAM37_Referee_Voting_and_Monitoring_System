@@ -49,4 +49,23 @@ router.post("/signin", async (req,res)=>{
     }
 })
 
+// localhost:5000/users/changename put request
+router.put("/:id", async (req,res)=>{
+    try {
+        const { fullname, password, phoneNumber, email } = req.body;
+
+        const hashedPassword = await bcrypt.hash(password, 10)
+
+        const updatedUser = await User.findByIdAndUpdate(
+            req.params.id,
+            { $set: {fullname, password: hashedPassword,phoneNumber,email} },
+            { new: true }
+          );
+        
+        return res.status(200).json({ updatedUser, message: 'Informations changed succesfully' })
+    } catch (error) {
+        return res.status(400).json({ message: error.message })
+    }
+})
+
 export default router;
