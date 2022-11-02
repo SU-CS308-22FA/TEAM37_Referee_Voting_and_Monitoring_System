@@ -1,60 +1,59 @@
 import express from "express";
 import mongoose from "mongoose";
-import bcrypt from 'bcryptjs'
-import User from '../models/userModel.js';
+import bcrypt from "bcryptjs";
+import User from "../models/userModel.js";
 const router = express.Router();
 
 // localhost:5000/users/signup POST request
-router.post("/signup", async (req, res)=>{
-    try {
-        //console.log(req.body)
-        const { fullname, password, phoneNumber, email } = req.body;
-        
-        const userExists = await User.findOne({ email })
-        if(userExists)
-            return res.status(400).json({ message: 'User already exists.'})
+router.post("/signup", async (req, res) => {
+  try {
+    //console.log(req.body)
+    const { fullname, password, phoneNumber, email } = req.body;
 
-        const hashedPassword = await bcrypt.hash(password, 10)
+    const userExists = await User.findOne({ email });
+    if (userExists)
+      return res.status(400).json({ message: "User already exists." });
 
-        const createdUser = await User.create({
-            fullname,
-            email,
-            password: hashedPassword,
-            phoneNumber
-        }
-        )
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-        return res.status(201).json(createdUser);
-    } catch (error) {
-        console.log(error)
-        return res.json({message: "User creation failed!"})
-    }
-})
+    const createdUser = await User.create({
+      fullname,
+      email,
+      password: hashedPassword,
+      phoneNumber,
+    });
+
+    return res.status(201).json(createdUser);
+  } catch (error) {
+    console.log(error);
+    return res.json({ message: "User creation failed!" });
+  }
+});
 
 // localhost:5000/users/signin POST request
-router.post("/signin", async (req,res)=>{
-    try {
-        const {email, password} = req.body;
-        const user = await User.findOne({email})
-        if(!user)
-            return res.status(400).json({message: "User does not exist."})
-        
-        const isPasswordCorrect = await bcrypt.compare(password, user.password)
-        if(!isPasswordCorrect)
-            return res.status(400).json({message: "Wrong password"})
-        
-        return res.status(200).json({ user, message: 'Authentication successful.' })
-    } catch (error) {
-        return res.status(400).json({ message: error.message })
-    }
-})
+router.post("/signin", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ message: "User does not exist." });
+
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect)
+      return res.status(400).json({ message: "Wrong password" });
+
+    return res
+      .status(200)
+      .json({ user, message: "Authentication successful." });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+});
 
 // localhost:5000/users/changename put request
-router.put("/:id", async (req,res)=>{
-    try {
-        const { fullname } = req.body;
-
-       // const hashedPassword = await bcrypt.hash(password, 10)
+router.put("users/:id", async (req, res) => {
+  try {
+    const { fullname } = req.body;
+    // const hashedPassword = await bcrypt.hash(password, 10)
 
         const updatedUser = await User.findByIdAndUpdate(
             req.params.id,
