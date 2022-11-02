@@ -64,8 +64,18 @@ router.put("/:id", async (req,res)=>{
         
         return res.status(200).json({ updatedUser, message: 'Informations changed succesfully' })
     } catch (error) {
-        return res.status(400).json({ message: error.message + req.params })
+        return res.status(400).json({ message: error.message})
     }
+})
+
+router.delete("/:id", async (req,res)=>{
+    try {
+        await User.findByIdAndDelete(req.params.id);
+        res.status(200).json("User has been deleted.");
+      } 
+      catch (err) {
+        return res.status(400).json({ message: error.message })
+      }
 })
 
 export default router;

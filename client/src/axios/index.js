@@ -18,3 +18,11 @@ export const handleEdit = async (formdata, id) => {
       console.log(`Error: ${err.message}`);
     }
 }
+export const handledelete = async (formdata, id) => {    
+  try {
+    const response1 = await HTTP.delete(`/users/${id}`, formdata);
+    
+  } catch (err) {
+    console.log(`Error: ${err.message}`);
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { change, handleEdit } from "../axios";
+import { change, handledelete, handleEdit } from "../axios";
 
 import axios from "axios";
 const apiEndPoint = "http://localhost:5000/users";
@@ -64,9 +64,9 @@ const HomeScreen = ({ user }) => {
           <Form
           onSubmit={(e) => {
             e.preventDefault();        
-            handleEdit(formData, user._id)
+            handledelete(formData, user._id)
               .then((res) => {
-                navigate("/");
+                navigate("/signin");
               })
               .catch((err) => console.log(err));
           }}
