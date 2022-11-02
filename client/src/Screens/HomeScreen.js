@@ -4,9 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { change, handledelete, handleEdit } from "../axios";
 
 
-const apiEndPoint = "http://localhost:5000/users";
 
-const HomeScreen = ({ user }) => {
+
+const HomeScreen = ({ user, setUser }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullname: "",
@@ -78,7 +78,11 @@ const HomeScreen = ({ user }) => {
                 <br></br>
                 <br></br>
                 <br></br>
-                <Button type="submit" className="mb-2" variant="danger">
+                <Button type="submit" className="mb-2" variant="danger"               
+                onClick={(e) => {
+                  localStorage.removeItem("user");
+                  setUser(null);
+                }}>
                   Delete Account :/
                 </Button>
               </Col>
