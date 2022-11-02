@@ -10,7 +10,13 @@ const Header = ({ user, setUser }) => {
   return (
     <Navbar className="py-4 " bg="success" expand="lg">
       <Container>
-        <Navbar.Brand className="text-white">
+        <Navbar.Brand
+          className="text-white"
+          style={{
+            fontSize: "25px",
+            marginRight: "50px",
+          }}
+        >
           Referee Voting and Monitoring System
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -30,18 +36,25 @@ const Header = ({ user, setUser }) => {
           </Nav>
         </Navbar.Collapse>
         {user ? (
-        <> <h2> {user.fullname} </h2>
-          <Button
-            variant="outline-light"
-            onClick={(e) => {
-              localStorage.removeItem("user");
-              setUser(null);
-            }}
-          >
-            {" "}
-            Sign Out{" "}
-          </Button>
-        </>
+          <>
+            <h4
+              style={{
+                marginRight: "100px",
+              }}
+            >
+              {user.fullname}
+            </h4>
+            <Button
+              variant="outline-light"
+              onClick={(e) => {
+                localStorage.removeItem("user");
+                setUser(null);
+              }}
+            >
+              {" "}
+              Sign Out{" "}
+            </Button>
+          </>
         ) : (
           <Button variant="outline-light">
             <Link className="text-white text-decoration-none" to="/signin">
