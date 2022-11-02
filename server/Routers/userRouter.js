@@ -2,7 +2,6 @@ import express from "express";
 import mongoose from "mongoose";
 import bcrypt from 'bcryptjs'
 import User from '../models/userModel.js';
-
 const router = express.Router();
 
 // localhost:5000/users/signup POST request
@@ -22,7 +21,8 @@ router.post("/signup", async (req, res)=>{
             email,
             password: hashedPassword,
             phoneNumber
-        })
+        }
+        )
 
         return res.status(201).json(createdUser);
     } catch (error) {
