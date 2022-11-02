@@ -19,7 +19,7 @@ const Header = ({ user, setUser }) => {
             <Nav.Link className="text-white">Homepage</Nav.Link>
             <Nav.Link></Nav.Link>
             <NavDropdown
-              title={<span className="text-white">Hakkımızda</span>}
+              title={<span className="text-white">About Us</span>}
               id="basic-nav-dropdown"
             >
               <NavDropdown.Item>About Football</NavDropdown.Item>
