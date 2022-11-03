@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { change, handledelete, handleEdit } from "../axios";
+import { handledelete, handleEdit } from "../axios";
 
 
 
