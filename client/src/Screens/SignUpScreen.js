@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Container, Form, Button, FormGroup, Row, Col } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "react-phone-number-input/style.css";
 import { register } from "../axios";
 
-const SignUpScreen = () => {
+
+export const SignUpScreen = (props) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullname: "",
     password: "",
     phoneNumber: "",
     email: "",
+    
   });
-
   return (
     <Container>
       <Row className="justify-content-center">
@@ -28,8 +29,10 @@ const SignUpScreen = () => {
                 .catch((err) => console.log(err));
             }}
           >
+          
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>Full Name</Form.Label>
+              
               <Form.Control
                 onChange={(e) =>
                   setFormData({ ...formData, fullname: e.target.value })

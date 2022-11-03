@@ -51,7 +51,7 @@ const AuthScreen = ({ setUser }) => {
             </Form.Group>
 
             <Form.Group className="d-grid">
-              <Button type="submit" variant="success" size="lg">
+              <Button type="submit" variant="success" className="mt-4" >
                 Sign In
               </Button>
               <Form.Text className="text-center mt-2">

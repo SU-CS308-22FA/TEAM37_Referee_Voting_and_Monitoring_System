@@ -1,3 +1,5 @@
+
+import "./App.css";
 import Header from "./Components/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
@@ -5,6 +7,7 @@ import HomeScreen from "./Screens/HomeScreen";
 import AuthScreen from "./Screens/AuthScreen";
 import SignUpScreen from "./Screens/SignUpScreen";
 import { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -21,6 +24,7 @@ function App() {
         </Container>
       </main>
     </Router>
+    /* Selam */
   );
 }
 
