@@ -1,0 +1,71 @@
+.App {
+    text-align: center;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(79deg, #7439db, #C66FBC 48%, #F7944D);
+  }
+  
+   .SignUpScreen, .register-form, .mb-3, .justify-content-center, .d-grid, .mt-4, .py-3, .d-grid {
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(79deg, #c9cc1fs, #c9cc1f 48%, #c9cc1f);
+    align-items: center;
+    
+  }
+  
+  .text-white{
+    align-items: left;
+    justify-content: center;
+  
+  }
+  .py-3{
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(79deg, #b1d88c,#b1d88c 48%, #b1d88c);
+    align-items: center;
+    
+  }
+  
+  .mt-4{
+    background-image: linear-gradient(79deg, #b6e6a1, #45bd6d 33%, #b6e6a1);
+  
+  }
+  
+  @media screen and (min-width: 600px) {
+    .auth-form-container {
+      padding: 5rem;
+      border: 1px solid rgb(255, 255, 255);
+      border-radius: 10px;
+      margin: 0.5rem;
+    }
+  }
+  
+  label {
+    text-align: left;
+    padding: 0.25rem 0;
+  }
+  
+  input {
+    margin: 0.5rem 0;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  button {
+    border: none;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #7439db;
+  }
+  
+  .link-btn {
+    background: none;
+    color: rgb(255, 255, 255);
+    text-decoration: underline;
+  }
