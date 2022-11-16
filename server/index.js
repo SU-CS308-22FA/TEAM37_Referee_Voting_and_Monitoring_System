@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import userRouter from "./Routers/userRouter.js";
 import cors from "cors";
+import path from "path";
 
 dotenv.config();
 
@@ -19,7 +20,10 @@ app.listen(5000, () => {
     .then(() => console.log("connected to db"))
     .catch((error) => console.log(error));
 });
-app.get ('/', (req, res) => {
-  res.send('APP IS RUNNING')
-  
-});
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
