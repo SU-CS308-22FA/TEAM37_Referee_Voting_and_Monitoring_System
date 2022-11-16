@@ -1,13 +1,13 @@
 import { useState } from "react";
 import React from "react";
-import axios from "axios";
+import { handleSignup} from "../axios";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
 const Signup = () => {
   const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
+    fullname: "",
+    nickname: "",
     email: "",
     password: "",
   });
@@ -16,48 +16,39 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleChange = ({ currentTarget: input }) => {
-    setData({ ...data, [input.name]: input.value });
+    setData({ ...data, [input.name]: input.value }) 
+    console.log(data);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const url = "https://weeklysoccer.vercel.app/api/users";
-      const { data: res } = await axios.post(url, data);
-      navigate("/login");
-      console.log(res.message);
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message);
-      }
-    }
-  };
 
   return (
     <div className={styles.signup_container}>
       <div className={styles.signup_form_container}>
         <div className={styles.right}>
-          <form className={styles.form_container} onSubmit={handleSubmit}>
+          <form className={styles.form_container} onSubmit={(e) => {
+              e.preventDefault();
+              handleSignup(data)
+              .then((res) => { navigate("/login");
+              })
+              .catch((err) => setError(err.response.data.message))           
+            }}
+            >
             <h1>Create Account</h1>
             <input
               type="text"
-              placeholder="First Name"
-              name="firstName"
+              placeholder="Full Name"
+              name="fullname"
               onChange={handleChange}
-              value={data.firstName}
+              value={data.fullname}
               required
               className={styles.input}
             />
             <input
               type="text"
-              placeholder="Last Name"
-              name="lastName"
+              placeholder="Nick Name"
+              name="nickname"
               onChange={handleChange}
-              value={data.lastName}
+              value={data.nickname}
               required
               className={styles.input}
             />

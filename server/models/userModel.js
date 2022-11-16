@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
         enum: ['USER', 'ADMIN'],
         default: 'USER'
     },
-    phoneNumber: {
+    nickname: {
         type: String,
         required: true
     },

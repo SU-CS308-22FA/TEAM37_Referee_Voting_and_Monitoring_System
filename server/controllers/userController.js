@@ -33,11 +33,11 @@ export const signin = async (req, res) => {
   };
 
   export const signup = async (req, res) => {
-    const { fullname, password, phoneNumber, email } = req.body;
+    const { fullname, nickname, password, email } = req.body;
   
     try {
         
-        if (!fullname || !password || !email)
+        if (!fullname || !nickname || !password || !email)
         {
           return res.status(400).json({ message: "All fields required" });
         }
@@ -49,9 +49,9 @@ export const signin = async (req, res) => {
   
       const createdUser = await User.create({
         fullname,
+        nickname,
         email,
         password: hashedPassword,
-        phoneNumber,
       });
   
       const token = jwt.sign( { email: createdUser.email, id: createdUser._id }, secret, { expiresIn: "1h" } );

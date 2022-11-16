@@ -1,8 +1,8 @@
 import { useState } from "react";
 import React from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
+import { handleSignin} from "../axios";
 
 const Login = () => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -12,31 +12,18 @@ const Login = () => {
     setData({ ...data, [input.name]: input.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const url = "https://weeklysoccer.vercel.app/api/auth";
-      const { data: res } = await axios.post(url, data);
-      console.log(res);
-      sessionStorage.setItem("token", res.data);
-      sessionStorage.setItem("user", JSON.stringify(res.user));
-      window.location = "/";
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message);
-      }
-    }
-  };
-
   return (
     <div className={styles.login_container}>
       <div className={styles.login_form_container}>
         <div className={styles.left}>
-          <form className={styles.form_container} onSubmit={handleSubmit}>
+          <form className={styles.form_container} onSubmit={(e) => {
+              e.preventDefault();
+              handleSignin(data)
+              .then((res) => {
+              })
+              .catch((err) => setError(err.response.data.message))           
+            }}
+            >
             <h1>Login to Your Account</h1>
             <input
               type="email"
@@ -56,6 +43,7 @@ const Login = () => {
               required
               className={styles.input}
             />
+            
             {error && <div className={styles.error_msg}>{error}</div>}
             <button type="submit" className={styles.green_btn}>
               Login

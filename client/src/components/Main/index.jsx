@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import UserPage from '../UserPage/UserPage'
 
+
 const Main = () => {
 	const handleLogout = () => {
 		sessionStorage.removeItem("token");
@@ -34,7 +35,7 @@ const Main = () => {
 
 				</Toolbar>
 			</AppBar>
-			<button className={styles.white_btn} onClick={handleLogout}>
+			<button className={styles.green_btn} onClick={handleLogout}>
 				Logout
 			</button>
 				

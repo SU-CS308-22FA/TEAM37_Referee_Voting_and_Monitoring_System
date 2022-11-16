@@ -29,16 +29,16 @@ export const handledelete = async (formdata, id) => {
   }
 }
 export const handleSignin = async (data) => {
-  try {
+  
     const { data: res } = await HTTP.post("/users/signin", data);
     console.log(res);
     sessionStorage.setItem("token", res.data);
     sessionStorage.setItem("user", JSON.stringify(res.user));
-    window.location = "/";
-
-  } catch (err) {
-
-      console.log(`Error: ${err.message}`);
-      return err;
-   };
+    window.location = "/";  
+}
+export const handleSignup = async (data) => {
+  
+  const { data: res } = await HTTP.post("/users/signup", data);
+  console.log(res.message);
+  
 }
