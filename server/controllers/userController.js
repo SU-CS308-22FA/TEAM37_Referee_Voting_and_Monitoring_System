@@ -24,11 +24,11 @@ export const signin = async (req, res) => {
 
         const token = jwt.sign({ email: user.email, id: user._id }, secret, { expiresIn: "1h" });
 
-      return res.status(200).json({ result: user, token });
+      return res.status(200).json({ user: user, token: token });
        
     } 
     catch (error) {
-      return res.status(400).json({ message: error.message });
+      return res.status(400).send({ message: error.message });
     }
   };
 
@@ -66,15 +66,14 @@ export const signin = async (req, res) => {
 
  export const updateUser = async (req, res) => {
     
-    const { fullname } = req.body;
+    const { fullname, nickname, email } = req.body;
     try {
           const updatedUser = await User.findByIdAndUpdate(
               req.params.id,
-              { $set: {fullname} },
+              { $set: {fullname, nickname, email}},
               { new: true }
             );
-          
-          return res.status(200).json({ updatedUser, message: 'Informations changed succesfully' })
+          return res.status(200).json({ user: updatedUser, message: 'Informations changed succesfully' })
       } catch (error) {
           return res.status(400).json({ message: error.message})
       }
