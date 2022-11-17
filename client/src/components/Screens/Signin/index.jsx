@@ -1,12 +1,13 @@
 import { useState } from "react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import styles from "./styles.module.css";
 import { handleSignin} from "../../axios";
 
 const Login = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -20,7 +21,7 @@ const Login = () => {
           <form className={styles.form_container} onSubmit={(e) => {
               e.preventDefault();
               handleSignin(data)
-              .then((res) => { window.location = "/";
+              .then((res) => { navigate("/");
               })
               .catch((err) => setError(err.response.data.message))           
             }}

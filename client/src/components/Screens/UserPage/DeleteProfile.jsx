@@ -1,10 +1,9 @@
-import React, { Component, Fragment } from "react";
-import { purple, red } from "@mui/material/colors";
+import React from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import { handleDelete} from "../../axios";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 
 
 export default function DeleteProfile({}) {
@@ -14,28 +13,6 @@ export default function DeleteProfile({}) {
   const [data, setData] = useState({fullname: user.fullname , nickname: user.nickname, email: user.email });
   const [error, setError] = useState("");
 
-  // const handleDeleteClicked = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const url =
-  //       "https://weeklysoccer.vercel.app/api/users/" +
-  //       user._id +
-  //       "?_id=" +
-  //       user._id;
-  //     const {
-  //       data: { user: updatedUser, message: message },
-  //     } = await axios.delete(url, { email });
-  //     sessionStorage.setItem("user", JSON.stringify(updatedUser));
-  //     navigate("/login");
-  //   } catch (error) {
-  //     if (
-  //       error.response &&
-  //       error.response.status >= 400 &&
-  //       error.response.status <= 500
-  //     ) {
-  //     }
-  //   }
-  // };
 
   function handleCancelClicked() {
     console.log("Cancelled");

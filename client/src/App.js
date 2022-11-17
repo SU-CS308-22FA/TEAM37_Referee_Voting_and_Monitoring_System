@@ -4,7 +4,7 @@ import HomePage from "./components/Screens/HomePage";
 import Signup from "./components/Screens/SignUp";
 import Login from "./components/Screens/Signin";
 
-import UserProfile from "./components/Screens/UserPage/EditableUserProfile";
+import UserProfile from "./components/Screens/UserPage/UserProfile";
 
 import DeleteProfile from "./components/Screens/UserPage/DeleteProfile";
 import 'react-toastify/dist/ReactToastify.css';

@@ -1,17 +1,19 @@
 import styles from "./styles.modules.css";
 import React from "react";
-import { Link } from "react-router-dom";
-import { AppBar, Tab, Tabs, Toolbar, Typography } from "@mui/material";
+
+import { useNavigate } from "react-router-dom";
+import { AppBar, Tab, Tabs, Toolbar} from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import UserPage from '../UserPage/UserPage'
+
 
 
 const HomePage = () => {
+	const navigate = useNavigate();
 	const handleLogout = () => {
 		sessionStorage.removeItem("token");
 		sessionStorage.removeItem("user");
-		window.location.reload();
+		navigate("/login");
 		
 	};
 	
