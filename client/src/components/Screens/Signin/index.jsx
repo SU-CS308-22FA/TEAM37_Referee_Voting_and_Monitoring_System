@@ -26,7 +26,7 @@ const Login = () => {
               .catch((err) => setError(err.response.data.message))           
             }}
             >
-            <h1>Login to Your Account</h1>
+            <h1>Sign in to your account</h1>
             <input
               type="email"
               placeholder="Email"
@@ -48,11 +48,11 @@ const Login = () => {
             
             {error && <div className={styles.error_msg}>{error}</div>}
             <button type="submit" className={styles.green_btn}>
-              Login
+              Sign In
             </button>
           </form>
           <div className={styles.bottom}>
-          <h1> Don't have an account yet?</h1>
+          <h1> New account? Join now</h1>
           <Link to="/signup">
             <button type="button" className={styles.white_btn}>
               Sign Up
