@@ -49,15 +49,16 @@ const Login = () => {
               Login
             </button>
           </form>
-        </div>
-        <div className={styles.bottom}>
+          <div className={styles.bottom}>
           <h1> Don't have an account yet?</h1>
           <Link to="/signup">
             <button type="button" className={styles.white_btn}>
               Sign Up
             </button>
           </Link>
+         </div>
         </div>
+        
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import { handleSignup} from "../axios";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
 const Signup = () => {
