@@ -3,7 +3,6 @@ import React from "react";
 import HomePage from "./components/Screens/HomePage";
 import Signup from "./components/Screens/SignUp";
 import Login from "./components/Screens/Signin";
-import { useState } from 'react';
 
 import UserProfile from "./components/Screens/UserPage/EditableUserProfile";
 
@@ -12,26 +11,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
 import UserPage from "./components/Screens/UserPage/UserPage";
 
-function randomName() {
-    return "Anonymous " 
-}
+
+
 function App() {
-	const user = sessionStorage.getItem("user");
-	const [editMode, setEditMode] = useState(false);
-
-    const [firstName, setName] = useState(randomName());
-	const [email, setEmail] = useState(randomName());
-	const stored = {firstName, email};
-
-	function handleEditComplete(result) {
-        console.log("handleEditComplete", result);
-        if (result != null) {
-            setName(result.name);
-            
-        }        
-        setEditMode(false);
-    }
-
+	const user = sessionStorage.getItem("token");
+    console.log(user);
 	return (
 
 			<Routes>
