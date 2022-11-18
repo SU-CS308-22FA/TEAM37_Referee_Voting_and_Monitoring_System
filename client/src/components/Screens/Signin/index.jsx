@@ -21,7 +21,7 @@ const Login = () => {
           <form className={styles.form_container} onSubmit={(e) => {
               e.preventDefault();
               handleSignin(data)
-              .then((res) => { navigate("/");
+              .then((res) => { window.location = "/";
               })
               .catch((err) => setError(err.response.data.message))           
             }}

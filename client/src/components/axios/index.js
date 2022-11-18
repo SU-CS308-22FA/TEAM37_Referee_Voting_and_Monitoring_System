@@ -12,7 +12,7 @@ export const handleSignin = async (data) => {
   console.log(res);
   sessionStorage.setItem("token", res.token);
   sessionStorage.setItem("user", JSON.stringify(res.user));
-  //window.location = "/";  
+   
 
 }
 export const handleSignup = async (data) => {

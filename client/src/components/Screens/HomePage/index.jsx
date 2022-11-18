@@ -27,10 +27,8 @@ const HomePage = () => {
 					sx={{ ml: "auto" }}
 					textColor="inherit"
 					indicatorColor="primary"
-					value= "undefined"
-					
+					value= "undefined"					
 					>
-						
 						<Tab LinkComponent={NavLink} to="/" label="Players" />
 						<Tab LinkComponent={NavLink} to="/" label="Matches" />
 						<Tab LinkComponent={NavLink} to="/" label="Referees" />
