@@ -29,6 +29,7 @@
   margin: 20px;
 }
 
+/*  NAV BAR CSS START   */
 .nav {
   height: 75px;
   background-color: #16213e;
@@ -64,9 +65,12 @@
 }
 
 .nav li.active {
-  background-color: #555;
+  font-weight: 700;
+  font-size: large;
 }
 
-.nav li:hover {
-  color: #777;
+.nav ul a:hover {
+  color: #ce52c7 !important;
 }
+
+/*  NAV BAR CSS END   */
