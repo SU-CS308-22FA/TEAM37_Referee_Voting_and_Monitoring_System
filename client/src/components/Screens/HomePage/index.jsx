@@ -13,8 +13,7 @@ const HomePage = () => {
 	const handleLogout = () => {
 		sessionStorage.removeItem("token");
 		sessionStorage.removeItem("user");
-		navigate("/login");
-		
+		navigate("/login");	
 	};
 	
 	const [value, setValue] = useState();
