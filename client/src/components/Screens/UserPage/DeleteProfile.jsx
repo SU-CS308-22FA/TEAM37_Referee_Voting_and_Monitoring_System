@@ -20,9 +20,9 @@ export default function DeleteProfile({}) {
   }
 
   return (
-    <div className={styles.login_container}>
+    <div className={styles.login_container} >
       <div className={styles.login_form_container}>
-        <div className={styles.left}>
+        <div className={styles.left2}>
           <form
             className={styles.form_container}
             onSubmit={(e) => {
@@ -33,12 +33,12 @@ export default function DeleteProfile({}) {
               .catch((err) => setError(err.response.data.message))           
             }}
             >
-            <h1>This is your final warning are you sure?</h1>
+            <h2>This is your final warning are you sure?</h2>
 
-            <button type="submit" className={styles.green_btn}>           
+            <button type="submit" className={styles.red_btn}>           
               Delete
             </button>
-            <button stype="button" className={styles.gray_btn} onClick={handleCancelClicked}>
+            <button stype="button" className={styles.green_btn} onClick={handleCancelClicked}>
               Cancel
             </button>
           </form>

@@ -5,7 +5,7 @@ import Signup from "./components/Screens/SignUp";
 import Login from "./components/Screens/Signin";
 import Navbar from "./components/Navbar";
 
-import UserProfile from "./components/Screens/UserPage/UserProfile";
+import UserProfile from "./components/Screens/UserPage/UpdateProfile";
 
 import DeleteProfile from "./components/Screens/UserPage/DeleteProfile";
 import "react-toastify/dist/ReactToastify.css";
