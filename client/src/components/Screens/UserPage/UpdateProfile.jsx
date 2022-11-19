@@ -11,7 +11,7 @@ export default function UserProfile({}) {
   const [error, setError] = useState("");
   const navigate = useNavigate();
  
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const [data, setData] = useState({fullname: user.fullname , nickname: user.nickname, email: user.email });
 

@@ -13,7 +13,7 @@ import "./App.css";
 import UserPage from "./components/Screens/UserPage/UserPage";
 
 function App() {
-  const user = sessionStorage.getItem("token");
+  const user = localStorage.getItem("token");
   console.log(user);
   return (
     <>

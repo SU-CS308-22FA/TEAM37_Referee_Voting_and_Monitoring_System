@@ -6,8 +6,8 @@ import React from "react";
 const HomePage = () => {
 
 	const handleLogout = () => {
-		sessionStorage.removeItem("token");
-		sessionStorage.removeItem("user");
+		localStorage.removeItem("token");
+		localStorage.removeItem("user");
 		window.location.reload();
 	};
 

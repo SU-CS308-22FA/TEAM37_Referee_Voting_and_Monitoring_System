@@ -9,7 +9,7 @@ import { useState} from "react";
 export default function DeleteProfile({}) {
 
   const navigate = useNavigate();
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
   const [data, setData] = useState({fullname: user.fullname , nickname: user.nickname, email: user.email });
   const [error, setError] = useState("");
 
