@@ -31,6 +31,36 @@ export const signin = async (req, res) => {
       return res.status(400).send({ message: error.message });
     }
   };
+  export const Gsignin = async (req, res) => {
+
+    const { email, name } = req.body;
+
+    try {
+
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        const password = "Google";
+        const user = await User.create({
+          fullname: name,
+          nickname: name,
+          email,
+          password,
+        });
+        const token = jwt.sign( { email: user.email, id: user._id }, secret, { expiresIn: "1h" } );
+        res.status(200).json({ user, token });
+      }
+      else {
+        
+        const token = jwt.sign({ email: user.email, id: user._id }, secret, { expiresIn: "1h" });
+        return res.status(200).json({ user: user, token: token});
+      }
+  
+    }
+    catch (error) {
+      return res.status(400).send({ message: error.message });
+    }
+  };
 
   export const signup = async (req, res) => {
     const { fullname, nickname, password, email } = req.body;
