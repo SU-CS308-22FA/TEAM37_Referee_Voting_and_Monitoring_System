@@ -27,7 +27,7 @@ export default function UserProfile({}) {
   return (
     <div className={styles.login_container}>
       <div className={styles.login_form_container}>
-        <div className={styles.left}>
+        <div className={styles.left2}>
           <form className={styles.form_container} onSubmit={(e) => {
               e.preventDefault();
               handleEdit(data, user._id)
@@ -62,10 +62,10 @@ export default function UserProfile({}) {
                className={styles.input}
             />
             
-            <button type="submit" className={styles.purple_btn}>           
+            <button type="submit" className={styles.green_btn}>           
               Save
             </button>
-            <button stype="button" className={styles.purple_btn} onClick={handleCancelClicked}>
+            <button stype="button" className={styles.red_btn} onClick={handleCancelClicked}>
               Cancel
             </button>
           </form>
