@@ -1,4 +1,5 @@
-import styles from "./styles.modules.css";
+import styles from "./styles.module.css";
+
 import React from "react";
 
 
@@ -12,8 +13,8 @@ const HomePage = () => {
 
 	
 	return (
-		<div className={styles.main_container}>
-			<button className={styles.green_btn} onClick={handleLogout}>
+		<div >
+			<button className={styles.logout_button} onClick={handleLogout}>
 				Logout
 			</button>		
 		</div>

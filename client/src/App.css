@@ -3,33 +3,75 @@
   justify-content: center;
   align-items: center;
 }
+
 .column {
   flex-direction: column;
 }
+
 .full_screen {
   width: 100vw;
   height: 100vh;
 }
 .new_user_btn_container {
-  width: 100 vw;
-  margin: 20 px 0;
+  width: 100vw;
+  margin: 20px 0;
 }
 
 .table_container {
-  width: 800 px !important;
+  width: 800px !important;
 }
+
 .form_container {
   width: 350px;
   padding: 30px;
   margin: 0;
   text-transform: uppercase;
 }
-.input {
-  width: 100% !important;
-  margin: 5px 0 !important;
+
+/*  NAV BAR CSS START   */
+.nav {
+  height: 75px;
+  background-color: #16213e;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 2rem;
+  padding: 0 1rem;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
-.submit_btn {
-  width: 100% !important;
-  margin-top: 10px !important;
+.site-title {
+  margin-top: -5px;
+  color: #e94560;
+  font-size: 2rem;
+  text-decoration: none;
+  font-weight: bold;
 }
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav a {
+  color: #e94560;
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+}
+
+.nav li.active {
+  font-weight: 700;
+  font-size: large;
+}
+
+.nav ul a:hover {
+  color: #ce52c7 !important;
+}
+
+/*  NAV BAR CSS END   */
