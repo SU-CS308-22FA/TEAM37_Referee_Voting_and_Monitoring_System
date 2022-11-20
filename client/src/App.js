@@ -14,7 +14,7 @@ import DeleteProfile from "./components/Screens/UserPage/DeleteProfile";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import UserPage from "./components/Screens/UserPage/UserPage";
-
+import Ref from "./components/Screens/Referee";
 
 
 function App() {
@@ -33,6 +33,8 @@ function App() {
         <Route path="/profile" exact element={<UserPage />} />
         <Route path="/profile/update" exact element={<UserProfile />} />
         <Route path="/profile/delete" exact element={<DeleteProfile />} />
+
+        <Route path="/referees" exact element={<Ref />} />
       </Routes>
     </GoogleOAuthProvider>
   );
