@@ -55,7 +55,7 @@ const Login = () => {
               
           </form>
           <div className={styles.bottom}>
-              <GoogleLogin size = "large" width="400"
+              <GoogleLogin size = "large" theme = "filled_blue" width="400"
                 onSuccess={(credentialResponse) => {
                 handleGoogle(credentialResponse)
                 console.log(credentialResponse);
