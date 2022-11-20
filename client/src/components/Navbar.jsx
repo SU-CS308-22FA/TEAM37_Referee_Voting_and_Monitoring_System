@@ -11,7 +11,7 @@ export default function Navbar() {
       <ul>
         {user && <CustomLink to="/players">Players</CustomLink>}
         {user && <CustomLink to="/matches">Matches</CustomLink>}
-        {user && <CustomLink to="/refrees">Referees</CustomLink>}
+        {user && <CustomLink to="/referees">Referees</CustomLink>}
         {user && <CustomLink to="/profile">My Profile</CustomLink>}
       </ul>
     </nav>
