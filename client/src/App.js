@@ -15,11 +15,11 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import UserPage from "./components/Screens/UserPage/UserPage";
 import Ref from "./components/Screens/Referee";
-
+import Matches from "./components/Screens/Matches";
 
 function App() {
   const user = localStorage.getItem("token");
-  console.log(user);
+
   return (
 
     <GoogleOAuthProvider clientId= "330490937140-hmot7hf3u41oijddu2efks7j3ffvoig0.apps.googleusercontent.com">
@@ -35,6 +35,7 @@ function App() {
         <Route path="/profile/delete" exact element={<DeleteProfile />} />
 
         <Route path="/referees" exact element={<Ref />} />
+        <Route path="/matches" exact element={<Matches />} />
       </Routes>
     </GoogleOAuthProvider>
   );
