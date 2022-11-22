@@ -18,8 +18,6 @@ const Matches = () => {
   const [season, setSeason] = useState("tur.1");
    
   
-  const test = async () => {
-
 
     var config = {
       method: 'get',
@@ -41,7 +39,7 @@ const Matches = () => {
     .catch(function (error) {
       console.log(error);
     });
-  };
+  
   
   return (
     <>
