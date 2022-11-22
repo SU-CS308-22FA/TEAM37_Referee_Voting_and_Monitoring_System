@@ -47,3 +47,38 @@ export const handleDelete = async (data, id) => {
     localStorage.setItem("user", JSON.stringify(res.user));
     console.log(res.user);
 }
+
+export const handleAddReferee = async (data) => {    
+    
+  const { data: res } = await HTTP.post(`/referee/add`, data);
+ 
+  
+}
+
+export const fetchReferee = async (data) => {    
+    
+  const { data: res } = await HTTP.get(`/referee`);
+return res.referee
+  
+}
+export const getRefereeDetails = async (id) => {    
+    
+  const { data: res } = await HTTP.get(`/referee/${id}`);
+return res.referee
+  
+}
+
+export const fetchReview = async (refid) => {    
+    
+  const { data: res } = await HTTP.get(`/review/${refid}`);
+  // console.log(res.review);
+return res.review
+  
+}
+
+
+export const handleAddReview = async (data) => {    
+  const { data: res } = await HTTP.post(`/review/add`, data);
+ 
+  return res
+}

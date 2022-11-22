@@ -12,6 +12,7 @@ export default function Navbar() {
         {user && <CustomLink to="/players">Players</CustomLink>}
         {user && <CustomLink to="/matches">Matches</CustomLink>}
         {user && <CustomLink to="/referees">Referees</CustomLink>}
+        {user && user.userType !=='USER' && <CustomLink to="/addreferee">Add Referee</CustomLink>}
         {user && <CustomLink to="/profile">My Profile</CustomLink>}
       </ul>
     </nav>
