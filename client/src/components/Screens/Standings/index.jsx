@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import React from "react";
 
 import {renderMatches, useNavigate } from "react-router-dom";
-import './league.css';
 import axios from "axios";
-import {Table} from 'react-bootstrap'
+
 import styles from "./styles.module.css";
 import './table.css';
 
@@ -77,7 +76,7 @@ const Standings = () => {
                     
                     </div>
                 </div>           
-                  <table className="table" size={window.outerWidth } align = "center">
+                  <table className="table" size={window.outerWidth } align = "center" >
                     <thead>
                       <tr>
                          <td colSpan="9"><h3>{"TFF"}</h3></td>
