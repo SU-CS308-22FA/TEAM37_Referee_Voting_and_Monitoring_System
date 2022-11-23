@@ -17,7 +17,7 @@ import UserPage from "./components/Screens/UserPage/UserPage";
 import Ref from "./components/Screens/Referee";
 import RefereeProfile from "./components/Screens/referee-profile/RefereeProfile";
 import AddReferee from "./components/Screens/HomePage/add-referee/AddReferee";
-
+import Standings from "./components/Screens/Standings";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -39,6 +39,7 @@ function App() {
         <Route path="/referees" exact element={<Ref />} />
         <Route path="/referee/:id" exact element={<RefereeProfile />} />
         <Route path="/addreferee" exact element={<AddReferee />} />
+        <Route path="/standing" exact element={<Standings />} />
       </Routes>
     </GoogleOAuthProvider>
   );
