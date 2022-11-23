@@ -1,0 +1,28 @@
+.tournament{
+    font-size: min(1.4rem, 4vw);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    margin-top:2rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.year{
+    opacity: 60%;
+}
+td,th{
+    font-size: 1rem;
+}
+
+@media all and (max-width:476px){
+    .points-table{
+    width: 20% !important;
+}
+td,th{
+    font-size: 0.6rem;
+}
+
+}
