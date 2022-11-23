@@ -50,10 +50,7 @@ export const sendVerifyEmail = async (data) => {
   console.log(res.message);
 };
 
-    console.log(res);
-    localStorage.setItem("user", JSON.stringify(res.user));
-    console.log(res.user);
-}
+
 
 export const handleAddReferee = async (data) => {    
     
