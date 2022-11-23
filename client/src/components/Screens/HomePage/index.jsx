@@ -12,6 +12,7 @@ const HomePage = () => {
     window.location.reload();
   };
 
+ 
   const [error, setError] = useState("");
   const [msg, setMsg] = useState("");
   const user = JSON.parse(localStorage.getItem("user"));

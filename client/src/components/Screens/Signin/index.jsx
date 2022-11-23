@@ -13,8 +13,8 @@ const Login = () => {
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
-  // localStorage.removeItem("token");
-	// localStorage.removeItem("user");
+   localStorage.removeItem("token");
+	 localStorage.removeItem("user");
   return (
     
     <div className={styles.login_container}>
