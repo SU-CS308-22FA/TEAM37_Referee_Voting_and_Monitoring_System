@@ -10,8 +10,7 @@ import './table.css';
 
 const Matches = () => {
   
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  
   const [team, setteam] = useState();
  
 
@@ -50,12 +49,8 @@ const Matches = () => {
 		try {
 			const response = await axios(config);
       const standings = response.data.response[0].league.standings[0];
-			console.log(response);
 			localStorage.setItem("teams", JSON.stringify(standings));
 			setteam(standings);
-      console.log(team);
-      const data1 = window.localStorage.getItem('teams');
-      console.log(data1);
 		} catch (err) {
 			console.log(err);
 		}
