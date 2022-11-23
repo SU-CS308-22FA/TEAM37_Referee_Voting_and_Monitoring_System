@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import UserPage from "./components/Screens/UserPage/UserPage";
 import Ref from "./components/Screens/Referee";
+import EmailVerify from "./components/Screens/EmailVerify";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/profile/delete" exact element={<DeleteProfile />} />
 
         <Route path="/referees" exact element={<Ref />} />
+        <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
       </Routes>
     </GoogleOAuthProvider>
   );

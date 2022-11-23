@@ -7,6 +7,7 @@ const secret = "test";
 
 import Token from "../models/token.js";
 import sendEmail from "./sendEmail.js";
+import crypto from "crypto";
 
 export const signin = async (req, res) => {
   const { email, password } = req.body;
@@ -117,5 +118,50 @@ export const deleteUser = async (req, res) => {
     res.status(200).json("User has been deleted.");
   } catch (err) {
     return res.status(400).json({ message: err.message });
+  }
+};
+
+/* GET */
+export const verifyEmail = async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.id });
+    if (!user) return res.status(400).send({ message: "Invalid link" });
+
+    const token = await Token.findOne({
+      userId: user._id,
+      token: req.params.token,
+    });
+    
+    if (!token) return res.status(400).send({ message: "Invalid link" });
+
+    await User.updateOne({ _id: user._id }, { verified: true });
+
+    res.status(200).send({ message: "Email verified successfully" });
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+};
+
+/* POST */
+export const sendVerifyEmail = async (req, res) => {
+  try {
+    let user = await User.findOne({ email: req.body.email });
+    if (!user.verified) {
+      let token = await Token.findOne({ userId: user._id });
+      if (true) {
+        token = await new Token({
+          userId: user._id,
+          token: crypto.randomBytes(32).toString("hex"),
+        }).save();
+        const url = `${process.env.BASE_URL}users/${user.id}/verify/${token.token}`;
+        await sendEmail(user.email, "Verify Email", url);
+      }
+
+      return res
+        .status(201)
+        .send({ message: "An Email sent to your account please verify" });
+    }
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
   }
 };
