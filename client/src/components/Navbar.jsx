@@ -14,7 +14,7 @@ export default function Navbar() {
         {user && <CustomLink to="/referees">Referees</CustomLink>}
         {user && user.userType !=='USER' && <CustomLink to="/addreferee">Add Referee</CustomLink>}
         {user && <CustomLink to="/profile">My Profile</CustomLink>}
-        
+        {user && <CustomLink to="/standing">Standings</CustomLink>}
       </ul>
     </nav>
   );

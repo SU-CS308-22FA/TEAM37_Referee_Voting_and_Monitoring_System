@@ -8,7 +8,7 @@ import {Table} from 'react-bootstrap'
 import styles from "./styles.module.css";
 import './table.css';
 
-const Matches = () => {
+const Standings = () => {
   
   
   const [team, setteam] = useState();
@@ -111,4 +111,4 @@ const Matches = () => {
 }
 
 
-export default Matches
+export default Standings
