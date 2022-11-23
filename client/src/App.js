@@ -15,9 +15,14 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import UserPage from "./components/Screens/UserPage/UserPage";
 import Ref from "./components/Screens/Referee";
+
+import EmailVerify from "./components/Screens/EmailVerify";
+
+
 import RefereeProfile from "./components/Screens/referee-profile/RefereeProfile";
 import AddReferee from "./components/Screens/HomePage/add-referee/AddReferee";
 import Standings from "./components/Screens/Standings";
+
 
 function App() {
   const user = localStorage.getItem("token");
@@ -37,6 +42,9 @@ function App() {
         <Route path="/profile/delete" exact element={<DeleteProfile />} />
 
         <Route path="/referees" exact element={<Ref />} />
+
+        <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
+
         <Route path="/referee/:id" exact element={<RefereeProfile />} />
         <Route path="/addreferee" exact element={<AddReferee />} />
         <Route path="/standing" exact element={<Standings />} />

@@ -23,7 +23,11 @@ const UserPage = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.left}>
-        <img src="https://i.imgur.com/tdi3NGa_d.webp?maxwidth=760&fidelity=grand" alt="user" width="100"></img>
+        <img
+          src="https://i.imgur.com/tdi3NGa_d.webp?maxwidth=760&fidelity=grand"
+          alt="user"
+          width="100"
+        ></img>
         <h4>{user.fullname}</h4>
         <p>{user.nickname}</p>
       </div>
@@ -48,8 +52,10 @@ const UserPage = () => {
           <h3>Activities</h3>
           <div className={styles.projects_data}>
             <div className={styles.data}>
-              <h4>Recent Votes</h4>
-              <p>PLACEHOLDER</p>
+              <h4>Verification Status</h4>
+              <p>
+                Email: <b>{user.verified}</b>
+              </p>
             </div>
             <div className={styles.data}>
               <h4>Most Viewed</h4>
@@ -81,6 +87,5 @@ const UserPage = () => {
     </div>
   );
 };
-
 
 export default UserPage;
