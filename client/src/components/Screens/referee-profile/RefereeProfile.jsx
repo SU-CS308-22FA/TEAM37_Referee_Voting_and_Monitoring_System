@@ -131,7 +131,7 @@ const RefereeProfile = () => {
     </Form.Select>
       </Form.Group>
     <Form.Group className="mb-3" name='comment' controlId="exampleForm.ControlTextarea1">
-        <Form.Label>Example textarea</Form.Label>
+        <Form.Label>Comment</Form.Label>
         <Form.Control as="textarea" onChange={handleChange} required name='comment' rows={3} value={data.comment} />
       </Form.Group>
       <button type='submit' className='btn btn-primary'>Submit</button>
