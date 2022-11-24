@@ -41,8 +41,8 @@ export const handleDelete = async (data, id) => {
   const { data: res } = await HTTP.delete(`/users/${id}`, data);
 
   console.log(res);
-  localStorage.setItem("user", JSON.stringify(res.user));
-  console.log(res.user);
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
 };
 
 export const sendVerifyEmail = async (data) => {
