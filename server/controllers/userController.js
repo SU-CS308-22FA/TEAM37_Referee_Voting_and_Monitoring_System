@@ -134,9 +134,14 @@ export const verifyEmail = async (req, res) => {
     
     if (!token) return res.status(400).send({ message: "Invalid link" });
 
-    await User.updateOne({ _id: user._id }, { verified: true });
+    //const updatedUser = await User.updateOne({ _id: user._id }, { verified: true });
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { $set: { verified: true} },
+      { new: true }
+    );
 
-    res.status(200).send({ message: "Email verified successfully" });
+    return res.status(200).json({ user: updatedUser, message: "Verified Succesfully" });
   } catch (error) {
     res.status(500).send({ message: "Internal Server Error" });
   }

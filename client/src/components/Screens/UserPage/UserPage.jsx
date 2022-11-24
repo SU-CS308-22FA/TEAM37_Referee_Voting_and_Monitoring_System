@@ -10,6 +10,7 @@ const UserPage = () => {
 
   console.log("USERPAGE");
   const user = JSON.parse(localStorage.getItem("user"));
+  
   const navigate = useNavigate();
 
   const handleUpdate = () => {
@@ -54,7 +55,7 @@ const UserPage = () => {
             <div className={styles.data}>
               <h4>Verification Status</h4>
               <p>
-                Email: <b>{user.verified}</b>
+                Email: <b>{String(user.verified)}</b>
               </p>
             </div>
             <div className={styles.data}>
