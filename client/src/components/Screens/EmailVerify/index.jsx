@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import styles from "./styles.module.css";
+import { FcCheckmark } from "react-icons/fc";
 
 const EmailVerify = () => {
   const [validUrl, setValidUrl] = useState(true);
@@ -27,14 +28,18 @@ const EmailVerify = () => {
     <>
       {validUrl ? (
         <div className={styles.container}>
-          <h1>SUCCESS</h1>
-          <h1>Email verified successfully</h1>
+          <h1>
+            Email verified successfully <FcCheckmark />
+          </h1>
           <Link to="/">
             <button className={styles.green_btn}>Homepage</button>
           </Link>
         </div>
       ) : (
-        <h1>404 Not Found</h1>
+        <div className={styles.container}>
+          <h1>404 Not Found</h1>
+          <h3>The link is expired</h3>
+        </div>
       )}
     </>
   );

@@ -1,20 +1,21 @@
 .container {
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
 }
 
 .green_btn {
-	border: none;
-	outline: none;
-	padding: 12px 0;
-	background-color: #3bb19b;
-	border-radius: 20px;
-	width: 180px;
-	font-weight: bold;
-	font-size: 14px;
-	cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 12px 0;
+  background-color: #b6ccc8;
+  border-radius: 12px;
+  width: 180px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
 }

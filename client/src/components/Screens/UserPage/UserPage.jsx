@@ -1,6 +1,6 @@
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
+import { FcCheckmark, FcCancel } from "react-icons/fc";
 
 import styles from "./styles.module.css";
 const UserPage = () => {
@@ -10,7 +10,7 @@ const UserPage = () => {
 
   console.log("USERPAGE");
   const user = JSON.parse(localStorage.getItem("user"));
-  
+
   const navigate = useNavigate();
 
   const handleUpdate = () => {
@@ -40,6 +40,10 @@ const UserPage = () => {
             <div className={styles.data}>
               <h4>Email</h4>
               <p>{user.email}</p>
+              <p>
+                Email is <b>{user.verified ? "verified. " : "not verified. "}
+                {user.verified ? <FcCheckmark /> : <FcCancel />}</b>
+              </p>
             </div>
 
             <div className={styles.data}>
@@ -53,10 +57,8 @@ const UserPage = () => {
           <h3>Activities</h3>
           <div className={styles.projects_data}>
             <div className={styles.data}>
-              <h4>Verification Status</h4>
-              <p>
-                Email: <b>{String(user.verified)}</b>
-              </p>
+              <h4>PLACEHOLDER</h4>
+              <p>PLACEHOLDER</p>
             </div>
             <div className={styles.data}>
               <h4>Most Viewed</h4>
