@@ -9,7 +9,7 @@ export default function Navbar() {
       Referee Voting & Monitoring System
       </Link>
       <ul>
-        {user && <CustomLink to="/players">Players</CustomLink>}
+        {user && <CustomLink to="/matches">Matches</CustomLink>}
         {user && <CustomLink to="/referees">Referees</CustomLink>}
 
      
