@@ -49,41 +49,53 @@ export const sendVerifyEmail = async (data) => {
   const { data: res } = await HTTP.post("/users/sendMeMail", data);
   console.log(res.message);
 };
+export const requestMatches = async (weekNumber, seasonNumber, leagueNumber) => {
+  try {
+    const { data } = await axios.get(
+      "https://v3.football.api-sports.io/fixtures",
+      {
+        params: {
+          round: "Regular Season - " + String(weekNumber),
+          league: String(leagueNumber),
+          season: String(seasonNumber),
+        },
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": "9d3f470a106c6ce69d1b6e6c4adff0f0",
+        },
+      }
+    );
+    const matches = data.response;
 
+    console.log(matches);
+    return matches;
+  } catch (error) {
+    console.log("ERROR");
+    return [];
+  }
+};
 
-
-export const handleAddReferee = async (data) => {    
-    
+export const handleAddReferee = async (data) => {
   const { data: res } = await HTTP.post(`/referee/add`, data);
- 
-  
-}
+};
 
-export const fetchReferee = async (data) => {    
-    
+export const fetchReferee = async (data) => {
   const { data: res } = await HTTP.get(`/referee`);
-return res.referee
-  
-}
-export const getRefereeDetails = async (id) => {    
-    
+  return res.referee;
+};
+export const getRefereeDetails = async (id) => {
   const { data: res } = await HTTP.get(`/referee/${id}`);
-return res.referee
-  
-}
+  return res.referee;
+};
 
-export const fetchReview = async (refid) => {    
-    
+export const fetchReview = async (refid) => {
   const { data: res } = await HTTP.get(`/review/${refid}`);
   // console.log(res.review);
-return res.review
-  
-}
+  return res.review;
+};
 
-
-export const handleAddReview = async (data) => {    
+export const handleAddReview = async (data) => {
   const { data: res } = await HTTP.post(`/review/add`, data);
- 
-  return res
-}
 
+  return res;
+};
