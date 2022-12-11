@@ -1,13 +1,8 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FcCheckmark, FcCancel } from "react-icons/fc";
 
 import styles from "./styles.module.css";
 const UserPage = () => {
-  const [data, setData] = useState({
-    firstName: "",
-  });
-
   console.log("USERPAGE");
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -41,8 +36,11 @@ const UserPage = () => {
               <h4>Email</h4>
               <p>{user.email}</p>
               <p>
-                Email is <b>{user.verified ? "verified. " : "not verified. "}
-                {user.verified ? <FcCheckmark /> : <FcCancel />}</b>
+                Email is{" "}
+                <b>
+                  {user.verified ? "verified. " : "not verified. "}
+                  {user.verified ? <FcCheckmark /> : <FcCancel />}
+                </b>
               </p>
             </div>
 

@@ -121,7 +121,7 @@ export const deleteUser = async (req, res) => {
   }
 };
 
-/* Email link clicked */
+/* Email link is clicked */
 export const verifyEmail = async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
@@ -134,7 +134,6 @@ export const verifyEmail = async (req, res) => {
 
     if (!token) return res.status(400).send({ message: "Invalid link" });
 
-    //const updatedUser = await User.updateOne({ _id: user._id }, { verified: true });
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
       { $set: { verified: true } },
