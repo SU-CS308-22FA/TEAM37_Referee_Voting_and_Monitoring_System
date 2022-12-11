@@ -99,14 +99,34 @@ export const getRefereeDetails = async (id) => {
   return res.referee;
 };
 
-export const fetchReview = async (refid) => {
-  const { data: res } = await HTTP.get(`/review/${refid}`);
+export const fetchReview = async (refid,week) => {
+  const { data: res } = await HTTP.get(`/review/${refid}/${week}`);
   // console.log(res.review);
   return res.review;
 };
 
 export const handleAddReview = async (data) => {
   const { data: res } = await HTTP.post(`/review/add`, data);
+
+  return res;
+};
+export const addLike = async (id,user) => {
+  const { data: res } = await HTTP.put(`/review/addlike`, {id,user});
+
+  return res;
+};
+export const addDislike = async (id,user) => {
+  const { data: res } = await HTTP.put(`/review/adddislike`, {id,user});
+
+  return res;
+};
+export const removeLike = async (id,user) => {
+  const { data: res } = await HTTP.put(`/review/removelike`, {id,user});
+
+  return res;
+};
+export const removeDislike = async (id,user) => {
+  const { data: res } = await HTTP.put(`/review/removedislike`, {id,user});
 
   return res;
 };

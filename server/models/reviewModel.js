@@ -13,6 +13,17 @@ const reviewSchema = mongoose.Schema(
       required: true,
      
     },
+    likedislike: [
+     {
+      type: String,
+     }
+    ],
+    dislike: [
+     {
+      type: String,
+     }
+    ],
+     
     
     rating: {
         type: Number,
@@ -23,6 +34,11 @@ const reviewSchema = mongoose.Schema(
     writtenBy: {
       type: String,
       default: 'Author Name'
+      
+    },
+    week: {
+      type: String,
+      default: 'week1'
       
     },
     

@@ -29,6 +29,10 @@ const Rating = ({rating}) => {
             <img src="/star.png" alt="" />
           <img src="/star.png" alt="" />
           
+          </div>: rating>=1?
+            <div>
+            <img src="/star.png" alt="" />
+          
 
 
 

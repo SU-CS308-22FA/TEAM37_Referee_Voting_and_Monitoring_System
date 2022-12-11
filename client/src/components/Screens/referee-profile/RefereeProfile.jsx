@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
+import { AiFillDislike,AiFillLike } from "react-icons/ai";
 import { useParams } from 'react-router-dom';
-import { fetchReview, getRefereeDetails, handleAddReview } from '../../axios';
+import { addDislike, addLike, fetchReview, getRefereeDetails, handleAddReview, removeDislike, removeLike } from '../../axios';
 import Rating from '../Referee/Rating';
+import SelectWeek from './SelectWeek';
 const RefereeProfile = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     let { id } = useParams();
     const [referee, setReferee] = useState({});
     const [reviews, setReviews] = useState([]);
-    const [data, setData] = useState({referee:id, writtenBy: user.fullname , comment:'', rating:'' });
+    const [likeCount, setLikeCount] = useState(0);
+    const [filteredReviews, setFilteredReviews] = useState([]);
+    const [week, setWeek] = useState('week1');
+    const [data, setData] = useState({referee:id, writtenBy: user.fullname , comment:'', rating:'', week:'' });
 
  
   
@@ -17,10 +22,111 @@ const RefereeProfile = () => {
       getRefereeDetails(id).then(res=>{
         setReferee(res)
       })
-      fetchReview(id).then(res=>{
+      fetchReview(id, week).then(res=>{
         setReviews(res)
+        setFilteredReviews(res.filter(e=>e.week===week))
       })
     },[id])
+    
+   
+const handleLikeDislike=(id)=>{
+
+const usersLiked= filteredReviews.filter(e=> e._id ===id)[0].likedislike
+
+setLikeCount(usersLiked.length)
+if (usersLiked.length>0 && usersLiked.includes(user._id)) {
+  const isLiked= usersLiked.includes(user._id)
+  if (isLiked) {
+    alert('you already liked this!')
+    return
+    
+  }
+  
+}else{
+  
+  const usersDisliked= filteredReviews.filter(e=> e._id ===id)[0].dislike
+  const isDisliked= usersDisliked.includes(user._id)
+  if (isDisliked) {
+    const r= filteredReviews.filter(e=> {
+      if (e._id ===id) {
+        e.dislike.pop(user._id)
+        e.likedislike.push(user._id)
+        return [...filteredReviews, e]
+      }
+    })
+    removeDislike(id, user._id)
+    addLike(id, user._id)
+    setFilteredReviews(filteredReviews.map(obj=> r.find(o=> o._id===obj._id)|| obj))
+    setLikeCount(likeCount+1)
+  }else{
+    const r= filteredReviews.filter(e=> {
+      if (e._id ===id) {
+        e.likedislike.push(user._id)
+        return [...filteredReviews, e]
+      }
+    })
+    addLike(id, user._id)
+    setFilteredReviews(filteredReviews.map(obj=> r.find(o=> o._id===obj._id)|| obj))
+    setLikeCount(likeCount+1)}
+  }
+  
+
+
+}
+
+const handleDislike=(id)=>{
+
+  const usersDisliked= filteredReviews.filter(e=> e._id ===id)[0].dislike
+  const isdisLiked= usersDisliked.includes(user._id)
+  if (isdisLiked) {
+    alert('You already disliked this!')
+    return;
+  }
+
+  const usersLiked= filteredReviews.filter(e=> e._id ===id)[0].likedislike
+
+if (usersLiked.length>0 && usersLiked.includes(user._id)) {
+  const isLiked= usersLiked.includes(user._id)
+  if (isLiked) {
+    
+    removeLike(id, user._id)
+    addDislike(id, user._id)
+    const r= filteredReviews.filter(e=> {
+      if (e._id ===id) {
+        e.likedislike.pop(user._id)
+        e.dislike.push(user._id)
+        return [...filteredReviews, e]
+      }
+    })
+    setFilteredReviews(filteredReviews.map(obj=> r.find(o=> o._id===obj._id)|| obj))
+    setLikeCount(likeCount-1)
+  }
+  
+}else{
+
+  addDislike(id, user._id)
+    const r= filteredReviews.filter(e=> {
+      if (e._id ===id) {
+        e.dislike.push(user._id)
+        return [...filteredReviews, e]
+      }
+    })
+    setFilteredReviews(filteredReviews.map(obj=> r.find(o=> o._id===obj._id)|| obj))
+    setLikeCount(likeCount-1)
+
+}
+
+}
+
+const handleWeek=(data)=>{
+setWeek(data)
+
+const filteredReview= reviews.filter(single => single.week == data.toString())
+
+setFilteredReviews(filteredReview)
+
+}
+// console.log(reviews);
 
     let totalReview=0;
  
@@ -34,13 +140,15 @@ const RefereeProfile = () => {
     }
     const handleChange = ({ currentTarget: input }) => {
         if (input.name==='') {
-            setData({ ...data, comment: input.value });
+            setData({ ...data, comment: input.value, week:week });
         }
-        setData({ ...data, [input.name]: input.value });
+        setData({ ...data, [input.name]: input.value, week: week });
       };
     const handleSubmit=(e)=>{
         e.preventDefault()
-       if (data.comment==='' || data.rating==='' || data.rating==='choose here') {
+        
+        
+       if (data.comment==='' || data.rating==='' || data.week==='' || data.rating==='choose here') {
         return
        }
         handleAddReview(data)
@@ -50,9 +158,11 @@ const RefereeProfile = () => {
                           })
                           fetchReview(id).then(res=>{
                             setReviews(res)
+                            setFilteredReviews(res.filter(single => single.week == week))
                           })
                         alert('review added successfully!')
                         setData({...data, comment:'', rating:'' })
+                        // e.target.reset()
                       })
                       .catch((err) => console.log(err.response.data.message)) 
     }
@@ -99,17 +209,34 @@ const RefereeProfile = () => {
                 </div>
             </div>
             
-            <div className="row review-section mt-5">
+            <div className="row review-section mt-5 mb-5">
                 <div className="col-md-6 review-list ">
+                  <p className='p-1 bg-primary col-6 text-center'>Displaying reviews for week {week.split('week')[1]}</p>
 
-                    {reviews&& reviews.map(single=>(
+                    {filteredReviews.length>0 ? filteredReviews.map(single=>(
                         <div key={single._id} className='single-review p-2'>
                         <h6>{single.writtenBy}</h6>
                         <span><Rating rating={single.rating}/></span>
                         <span className='text-muted'>{single.createdAt.slice(0,10)}</span>
                         <p>{single.comment}</p>
+                        <div className='like-icon'>
+                          <span>{single.likedislike.length +' Like! '}</span>
+                          {single.likedislike.includes(user._id)? <AiFillLike title='Like' className='bg-info likedislike-active font-size-25' onClick={()=>{ handleLikeDislike(single._id)}}></AiFillLike> :
+                          <AiFillLike title='Like' className='bg-info font-size-25' onClick={()=>{ handleLikeDislike(single._id)}}></AiFillLike>  }
+                          
+                        </div>
+
+                        <div className='like-icon'>
+                          <span>{single.dislike.length +' Dislike! '}</span>
+                          {single.dislike.includes(user._id)? <AiFillDislike title='Dislike' className='bg-danger likedislike-active font-size-25' onClick={()=>{ handleDislike(single._id)}}></AiFillDislike> : <AiFillDislike title='Dislike' className='bg-danger font-size-25' onClick={()=>{ handleDislike(single._id)}}></AiFillDislike>  }
+
+                        </div>
+
+
                     </div>
-                    ))}
+                    )): <div className="alert alert-warning" role="alert">
+                    No revies found for week {week.split('week')[1]}
+                  </div>  }
 
                 </div>
 
@@ -118,6 +245,10 @@ const RefereeProfile = () => {
                 <div className="col-md-6">
                     <form onSubmit={handleSubmit}>
                     
+
+    <SelectWeek handleWeek={handleWeek}/>
+
+
 
     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
         <Form.Label>Rating</Form.Label>
@@ -134,7 +265,7 @@ const RefereeProfile = () => {
         <Form.Label>Comment</Form.Label>
         <Form.Control as="textarea" onChange={handleChange} required name='comment' rows={3} value={data.comment} />
       </Form.Group>
-      <button type='submit' className='btn btn-primary'>Submit</button>
+      <button type='submit' className='btn btn-primary mb-5'>Submit</button>
                     </form>
                 </div>
             </div>

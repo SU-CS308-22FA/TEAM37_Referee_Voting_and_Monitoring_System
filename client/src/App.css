@@ -112,3 +112,19 @@ a{
     margin-top: 85px !important;
   }
 }
+
+.font-size-25{
+  font-size: 25px;
+    margin-bottom: 7px;
+    cursor: pointer;
+    background-color: #0f3460 !important;
+}
+.dislike-icon{
+  font-size: 25px;
+    margin-bottom: 7px;
+    cursor: pointer;
+    
+}
+.likedislike-active{
+  color: rgb(42, 230, 70);
+}
