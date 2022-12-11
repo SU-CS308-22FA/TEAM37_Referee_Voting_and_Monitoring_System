@@ -1,6 +1,6 @@
 .matches-container {
   width: calc(100% - 30px);
-  background-color: rgb(38, 146, 185);
+  background-color: rgb(238, 231, 231);
   border-radius: 10px;
   box-shadow: rgba(34, 34, 38, 0.08) 0px 1px 4px;
   padding: 0;
@@ -35,8 +35,8 @@
 
 .select-option {
   font-weight: bold;
-  width: 500px;
+  width: 550px;
   margin: 15px;
-  display: flex;
   justify-content: space-between;
+  display: flex;
 }

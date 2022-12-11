@@ -49,19 +49,30 @@ export const sendVerifyEmail = async (data) => {
   const { data: res } = await HTTP.post("/users/sendMeMail", data);
   console.log(res.message);
 };
-export const requestMatches = async (weekNumber, seasonNumber, leagueNumber) => {
+export const requestMatches = async (
+  weekNumber,
+  seasonNumber,
+  leagueNumber,
+  roundName
+) => {
   try {
+    console.log(process.env)
     const { data } = await axios.get(
       "https://v3.football.api-sports.io/fixtures",
       {
         params: {
-          round: "Regular Season - " + String(weekNumber),
-          league: String(leagueNumber),
-          season: String(seasonNumber),
+          round:
+            leagueNumber === 206 || leagueNumber === 551 ? roundName :
+            leagueNumber === 552 && seasonNumber >= 2016 && seasonNumber !== 2018 ? "Group 1 - " + String(weekNumber) :
+            leagueNumber === 553 && seasonNumber >= 2016 && seasonNumber !== 2018 ? "Group 2 - " + String(weekNumber) :
+            leagueNumber === 554 && seasonNumber >= 2016 && seasonNumber !== 2018 ? "Group 3 - " + String(weekNumber) :
+               "Regular Season - " + String(weekNumber),
+          league: leagueNumber,
+          season: seasonNumber,
         },
         headers: {
-          "x-rapidapi-host": "v3.football.api-sports.io",
-          "x-rapidapi-key": "9d3f470a106c6ce69d1b6e6c4adff0f0",
+          "x-rapidapi-host": process.env.REACT_APP_FOOTBALL_API_HOST,
+          "x-rapidapi-key": process.env.REACT_APP_FOOTBALL_API_KEY,
         },
       }
     );

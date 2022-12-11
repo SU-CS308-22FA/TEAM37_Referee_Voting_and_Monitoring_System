@@ -68,9 +68,7 @@ const MatchElement = ({
       <span className="match-refree-stadium">
         <div>
           <FcBusinessman />
-          {Referee === null
-            ? "No referee found"
-            : " " + Referee.substring(0, Referee.indexOf(","))}
+          {Referee === null ? "No referee found" : " " + Referee}
         </div>
         <div>
           <GiSoccerField />
