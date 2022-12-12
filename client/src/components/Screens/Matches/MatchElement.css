@@ -1,0 +1,101 @@
+.match-element {
+  font-weight: normal;
+  position: relative;
+  display: grid;
+  -webkit-box-align: center;
+  align-items: center;
+  padding-top: 0px;
+  padding-right: 5px;
+  grid-template-columns: 1fr 25px 40px 25px 1fr;
+  column-gap: 15px;
+  user-select: none;
+  -webkit-user-select: none;
+  height: 70px;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--primary-300);
+  background-color: white;
+  font-weight: 500;
+}
+
+.match-element:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.match-element > * {
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+.match-element > span {
+  color: black;
+  line-height: 1.08;
+}
+
+.match-element-team-name {
+  width: 100%;
+  text-align: right;
+  font-size: 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  line-height: 16px;
+}
+
+.match-element-team-name2 {
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  line-height: 16px;
+}
+
+.match-element-team-logo {
+  width: 25px;
+  aspect-ratio: auto 25 / 25;
+  height: 25px;
+}
+
+.match-element-details-box {
+  display: grid;
+  grid-auto-flow: row;
+  grid-auto-rows: max-content;
+  row-gap: 5px;
+  justify-items: center;
+}
+
+.match-element-result {
+  font-weight: 700;
+  white-space: nowrap;
+  font-size: 14px;
+  color: black;
+}
+
+.match-element-status {
+  font-size: 11px;
+  color: rgb(172, 172, 172);
+}
+
+.match-element-time {
+  color: rgb(133, 133, 133);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.match-date {
+  position: absolute;
+  margin: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.match-refree-stadium {
+  text-align: left;
+  font-size: 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  line-height: 16px;
+  position: absolute;
+  left: 82%;
+  margin: 15px;
+}

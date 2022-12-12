@@ -1,9 +1,9 @@
 import { useState } from "react";
 import React from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
-import { handleSignin, handleGoogle} from "../../axios";
-import { GoogleLogin } from '@react-oauth/google';
+import { handleSignin, handleGoogle } from "../../axios";
+import { GoogleLogin } from "@react-oauth/google";
 
 const Login = () => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -13,21 +13,23 @@ const Login = () => {
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
-   localStorage.removeItem("token");
-	 localStorage.removeItem("user");
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
   return (
-    
     <div className={styles.login_container}>
       <div className={styles.login_form_container}>
         <div className={styles.left}>
-          <form className={styles.form_container} onSubmit={(e) => {
+          <form
+            className={styles.form_container}
+            onSubmit={(e) => {
               e.preventDefault();
               handleSignin(data)
-              .then((res) => { window.location = "/";
-              })
-              .catch((err) => setError(err.response.data.message))           
+                .then((res) => {
+                  window.location = "/";
+                })
+                .catch((err) => setError(err.response.data.message));
             }}
-            >
+          >
             <h1>Sign in to your account</h1>
             <input
               type="email"
@@ -47,34 +49,41 @@ const Login = () => {
               required
               className={styles.input}
             />
-            
-            {error && <div className={styles.error_msg}>{error}</div>}
-            <button type="submit" className={styles.green_btn}>
-              Sign In
-            </button>
-              
-          </form>
-          <div className={styles.bottom}>
-              <GoogleLogin size = "large" theme = "filled_blue" width="400"
-                onSuccess={(credentialResponse) => {
-                handleGoogle(credentialResponse)
+
+            <GoogleLogin 
+              size="large"
+              theme="filled_blue"
+              width="400"
+              onSuccess={(credentialResponse) => {
+                handleGoogle(credentialResponse);
                 console.log(credentialResponse);
               }}
               onError={() => {
-                console.log('Login Failed');
+                console.log("Login Failed");
               }}
-              />
-          </div>
-          <div className={styles.bottom}>
-          <h1> New account? Join now</h1>
-          <Link to="/signup">
-            <button type="button" className={styles.white_btn}>
-              Sign Up
+            />
+
+            <button type="submit" className={styles.green_btn}>
+              Sign In
             </button>
-          </Link>
-         </div>
+            {error && <div className={styles.error_msg}>{error}</div>}
+          </form>
+
+          <div className={styles.forgetpass}>
+            <Link to="/forgot-password" style={{ alignSelf: "flex-start" }}>
+              <p style={{ padding: "0 15px" }}>Forgot Password ?</p>
+            </Link>
+          </div>
+
+          <div className={styles.bottom}>
+            <h1> New account? Join now</h1>
+            <Link to="/signup">
+              <button type="button" className={styles.white_btn}>
+                Sign Up
+              </button>
+            </Link>
+          </div>
         </div>
-        
       </div>
     </div>
   );

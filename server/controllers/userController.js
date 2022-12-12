@@ -121,7 +121,7 @@ export const deleteUser = async (req, res) => {
   }
 };
 
-/* GET */
+/* Email link is clicked */
 export const verifyEmail = async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
@@ -131,23 +131,24 @@ export const verifyEmail = async (req, res) => {
       userId: user._id,
       token: req.params.token,
     });
-    
+
     if (!token) return res.status(400).send({ message: "Invalid link" });
 
-    //const updatedUser = await User.updateOne({ _id: user._id }, { verified: true });
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      { $set: { verified: true} },
+      { $set: { verified: true } },
       { new: true }
     );
 
-    return res.status(200).json({ user: updatedUser, message: "Verified Succesfully" });
+    return res
+      .status(200)
+      .json({ user: updatedUser, message: "Verified Succesfully" });
   } catch (error) {
     res.status(500).send({ message: "Internal Server Error" });
   }
 };
 
-/* POST */
+/* Email is sent */
 export const sendVerifyEmail = async (req, res) => {
   try {
     let user = await User.findOne({ email: req.body.email });
@@ -159,7 +160,11 @@ export const sendVerifyEmail = async (req, res) => {
           token: crypto.randomBytes(32).toString("hex"),
         }).save();
         const url = `${process.env.BASE_URL}users/${user.id}/verify/${token.token}`;
-        await sendEmail(user.email, "Verify Email", url);
+        await sendEmail(
+          user.email,
+          "Verify Your Email",
+          "Please click the link to verify your account.\n" + url
+        );
       }
 
       return res
