@@ -13,7 +13,7 @@ export default function Navbar() {
         {user && <CustomLink to="/referees">Referees</CustomLink>}
 
      
-        {user && <CustomLink to="/standing">Standings</CustomLink>}
+        { <CustomLink to="/standing">Standings</CustomLink>}
 
         {user && user.userType !=='ADMIN' && <CustomLink to="/addreferee">Add Referee</CustomLink>}
 
