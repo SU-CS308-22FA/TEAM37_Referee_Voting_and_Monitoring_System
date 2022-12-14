@@ -118,6 +118,15 @@ export const handleAddReferee = async (data) => {
   const { data: res } = await HTTP.post(`/referee/add`, data);
 };
 
+export const handleDeleteReferee = async (id) => {
+  const { data: res } = await HTTP.delete(`/referee/${id}`);
+  console.log("Test");
+};
+export const handleUpdateReferee = async (data,id) => {
+  const { data: res } = await HTTP.put(`/referee/${id}`,data);
+  console.log(data);
+};
+
 export const fetchReferee = async (data) => {
   const { data: res } = await HTTP.get(`/referee`);
   return res.referee;

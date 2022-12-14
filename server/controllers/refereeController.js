@@ -83,3 +83,28 @@ export const addReferee = async (req, res) => {
       return res.status(400).send({ message: error.message });
     }
   };
+  export const updateReferee = async (req, res) => {
+
+  const {name, age, imageurl, description, matches, redcard, yellowcard  } = req.body;
+  try {
+    const updatedReferee = await Referee.findByIdAndUpdate(
+      req.params.id,
+      { $set: { name, age, imageurl, description, matches, redcard, yellowcard } },
+      { new: true }
+      
+    );
+    return res
+      .status(200)
+      .json({ referee: updatedReferee, message: "Informations changed succesfully" });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+export const deleteReferee = async (req, res) => {
+  try {
+    await Referee.findByIdAndDelete(req.params.id);
+    res.status(200).json("Referee has been deleted.");
+  } catch (err) {
+    return res.status(400).json({ message: err.message });
+  }
+};
