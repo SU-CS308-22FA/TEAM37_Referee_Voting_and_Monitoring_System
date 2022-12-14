@@ -74,9 +74,9 @@ Also
 ### Folder Structure
 
 1. In the root file there are two main folders which are client and server.
-2. Client folder contains the front-end part of the project
-  2.1 Main files stored in src folder and other minor things stored in public folder such as icon of the website
-  2.2 Src file contains components folder and other necessary files such as app.js
+2. Client folder contains the front-end part of the project.
+  2.1 Main files stored in src folder and other minor things stored in public folder such as icon of the website.
+  2.2 Src file contains components folder and other necessary files such as app.js.
   2.3 Components folder contains two folder which are Screens and Axios.
     2.3.1 Screens folder contains the pages that user will see when it enters the applicatipn such as sign-in and standings page.
     2.3.2 Axios folder contains the axios http methods that are used in the pages to connect them to backend.
