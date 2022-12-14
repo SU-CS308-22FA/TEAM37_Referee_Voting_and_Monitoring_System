@@ -1,9 +1,9 @@
 CS 308 Team 37 - 202201
-# [Referee_Voting_and_Monitoring_System]
+# [Referee Voting and Monitoring System]
 
 Go to website: Not Active
 
-Referee_Voting_and_Monitoring_System is a open source web application that football fans can use. It isa free space that every fan can express their opinons about matches, leagues, and referees. This website also provides up-to date news about football such as standings and fixtures to keep the fans well-informed.
+Referee Voting and Monitoring System is a open source web application that football fans can use. It isa free space that every fan can express their opinons about matches, leagues, and referees. This website also provides up-to date news about football such as standings and fixtures to keep the fans well-informed.
 
 ## Installation
 First step is installing npm package manager to your device using [this](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) website.
@@ -116,7 +116,7 @@ npm install
 ```
 This will load the packages used for backend of the project.
 
-### Deploying the project to a remote server (Railway)
+### Deploying the project to a remote server (Render)
 
 #####Step 1: Clone to a git repository 
 [Render](https://dashboard.render.com/) is a free open source deployment platform 
