@@ -17,6 +17,8 @@ export default function Navbar() {
 
         {user && user.userType !=='ADMIN' && <CustomLink to="/addreferee">Add Referee</CustomLink>}
 
+        {user && <CustomLink to="/refereePanel">RefereePanel</CustomLink>}
+
         {user && <CustomLink to="/profile">My Profile</CustomLink>}
         
       </ul>
