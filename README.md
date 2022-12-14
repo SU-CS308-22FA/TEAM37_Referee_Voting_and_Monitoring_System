@@ -118,18 +118,18 @@ This will load the packages used for backend of the project.
 
 ### Deploying the project to a remote server (Render)
 
-#####Step 1: Clone to a git repository 
+##### Step 1.1: Clone to a git repository 
 [Render](https://dashboard.render.com/) is a free open source deployment platform 
 
 Use link above to sign-up with render
 
-##### Step 1: On the render web page, conenct your account to your github account
+##### Step 1.2: On the render web page, conenct your account to your github account
 
 ##### Step 2: On the render dashboard, deploy client part of the project from github repository by choosing static site
 
-##### Step 3: On the render dashboard, deploy server part of the project from github repository by choosing web service
+##### Step 3.1: On the render dashboard, deploy server part of the project from github repository by choosing web service
 
-##### Step 3: Configure & launch your environment
+##### Step 3.2: Configure & launch your environment
 
 
 ##### Step 4: Modify environment variables
