@@ -72,7 +72,7 @@ export const requestMatches = async (
         },
         headers: {
           "x-rapidapi-host": process.env.REACT_APP_FOOTBALL_API_HOST,
-          //"x-rapidapi-key": process.env.REACT_APP_FOOTBALL_API_KEY,
+          "x-rapidapi-key": process.env.REACT_APP_FOOTBALL_API_KEY,
         },
       }
     );
