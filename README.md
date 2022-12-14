@@ -137,6 +137,6 @@ Use link above to sign-up with render
 1. In Render, select your deployment
 2. Navigate to variables
 3. Add all environment variables or add your .env files Render will keep them encrpted
-4. railway automatically deploys once you are done editing
+4. Render automatically deploys once you are done editing
 
 ##### Step 5: Update your project by commiting to your repository. Render will autamatically deploy your project by your lates commits
