@@ -85,6 +85,7 @@
 	font-weight: bold;
 	font-size: 14px;
 	cursor: pointer;
+	
   }
   .select-option {
 	font-weight: bold;
@@ -92,4 +93,5 @@
 	margin: 15px;
 	justify-content: space-between;
 	display: flex;
+	
   }

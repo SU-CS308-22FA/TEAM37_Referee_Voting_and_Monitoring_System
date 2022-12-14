@@ -72,6 +72,96 @@ const Standings = () => {
       ),
     },
     {
+      value: 207,
+      label: (
+        <span>
+          <img
+            src={
+              "https://media-2.api-sports.io/football/leagues/207.png"
+            }
+            height="30px"
+            width="25px"
+          />
+          {"Swiss Super League"}
+        </span>
+      ),
+    },
+    {
+      value: 135,
+      label: (
+        <span>
+          <img
+            src={
+              "https://media-2.api-sports.io/football/leagues/135.png"
+            }
+            height="30px"
+            width="25px"
+          />
+          {"Serie A"}
+        </span>
+      ),
+    },
+    {
+      value: 61,
+      label: (
+        <span>
+          <img
+            src={
+              "https://media-2.api-sports.io/football/leagues/61.png"
+            }
+            height="30px"
+            width="25px"
+          />
+          {"Ligue 1"}
+        </span>
+      ),
+    },
+    {
+      value: 204,
+      label: (
+        <span>
+          <img
+            src={
+              "https://upload.wikimedia.org/wikipedia/tr/e/ec/TFF_1.Lig_logo.png"
+            }
+            height="30px"
+            width="25px"
+          />
+          {" TFF 1. League"}
+        </span>
+      ),
+    },
+    {
+      value: 205,
+      label: (
+        <span>
+          <img
+            src={
+              "https://upload.wikimedia.org/wikipedia/de/d/d9/TFF_2._Lig.png"
+            }
+            height="30px"
+            width="25px"
+          />
+          {" TFF 2. League"}
+        </span>
+      ),
+    },
+    {
+      value: 552,
+      label: (
+        <span>
+          <img
+            src={
+              "https://upload.wikimedia.org/wikipedia/tr/archive/4/47/20200909222954%21TFF3_kopya.png"
+            }
+            height="30px"
+            width="25px"
+          />
+          {" TFF 3. League 1"}
+        </span>
+      ),
+    },
+    {
       value: 553,
       label: (
         <span>
@@ -101,36 +191,7 @@ const Standings = () => {
         </span>
       ),
     },
-    {
-      value: 206,
-      label: (
-        <span>
-          <img
-            src={
-              "https://upload.wikimedia.org/wikipedia/tr/6/61/Ziraat_Türkiye_Kupası_logosu.png"
-            }
-            height="30px"
-            width="25px"
-          />
-          {" Turkish Cup"}
-        </span>
-      ),
-    },
-    {
-      value: 551,
-      label: (
-        <span>
-          <img
-            src={
-              "https://upload.wikimedia.org/wikipedia/tr/6/61/Türkiye_Süper_Kupası_logo.png"
-            }
-            height="30px"
-            width="25px"
-          />
-          {" Super Cup"}
-        </span>
-      ),
-    },
+   
   ];
   const seasonOptions = [];
   for (var i = 1; i <= 6; i++) {
@@ -170,19 +231,6 @@ const Standings = () => {
     .then((data) => setTeam(data));
     console.log("front end butonuna geldi");
     console.log(team);
-    // try {
-    //   const standings = requestStandings(selectedLeagueOption["value"],selectedSeasonOption["value"]);
-    //   console.log("front end butonuna geldi");
-    //   console.log(standings);
-      
-    // } catch (err) {
-    //   console.log(err);
-    // }
-    // const data1 = window.localStorage.getItem('teams');
-    // console.log("data buton");
-    // console.log(data1);
-    // setTeam(JSON.parse(data1));
-    // console.log(team);
 
   };
 
@@ -197,7 +245,7 @@ const Standings = () => {
       <button onClick={callAPI} className={styles.green_btn} align="center">
         Call API
       </button>
-      <div className="select-option">
+      <div className="select-option" align="center">
         <Select
           defaultValue={selectedLeagueOption}
           onChange={setSelectedLeagueOption}
@@ -219,8 +267,9 @@ const Standings = () => {
           <table className="table" size={window.outerWidth} align="center">
             <thead>
               <tr>
-                <td colSpan="9">
-                  <h3>{"TFF"}</h3>
+        
+                <td colSpan="9">           
+                    <h3>{}</h3>                
                 </td>
               </tr>
               <tr>
