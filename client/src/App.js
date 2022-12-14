@@ -24,7 +24,6 @@ import PasswordReset from "./components/Screens/PasswordReset";
 import RefereeProfile from "./components/Screens/referee-profile/RefereeProfile";
 import AddReferee from "./components/Screens/HomePage/add-referee/AddReferee";
 import Standings from "./components/Screens/Standings";
-import Standings2 from "./components/Screens/Standings2";
 import Matches from "./components/Screens/Matches";
 
 
@@ -54,7 +53,6 @@ function App() {
         <Route path="/referee/:id" exact element={<RefereeProfile />} />
         <Route path="/addreferee" exact element={<AddReferee />} />
         <Route path="/standing" exact element={<Standings />} />
-        <Route path="/standing2" exact element={<Standings2 />} />
         <Route path="/matches" exact element={<Matches />} />
       </Routes>
     </GoogleOAuthProvider>
