@@ -72,7 +72,7 @@ export const requestMatches = async (
         },
         headers: {
           "x-rapidapi-host": process.env.REACT_APP_FOOTBALL_API_HOST,
-          "x-rapidapi-key": process.env.REACT_APP_FOOTBALL_API_KEY,
+          //"x-rapidapi-key": process.env.REACT_APP_FOOTBALL_API_KEY,
         },
       }
     );
@@ -80,6 +80,34 @@ export const requestMatches = async (
 
     console.log(matches);
     return matches;
+  } catch (error) {
+    console.log("ERROR");
+    return [];
+  }
+};
+
+export const requestStandings = async (leagueNumber, seasonNumber) => {
+  try {
+  
+    const { data } = await axios.get(
+      "https://v3.football.api-sports.io/standings",
+      {
+        params: {
+          league: leagueNumber,
+          season: seasonNumber,
+        },
+        headers: {
+          "x-rapidapi-host": process.env.REACT_APP_FOOTBALL_API_HOST,
+          "x-rapidapi-key": process.env.REACT_APP_FOOTBALL_API_KEY,
+        },
+      }
+    );
+   
+    const standings = data.response[0].league.standings[0];
+    console.log('axiosa data geldi');
+    console.log(standings);
+
+    return standings;
   } catch (error) {
     console.log("ERROR");
     return [];
