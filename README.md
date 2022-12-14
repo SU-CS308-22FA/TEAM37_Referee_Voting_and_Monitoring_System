@@ -75,20 +75,20 @@ Also
 
 1. In the root file there are two main folders which are client and server.
 2. Client folder contains the front-end part of the project.
-  2.1 Main files stored in src folder and other minor things stored in public folder such as icon of the website.
-  2.2 Src file contains components folder and other necessary files such as app.js.
-  2.3 Components folder contains two folder which are Screens and Axios.
-    2.3.1 Screens folder contains the pages that user will see when it enters the applicatipn such as sign-in and standings page.
-    2.3.2 Axios folder contains the axios http methods that are used in the pages to connect them to backend.
+2.1 Main files stored in src folder and other minor things stored in public folder such as icon of the website.
+2.2 Src file contains components folder and other necessary files such as app.js.
+2.3 Components folder contains two folder which are Screens and Axios.
+2.3.1 Screens folder contains the pages that user will see when it enters the applicatipn such as sign-in and standings page.
+2.3.2 Axios folder contains the axios http methods that are used in the pages to connect them to backend.
   
 3. Server folder contains the back-end part of the project
-  3.1 We have three main folders named as Routers, Controllers and Models
-    3.1.1 Routers folders stores the functional routes that http request will use
-    3.1.2 Controllers folder contructs the backbone of the backend by implementing the backend functions retrieve and post data to database(MongoDB)
-    3.1.3 Models folder contains the schemas used in the projet such as user schema and referee schema.
-   3.2 We have necessary files such as index.js and package.json.
-     3.2.1 Index.js construct the entry point of the backend by connecting to database and arranging the routes.
-     3.2.2 Package.json file simply stores the package versions used in the project.
+3.1 We have three main folders named as Routers, Controllers and Models
+3.1.1 Routers folders stores the functional routes that http request will use
+3.1.2 Controllers folder contructs the backbone of the backend by implementing the backend functions retrieve and post data to database(MongoDB)
+3.1.3 Models folder contains the schemas used in the projet such as user schema and referee schema.
+3.2 We have necessary files such as index.js and package.json.
+3.2.1 Index.js construct the entry point of the backend by connecting to database and arranging the routes.
+3.2.2 Package.json file simply stores the package versions used in the project.
     
 
 ### How to Build the project
