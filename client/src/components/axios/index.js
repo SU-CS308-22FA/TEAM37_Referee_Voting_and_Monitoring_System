@@ -45,10 +45,47 @@ export const handleDelete = async (data, id) => {
   localStorage.removeItem("user");
 };
 
+/**
+ * Creates a special token in the database for the mail sent to it and sends it to the user's e-mail address
+ * @param {Array} emailArray - 1-element array containing elements in a dictionary format
+ * @returns {true} if email is successfully sent
+ * @throws {ServerError} if email cannot sent
+ * @example   
+    const [data] = useState({
+      email: user.email,
+    });
+
+    sendVerifyEmail(data)
+      .then(() => {
+        setMsg("An email sent to your account please verify !");
+      })
+      .catch((err) => {
+        setError(err.response.data.message);
+      });
+ */
+
 export const sendVerifyEmail = async (data) => {
   const { data: res } = await HTTP.post("/users/sendMeMail", data);
   console.log(res.message);
 };
+
+/**
+ * Get all the matches in the desired parameters in a specific format.
+ * @param {int} weekNumber - the number of the week in which the match was/will be played
+ * @param {int} seasonNumber - the season year in which the match was/will be played
+ * @param {int} leagueNumber - the league id which corresponds the a league to find match was/will be played
+ * @param {string} roundName -  the round string to find the rounds of tournaments
+ * @returns {Array} Array containing the information of the matches played in the desired parameters
+ * @example   
+    const [matches, setMatches] = useState([]);  
+
+    requestMatches(
+      selectedWeekOption["value"],
+      selectedSeasonOption["value"],
+      selectedLeagueOption["value"],
+      selectedRoundOption["value"]
+    ).then((data) => setMatches(data));
+ */
 export const requestMatches = async (
   weekNumber,
   seasonNumber,
@@ -56,17 +93,27 @@ export const requestMatches = async (
   roundName
 ) => {
   try {
-    console.log(process.env)
+    console.log(process.env);
     const { data } = await axios.get(
       "https://v3.football.api-sports.io/fixtures",
       {
         params: {
           round:
-            leagueNumber === 206 || leagueNumber === 551 ? roundName :
-            leagueNumber === 552 && seasonNumber >= 2016 && seasonNumber !== 2018 ? "Group 1 - " + String(weekNumber) :
-            leagueNumber === 553 && seasonNumber >= 2016 && seasonNumber !== 2018 ? "Group 2 - " + String(weekNumber) :
-            leagueNumber === 554 && seasonNumber >= 2016 && seasonNumber !== 2018 ? "Group 3 - " + String(weekNumber) :
-               "Regular Season - " + String(weekNumber),
+            leagueNumber === 206 || leagueNumber === 551
+              ? roundName
+              : leagueNumber === 552 &&
+                seasonNumber >= 2016 &&
+                seasonNumber !== 2018
+              ? "Group 1 - " + String(weekNumber)
+              : leagueNumber === 553 &&
+                seasonNumber >= 2016 &&
+                seasonNumber !== 2018
+              ? "Group 2 - " + String(weekNumber)
+              : leagueNumber === 554 &&
+                seasonNumber >= 2016 &&
+                seasonNumber !== 2018
+              ? "Group 3 - " + String(weekNumber)
+              : "Regular Season - " + String(weekNumber),
           league: leagueNumber,
           season: seasonNumber,
         },
@@ -88,7 +135,6 @@ export const requestMatches = async (
 
 export const requestStandings = async (leagueNumber, seasonNumber) => {
   try {
-  
     const { data } = await axios.get(
       "https://v3.football.api-sports.io/standings",
       {
@@ -102,9 +148,9 @@ export const requestStandings = async (leagueNumber, seasonNumber) => {
         },
       }
     );
-   
+
     const standings = data.response[0].league.standings[0];
-    console.log('axiosa data geldi');
+    console.log("axiosa data geldi");
     console.log(standings);
 
     return standings;
@@ -122,8 +168,8 @@ export const handleDeleteReferee = async (id) => {
   const { data: res } = await HTTP.delete(`/referee/${id}`);
   console.log("Test");
 };
-export const handleUpdateReferee = async (data,id) => {
-  const { data: res } = await HTTP.put(`/referee/${id}`,data);
+export const handleUpdateReferee = async (data, id) => {
+  const { data: res } = await HTTP.put(`/referee/${id}`, data);
   console.log(data);
 };
 
@@ -136,7 +182,7 @@ export const getRefereeDetails = async (id) => {
   return res.referee;
 };
 
-export const fetchReview = async (refid,week) => {
+export const fetchReview = async (refid, week) => {
   const { data: res } = await HTTP.get(`/review/${refid}/${week}`);
   // console.log(res.review);
   return res.review;
@@ -147,23 +193,23 @@ export const handleAddReview = async (data) => {
 
   return res;
 };
-export const addLike = async (id,user) => {
-  const { data: res } = await HTTP.put(`/review/addlike`, {id,user});
+export const addLike = async (id, user) => {
+  const { data: res } = await HTTP.put(`/review/addlike`, { id, user });
 
   return res;
 };
-export const addDislike = async (id,user) => {
-  const { data: res } = await HTTP.put(`/review/adddislike`, {id,user});
+export const addDislike = async (id, user) => {
+  const { data: res } = await HTTP.put(`/review/adddislike`, { id, user });
 
   return res;
 };
-export const removeLike = async (id,user) => {
-  const { data: res } = await HTTP.put(`/review/removelike`, {id,user});
+export const removeLike = async (id, user) => {
+  const { data: res } = await HTTP.put(`/review/removelike`, { id, user });
 
   return res;
 };
-export const removeDislike = async (id,user) => {
-  const { data: res } = await HTTP.put(`/review/removedislike`, {id,user});
+export const removeDislike = async (id, user) => {
+  const { data: res } = await HTTP.put(`/review/removedislike`, { id, user });
 
   return res;
 };
