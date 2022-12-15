@@ -1,5 +1,5 @@
 CS 308 Team 37 - 202201
-# [Referee Voting and Monitoring System]
+# Referee Voting and Monitoring System
 
 Go to website: Not Active
 
