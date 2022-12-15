@@ -5,6 +5,26 @@ const HTTP = axios.create({
   baseURL: "http://localhost:5000",
 });
 
+
+/**
+ * Gets user information from google by decyrpting the credentials coming from users gmail
+ * @param {Array} credentialResponse - Array that contains the encrypted credentials of the user
+ * @returns {Array} If gmail credentials succesfully collected and decyrpted
+ * @throws {ServerError} if google authentication was unsuccesful
+ * @example   
+    <GoogleLogin 
+              size="large"
+              theme="filled_blue"
+              width="400"
+              onSuccess={(credentialResponse) => {
+                handleGoogle(credentialResponse);
+                console.log(credentialResponse);
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+            />
+ */
 export const handleGoogle = async (data) => {
   try {
     var userObject = jwt_decode(data.credential);
@@ -133,6 +153,21 @@ export const requestMatches = async (
   }
 };
 
+/**
+ * Get all the standings in the desired parameters in a specific format.
+ * @param {int} seasonNumber - the season year in which the standings takes/took place
+ * @param {int} leagueNumber - the league id which corresponds the a league that is/was going on such as Bundesliga and La Liga
+ * @returns {Array} Array containing the information of standings according to the given parameters
+ * @example  
+ *  
+    const [team, setTeam] = useState([]); 
+
+    requestStandings(
+      selectedLeagueOption["value"],
+      selectedSeasonOption["value"])
+        .then((data) => setTeam(data));
+    
+ */
 export const requestStandings = async (leagueNumber, seasonNumber) => {
   try {
     const { data } = await axios.get(
