@@ -23,7 +23,11 @@ const reviewSchema = mongoose.Schema(
       type: String,
      }
     ],
-     
+    report:[
+      {
+      type: String,    
+    }
+  ],
     
     rating: {
         type: Number,
@@ -41,6 +45,7 @@ const reviewSchema = mongoose.Schema(
       default: 'week1'
       
     },
+    
     
   },
   {

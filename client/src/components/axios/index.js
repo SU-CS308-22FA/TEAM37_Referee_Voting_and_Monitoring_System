@@ -248,3 +248,8 @@ export const removeDislike = async (id, user) => {
 
   return res;
 };
+export const addReport = async (id,user) => {
+  const { data: res } = await HTTP.put(`/review/report`, {id,user});
+
+  return res;
+};
