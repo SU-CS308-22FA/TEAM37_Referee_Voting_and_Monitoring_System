@@ -3,8 +3,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
-  height: 450px;
+
   display: flex;
   box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
 }
@@ -16,14 +15,12 @@
 }
 
 .left2 {
-  width: 600px;
-  height: 450px;
-  flex: 2;
+  display: flex;
   align-items: center;
   justify-content: center;
   background-color: #16213e;
   border-radius: 5px;
-  padding: 10px;
+  padding: 50px;
 }
 
 .form_container {
@@ -35,14 +32,16 @@
 
 .form_container h1 {
   font-size: 40px;
+  margin-bottom: 20px;
 }
 
 .input {
   outline: none;
   border: 1px solid #533483;
-  width: 370px;
+  width: 400px;
+  height: 50px;
   padding: 15px;
-  margin: 5px;
+  margin-bottom: 10px;
   font-size: 14px;
 }
 

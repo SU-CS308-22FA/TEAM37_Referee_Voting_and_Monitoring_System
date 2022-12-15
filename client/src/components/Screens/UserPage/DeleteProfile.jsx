@@ -2,17 +2,18 @@ import React from "react";
 
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
-import { handleDelete} from "../../axios";
-import { useState} from "react";
-
+import { handleDelete } from "../../axios";
+import { useState } from "react";
 
 export default function DeleteProfile({}) {
-
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
-  const [data, setData] = useState({fullname: user.fullname , nickname: user.nickname, email: user.email });
+  const data = {
+    fullname: user.fullname,
+    nickname: user.nickname,
+    email: user.email,
+  };
   const [error, setError] = useState("");
-
 
   function handleCancelClicked() {
     console.log("Cancelled");
@@ -20,7 +21,7 @@ export default function DeleteProfile({}) {
   }
 
   return (
-    <div className={styles.login_container} >
+    <div className={styles.login_container}>
       <div className={styles.login_form_container}>
         <div className={styles.left2}>
           <form
@@ -28,17 +29,22 @@ export default function DeleteProfile({}) {
             onSubmit={(e) => {
               e.preventDefault();
               handleDelete(data, user._id)
-              .then((res) => { navigate("/login");
-              })
-              .catch((err) => setError(err.response.data.message))           
+                .then((res) => {
+                  navigate("/login");
+                })
+                .catch((err) => setError(err.response.data.message));
             }}
-            >
+          >
             <h2>This is your final warning are you sure?</h2>
 
-            <button type="submit" className={styles.red_btn}>           
-              Delete
+            <button type="submit" className={styles.red_btn}>
+              Delete My Account
             </button>
-            <button stype="button" className={styles.green_btn} onClick={handleCancelClicked}>
+            <button
+              stype="button"
+              className={styles.green_btn}
+              onClick={handleCancelClicked}
+            >
               Cancel
             </button>
           </form>
