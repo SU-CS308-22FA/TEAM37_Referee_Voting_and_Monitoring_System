@@ -6,8 +6,15 @@ import { addDislike, addLike, fetchReview, getRefereeDetails, handleAddReview, r
 import Rating from '../Referee/Rating';
 import SelectWeek from './SelectWeek';
 const RefereeProfile = () => {
+
+   // getting user profile from localstorage
+
     const user = JSON.parse(localStorage.getItem("user"));
+
+    // referee id from route
     let { id } = useParams();
+
+     // declaring necessary useState hooks
     const [referee, setReferee] = useState({});
     const [reviews, setReviews] = useState([]);
     const [likeCount, setLikeCount] = useState(0);
@@ -19,21 +26,32 @@ const RefereeProfile = () => {
   
    
     useEffect(()=>{
+    
       getRefereeDetails(id).then(res=>{
         setReferee(res)
       })
+
+      // fetching reviews by it's id when this page first render
       fetchReview(id, week).then(res=>{
         setReviews(res)
+
+        // set filteredreview as per seleted week. initial week is 'week1' in the state
         setFilteredReviews(res.filter(e=>e.week===week))
       })
     },[id])
     
-   
+
+// this function is responsible for handle like to a comment/review
 const handleLikeDislike=(id)=>{
 
+
+// getting all the users array who liked this comment/review
 const usersLiked= filteredReviews.filter(e=> e._id ===id)[0].likedislike
 
 setLikeCount(usersLiked.length)
+
+// check if current user has liked this comment or not
+// this block of code execute if user already liked the review
 if (usersLiked.length>0 && usersLiked.includes(user._id)) {
   const isLiked= usersLiked.includes(user._id)
   if (isLiked) {
@@ -45,8 +63,11 @@ if (usersLiked.length>0 && usersLiked.includes(user._id)) {
 }else{
   
   const usersDisliked= filteredReviews.filter(e=> e._id ===id)[0].dislike
+
+// this block of code will be executed if the user did not liked the review before
   const isDisliked= usersDisliked.includes(user._id)
   if (isDisliked) {
+      // if user dislike this review before : then first remove dislike then add like
     const r= filteredReviews.filter(e=> {
       if (e._id ===id) {
         e.dislike.pop(user._id)
@@ -54,42 +75,53 @@ if (usersLiked.length>0 && usersLiked.includes(user._id)) {
         return [...filteredReviews, e]
       }
     })
+
+    // removing dislike from DB
     removeDislike(id, user._id)
+    // adding like to DB
     addLike(id, user._id)
+    // updating filtered review list with latest like dislike update
     setFilteredReviews(filteredReviews.map(obj=> r.find(o=> o._id===obj._id)|| obj))
     setLikeCount(likeCount+1)
   }else{
+    // if user did not dislike this review before : then directly add like
     const r= filteredReviews.filter(e=> {
       if (e._id ===id) {
         e.likedislike.push(user._id)
         return [...filteredReviews, e]
       }
     })
+    // adding like to DB
     addLike(id, user._id)
+    // updating filtered review list with latest like dislike update
     setFilteredReviews(filteredReviews.map(obj=> r.find(o=> o._id===obj._id)|| obj))
-    setLikeCount(likeCount+1)}
+    setLikeCount(likeCount+1)}  // increment the like count
   }
   
 
 
 }
-
+// this function is responsible for handle dislike to a comment/review
 const handleDislike=(id)=>{
 
+  // getting list of user(s) who dislike this review
   const usersDisliked= filteredReviews.filter(e=> e._id ===id)[0].dislike
   const isdisLiked= usersDisliked.includes(user._id)
+  // checking if current user already disliked this review 
   if (isdisLiked) {
     alert('You already disliked this!')
     return;
   }
-
+  // getting the list of users who liked this review
   const usersLiked= filteredReviews.filter(e=> e._id ===id)[0].likedislike
 
 if (usersLiked.length>0 && usersLiked.includes(user._id)) {
   const isLiked= usersLiked.includes(user._id)
   if (isLiked) {
-    
+    // if the current user liked this : then execute this block of code
+    // so first remove like from DB
     removeLike(id, user._id)
+    // after that add dislike to DB
     addDislike(id, user._id)
     const r= filteredReviews.filter(e=> {
       if (e._id ===id) {
@@ -98,12 +130,14 @@ if (usersLiked.length>0 && usersLiked.includes(user._id)) {
         return [...filteredReviews, e]
       }
     })
+    // updating filtered review list with the latest like dislike update
     setFilteredReviews(filteredReviews.map(obj=> r.find(o=> o._id===obj._id)|| obj))
-    setLikeCount(likeCount-1)
+    setLikeCount(likeCount-1)  // decrement the like count
   }
   
 }else{
-
+// if the current user did not like this review : then execute this block of code
+// therefore directly add dislike to DB
   addDislike(id, user._id)
     const r= filteredReviews.filter(e=> {
       if (e._id ===id) {
@@ -111,18 +145,28 @@ if (usersLiked.length>0 && usersLiked.includes(user._id)) {
         return [...filteredReviews, e]
       }
     })
+    // updating filtered review list with the latest like dislike update
     setFilteredReviews(filteredReviews.map(obj=> r.find(o=> o._id===obj._id)|| obj))
-    setLikeCount(likeCount-1)
+    setLikeCount(likeCount-1)   // decrement the like count
+
 
 }
 
 }
 
+
+/**
+* Change week according to the user selection
+* @param {object} data Week to be selected
+* @returns {string} Week that selected 
+ 
+*/
 const handleWeek=(data)=>{
 setWeek(data)
 
 const filteredReview= reviews.filter(single => single.week == data.toString())
 
+// update filtered review list due to the change of the week
 setFilteredReviews(filteredReview)
 
 }
@@ -130,6 +174,10 @@ setFilteredReviews(filteredReview)
 
     let totalReview=0;
  
+
+/**
+* calculating of total review 
+*/
 
     if (reviews.length>0) {
         totalReview= reviews.reduce((accumulator, object) => {
@@ -144,6 +192,8 @@ setFilteredReviews(filteredReview)
         }
         setData({ ...data, [input.name]: input.value, week: week });
       };
+
+      // adding new review when user click on the submit button
     const handleSubmit=(e)=>{
         e.preventDefault()
         
@@ -151,6 +201,8 @@ setFilteredReviews(filteredReview)
        if (data.comment==='' || data.rating==='' || data.week==='' || data.rating==='choose here') {
         return
        }
+
+       //  this function adds new review to DB
         handleAddReview(data)
                       .then((res) => { 
                         getRefereeDetails(id).then(res=>{
@@ -245,7 +297,8 @@ setFilteredReviews(filteredReview)
                 <div className="col-md-6">
                     <form onSubmit={handleSubmit}>
                     
-
+{/* this is week component here all the week list is showing. 
+this component takes the handleweek function as it's props */}
     <SelectWeek handleWeek={handleWeek}/>
 
 

@@ -1,5 +1,13 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
+
+/**
+* Select a specific week from the week 1 to 38
+* @param {object} handleWeek Target Week from 1 to 38
+* @returns {string} A specific week that selected for example "Week 8"
+* 
+*/
+
 const SelectWeek = ({handleWeek}) => {
     return (
         <>
