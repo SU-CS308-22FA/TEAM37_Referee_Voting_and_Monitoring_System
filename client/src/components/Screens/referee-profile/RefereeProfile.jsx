@@ -139,6 +139,12 @@ const handleDislike=(id)=>{
 }
 
 }
+/**
+ * Get color corresponding to a id report comment
+ * @param {string} id Report the comment with respect to the comments Object id.
+ * @returns [...filteredReviews, e]  
+ *  
+ */
 const handleReport=(id)=>{
   
   const userReport= filteredReviews.filter(e=> e._id ===id)[0].report
