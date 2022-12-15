@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { AiFillDislike,AiFillLike } from "react-icons/ai";
+import {GoReport as GoReport} from "react-icons/go";
 import { useParams } from 'react-router-dom';
-import { addDislike, addLike, fetchReview, getRefereeDetails, handleAddReview, removeDislike, removeLike } from '../../axios';
+import { addDislike, addLike, fetchReview, getRefereeDetails, handleAddReview, removeDislike, removeLike,addReport } from '../../axios';
 import Rating from '../Referee/Rating';
 import SelectWeek from './SelectWeek';
 const RefereeProfile = () => {
@@ -37,8 +38,16 @@ setLikeCount(usersLiked.length)
 if (usersLiked.length>0 && usersLiked.includes(user._id)) {
   const isLiked= usersLiked.includes(user._id)
   if (isLiked) {
-    alert('you already liked this!')
-    return
+    removeLike(id, user._id)
+    const r= filteredReviews.filter(e=> {
+      if (e._id ===id) {
+        
+        e.likedislike.pop(user._id)
+        return [...filteredReviews, e]
+      }
+    })
+    setFilteredReviews(filteredReviews.map(obj=> r.find(o=> o._id===obj._id)|| obj))
+    setLikeCount(likeCount-1)
     
   }
   
@@ -79,42 +88,77 @@ const handleDislike=(id)=>{
   const usersDisliked= filteredReviews.filter(e=> e._id ===id)[0].dislike
   const isdisLiked= usersDisliked.includes(user._id)
   if (isdisLiked) {
-    alert('You already disliked this!')
-    return;
-  }
-
-  const usersLiked= filteredReviews.filter(e=> e._id ===id)[0].likedislike
-
-if (usersLiked.length>0 && usersLiked.includes(user._id)) {
-  const isLiked= usersLiked.includes(user._id)
-  if (isLiked) {
     
-    removeLike(id, user._id)
-    addDislike(id, user._id)
+    removeDislike(id, user._id)
     const r= filteredReviews.filter(e=> {
       if (e._id ===id) {
-        e.likedislike.pop(user._id)
-        e.dislike.push(user._id)
+        
+        e.dislike.pop(user._id)
         return [...filteredReviews, e]
       }
     })
     setFilteredReviews(filteredReviews.map(obj=> r.find(o=> o._id===obj._id)|| obj))
     setLikeCount(likeCount-1)
+    
   }
-  
-}else{
+  else{
+    const usersLiked= filteredReviews.filter(e=> e._id ===id)[0].likedislike
 
-  addDislike(id, user._id)
-    const r= filteredReviews.filter(e=> {
-      if (e._id ===id) {
-        e.dislike.push(user._id)
-        return [...filteredReviews, e]
+    if (usersLiked.length>0 && usersLiked.includes(user._id)) {
+      const isLiked= usersLiked.includes(user._id)
+      if (isLiked) {
+        
+        removeLike(id, user._id)
+        addDislike(id, user._id)
+        const r= filteredReviews.filter(e=> {
+          if (e._id ===id) {
+            e.likedislike.pop(user._id)
+            e.dislike.push(user._id)
+            return [...filteredReviews, e]
+          }
+        })
+        setFilteredReviews(filteredReviews.map(obj=> r.find(o=> o._id===obj._id)|| obj))
+        setLikeCount(likeCount-1)
       }
-    })
-    setFilteredReviews(filteredReviews.map(obj=> r.find(o=> o._id===obj._id)|| obj))
-    setLikeCount(likeCount-1)
+      
+    }else{
+    
+      addDislike(id, user._id)
+        const r= filteredReviews.filter(e=> {
+          if (e._id ===id) {
+            e.dislike.push(user._id)
+            return [...filteredReviews, e]
+          }
+        })
+        setFilteredReviews(filteredReviews.map(obj=> r.find(o=> o._id===obj._id)|| obj))
+        setLikeCount(likeCount-1)
+  }
+
+  
 
 }
+
+}
+const handleReport=(id)=>{
+  
+  const userReport= filteredReviews.filter(e=> e._id ===id)[0].report
+  const userReported= userReport.includes(user._id)
+  if(userReported){
+    alert('You have already reported this comment, thanks for supporting us for improving our community')
+    return;
+    
+  }
+  else{
+    addReport(id, user._id)
+    const r= filteredReviews.filter(e=> {
+      if (e._id ===id && window.confirm("Are you sure you want to report the comment?")) {
+        alert('You have reported this comment')
+        e.report.push(user._id)     
+        return [...filteredReviews, e]        
+      }
+    })
+    setFilteredReviews(filteredReviews.map(obj=> r.find(o=> o._id===obj._id)|| obj))
+  }
 
 }
 
@@ -212,7 +256,6 @@ setFilteredReviews(filteredReview)
             <div className="row review-section mt-5 mb-5">
                 <div className="col-md-6 review-list ">
                   <p className='p-1 bg-primary col-6 text-center'>Displaying reviews for week {week.split('week')[1]}</p>
-
                     {filteredReviews.length>0 ? filteredReviews.map(single=>(
                         <div key={single._id} className='single-review p-2'>
                         <h6>{single.writtenBy}</h6>
@@ -231,11 +274,17 @@ setFilteredReviews(filteredReview)
                           {single.dislike.includes(user._id)? <AiFillDislike title='Dislike' className='bg-danger likedislike-active font-size-25' onClick={()=>{ handleDislike(single._id)}}></AiFillDislike> : <AiFillDislike title='Dislike' className='bg-danger font-size-25' onClick={()=>{ handleDislike(single._id)}}></AiFillDislike>  }
 
                         </div>
+                        <div className= 'report-icon'>
+                        <span>{'REPORT! '}</span>
+                        {single.report.includes(user._id)? <GoReport title='Report' className='bg-info report-icon font-size-25' onClick={()=>{ handleReport(single._id)}}></GoReport> :
+                          <GoReport title='Report' className='bg-info font-size-25' onClick={()=>{ handleReport(single._id)}}></GoReport>  }
+                          
+                          </div>
 
 
                     </div>
                     )): <div className="alert alert-warning" role="alert">
-                    No revies found for week {week.split('week')[1]}
+                    No reviews found for week {week.split('week')[1]}
                   </div>  }
 
                 </div>

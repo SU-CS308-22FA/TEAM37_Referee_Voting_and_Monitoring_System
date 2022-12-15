@@ -112,3 +112,23 @@ export const addReview = async (req, res) => {
 
 
   }
+  export const report1 = async (req, res) => {
+    const { id,user } = req.body;
+    try {
+      const done= await Review.findOneAndUpdate({_id: id}, {$push:{report:user}}, {new: true})
+
+      res.status(200).json( done );
+    
+    } catch (error) {
+      return res.status(400).send({ message: error.message });
+    }
+
+
+  }
+  export const updateComment = async (text) => {
+    return { text };
+  };
+  
+  export const deleteComment = async () => {
+    return {};
+  };
