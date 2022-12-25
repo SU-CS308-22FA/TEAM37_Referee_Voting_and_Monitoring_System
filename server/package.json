@@ -15,7 +15,7 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
-    "express": "^4.17.2",
+    "express": "^4.17.3",
     "joi": "^17.7.0",
     "joi-password-complexity": "^5.1.0",
     "jsonwebtoken": "^9.0.0",
