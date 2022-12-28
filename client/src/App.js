@@ -1,7 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import React from "react";
-import { GoogleOAuthProvider } from '@react-oauth/google';
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import HomePage from "./components/Screens/HomePage";
 import Signup from "./components/Screens/SignUp";
@@ -20,7 +19,6 @@ import EmailVerify from "./components/Screens/EmailVerify";
 import ForgotPassword from "./components/Screens/ForgotPassword";
 import PasswordReset from "./components/Screens/PasswordReset";
 
-
 import RefereeProfile from "./components/Screens/referee-profile/RefereeProfile";
 import AddReferee from "./components/Screens/HomePage/add-referee/AddReferee";
 import RefereeAdminPanel from "./components/Screens/RefereeAdmin/AdminPanel";
@@ -29,14 +27,12 @@ import DeleteReferee from "./components/Screens/RefereeAdmin/DeleteReferee";
 
 import Standings from "./components/Screens/Standings";
 import Matches from "./components/Screens/Matches";
-
+import Match from "./components/Screens/Matches/MatchDetails";
 
 function App() {
   const user = localStorage.getItem("token");
-  // console.log(user);
   return (
-
-    <GoogleOAuthProvider clientId= "330490937140-hmot7hf3u41oijddu2efks7j3ffvoig0.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="330490937140-hmot7hf3u41oijddu2efks7j3ffvoig0.apps.googleusercontent.com">
       <Navbar />
       <Routes>
         {user && <Route path="/" exact element={<HomePage />} />}
@@ -50,16 +46,25 @@ function App() {
 
         <Route path="/referees" exact element={<Ref />} />
         <Route path="/refereePanel" exact element={<RefereeAdminPanel />} />
-        <Route path="/refereePanel/updateReferee/:id" exact element={<UpdateReferee />} />
-        <Route path="/refereePanel/deleteReferee/:id" exact element={<DeleteReferee />} />
+        <Route
+          path="/refereePanel/updateReferee/:id"
+          exact
+          element={<UpdateReferee />}
+        />
+        <Route
+          path="/refereePanel/deleteReferee/:id"
+          exact
+          element={<DeleteReferee />}
+        />
         <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-			<Route path="/password-reset/:id/:token" element={<PasswordReset />} />
+        <Route path="/password-reset/:id/:token" element={<PasswordReset />} />
 
         <Route path="/referee/:id" exact element={<RefereeProfile />} />
         <Route path="/addreferee" exact element={<AddReferee />} />
         <Route path="/standing" exact element={<Standings />} />
         <Route path="/matches" exact element={<Matches />} />
+        <Route path="/matches/matchdetails/:id" element={<Match />} />
       </Routes>
     </GoogleOAuthProvider>
   );
