@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import MatchGeneralInfo from "./MatchGeneralInfo";
+import MatchScoreBoard from "./MatchScoreBoard";
 
 import "./MatchDetails.css";
 import { requestOneMatch } from "../../../axios";
 import { useParams } from "react-router-dom";
 
 const Match = () => {
-  console.log("sadasda");
   const { id } = useParams();
 
   const [matchData, setMatchData] = useState(null);
@@ -23,8 +22,8 @@ const Match = () => {
   }
 
   return (
-    <div className="match-page">
-      <MatchGeneralInfo  data={matchData} />
+    <div>
+      <MatchScoreBoard data={matchData} />
     </div>
   );
 };

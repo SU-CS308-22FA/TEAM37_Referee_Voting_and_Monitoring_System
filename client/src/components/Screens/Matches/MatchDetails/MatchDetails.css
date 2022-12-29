@@ -1,10 +1,16 @@
-.container {
+/* Scoreboard START */
+.match-page-general-info-container {
   margin-top: 25px;
   margin-bottom: 25px;
-  border-radius: 10px;
-  background-color: white;
+  border-radius: 12px;
+  background-color: whitesmoke;
   color: black;
-  width: 100%;
+
+  width: 80%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .grid-container {
@@ -28,7 +34,7 @@
 }
 
 .back-to-mathces-button:hover {
-  opacity: 0.4;
+  opacity: 0.45;
 }
 
 .back-to-mathces-button span {
@@ -37,11 +43,9 @@
   font-size: 13px;
 }
 
-a,
-button {
+.match-page-general-info-container a {
   -webkit-text-decoration: none;
   text-decoration: none;
-  color: black;
   outline: none;
   border: 0;
   background: 0;
@@ -67,16 +71,6 @@ button {
   height: 20px;
 }
 
-img.Image {
-  width: 20px;
-  aspect-ratio: auto 20 / 20;
-  height: 20px;
-}
-
-.right-grid-item {
-  margin-right: 20px;
-}
-
 .general-scoreboard {
   margin-top: 20px;
   width: 100%;
@@ -93,7 +87,7 @@ img.Image {
   -webkit-box-align: center;
   align-items: center;
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .away-team {
@@ -101,7 +95,7 @@ img.Image {
   -webkit-box-align: center;
   align-items: center;
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .home-team [class="teamName"] span {
@@ -159,7 +153,7 @@ img.Image.team-icon {
 .match-info-bottom {
   font-size: 14px;
   font-weight: bold;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.25px;
 }
 
 .match-goals {
@@ -193,14 +187,16 @@ img.Image.team-icon {
 .match-goals ul {
   display: flex;
   flex-wrap: wrap;
-}
-
-ol,
-ul {
   list-style: none;
+
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
 }
 
-ul {
+.match-details-info-container ul {
   margin-block-start: 1em;
   margin-block-end: 1em;
   margin-inline-start: 0px;
@@ -212,17 +208,12 @@ ul {
   font-size: 13px;
 }
 
-li {
-  display: list-item;
-  text-align: match-parent;
-}
-
 .match-goals li span {
-  color: rgb(62, 45, 45);
+  color: rgb(22, 22, 22);
 }
 
 .event-time {
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .match-goals svg {
@@ -241,37 +232,45 @@ li {
   height: 60px;
   border-top-width: 1px;
   border-top-style: solid;
-  border-top-color: rgba(200, 200, 200, 0.5);
+  border-top-color: darkgray;
   display: flex;
-  -webkit-box-pack: center;
   justify-content: center;
+  -webkit-box-pack: center;
   -webkit-box-align: center;
   align-items: center;
 
   font-size: 13px;
-  line-height: 1.54;
-  letter-spacing: 0.13px;
-  color: rgb(0, 0, 0);
+  color: black;
 }
 
 .match-detail-box {
   display: flex;
   justify-items: center;
-  -webkit-box-align: center;
   align-items: center;
+  -webkit-box-align: center;
 }
 
 .match-detail-item {
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  color: rgb(0, 0, 0);
+  display: block;
+  padding-right: 50px;
+  padding-left: 50px;
+  color: black;
 }
 
-.match-detail-item svg,
-.match-detail-item img {
+.match-detail-item svg {
   width: 17px;
   height: 17px;
-  margin-right: 12px;
-  margin-left: 20px;
+  margin-right: 5px;
 }
+
+.match-detail-item p {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  margin: 0;
+}
+.match-detail-item span {
+  display: block;
+}
+
+/* Scoreboard END */
