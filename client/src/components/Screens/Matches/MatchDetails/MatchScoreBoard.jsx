@@ -156,7 +156,12 @@ const MatchScoreBoard = ({ data }) => {
               Referee
             </p>
             <span>
-              {data.fixture.referee.slice(0, data.fixture.referee.indexOf(","))}
+              {data.fixture.referee === null
+                ? "No referee assigned yet"
+                : data.fixture.referee.slice(
+                    0,
+                    data.fixture.referee.indexOf(",")
+                  )}
             </span>
           </li>
         </ul>
