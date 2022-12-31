@@ -5,7 +5,6 @@ const HTTP = axios.create({
   baseURL: "http://localhost:5000",
 });
 
-
 /**
  * Gets user information from google by decyrpting the credentials coming from users gmail
  * @param {Array} credentialResponse - Array that contains the encrypted credentials of the user
@@ -113,7 +112,6 @@ export const requestMatches = async (
   roundName
 ) => {
   try {
-    console.log(process.env);
     const { data } = await axios.get(
       "https://v3.football.api-sports.io/fixtures",
       {
@@ -147,6 +145,27 @@ export const requestMatches = async (
 
     console.log(matches);
     return matches;
+  } catch (error) {
+    console.log("ERROR");
+    return [];
+  }
+};
+
+export const requestOneMatch = async (matchId) => {
+  try {
+    const { data } = await axios.get(
+      "https://v3.football.api-sports.io/fixtures",
+      {
+        params: { id: matchId },
+        headers: {
+          "x-rapidapi-host": process.env.REACT_APP_FOOTBALL_API_HOST,
+          "x-rapidapi-key": process.env.REACT_APP_FOOTBALL_API_KEY,
+        },
+      }
+    );
+
+    console.log(JSON.stringify(data.response[0]));
+    return data.response[0];
   } catch (error) {
     console.log("ERROR");
     return [];
@@ -248,8 +267,8 @@ export const removeDislike = async (id, user) => {
 
   return res;
 };
-export const addReport = async (id,user) => {
-  const { data: res } = await HTTP.put(`/review/report`, {id,user});
+export const addReport = async (id, user) => {
+  const { data: res } = await HTTP.put(`/review/report`, { id, user });
 
   return res;
 };

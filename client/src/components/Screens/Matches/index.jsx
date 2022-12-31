@@ -217,7 +217,7 @@ const Matches = () => {
             matches.map((match, matchId) => (
               <MatchElement
                 key={matchId}
-                MatchLink={"/matches/" + match.fixture.id}
+                MatchLink={"matchdetails/" + match.fixture.id}
                 Team1={match.teams.home.name}
                 Team2={match.teams.away.name}
                 Team1Img={match.teams.home.logo}
