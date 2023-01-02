@@ -1,6 +1,6 @@
 
 import Review from "../models/reviewModel.js";
-import { updateRating } from "./refereeController.js";
+import { removeRating, updateRating } from "./refereeController.js";
 
 export const addReview = async (req, res) => {
     const { referee, comment, rating, writtenBy, week } = req.body;
@@ -125,10 +125,39 @@ export const addReview = async (req, res) => {
 
 
   }
-  export const updateComment = async (text) => {
-    return { text };
-  };
-  
-  export const deleteComment = async () => {
-    return {};
+   // function for delete a review
+  // route: localhost:5000/review/delete/reviewid
+  export const deleteReview = async (req, res) => {
+    
+    try {
+      const done= await Review.findByIdAndDelete(req.params.id, {new: true})
+removeRating(done.referee, done.rating)
+      res.status(200).json(done);
+      
+    } catch (error) {
+      return res.status(400).send({ message: error.message });
+    }
+
+
+  }
+
+
+  // function for update review
+  // route: localhost:5000/review/update/reviewid
+  export const updateReview = async (req, res) => {
+
+    const {rating, comment  } = req.body;
+    try {
+      const reviewUpdate = await Review.findByIdAndUpdate(
+        req.params.id,
+        { $set: { rating, comment } },
+        { new: true }
+        
+      );
+      return res
+        .status(200)
+        .json({ review: reviewUpdate, message: "Informations changed succesfully", success: true });
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
   };

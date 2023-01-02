@@ -56,12 +56,16 @@ setSearchtext('')
         <div className="">
 <div className="row mt-4">
 
-{isSearch?   <RefereeList referee={filteredreferee}/> :
-  <RefereeList referee={referee}/>}
+{isSearch?   filteredreferee.map(single=>(
+  <RefereeList key={single._id} referee={single}/>
+)) :
+  
+  referee.map(single=>(
+    <RefereeList key={single._id} referee={single}/>
+  ))
+  }
 
 
-  
-  
   
 </div>
         </div>

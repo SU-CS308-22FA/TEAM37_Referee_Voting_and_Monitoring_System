@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import { AiFillDislike,AiFillLike } from "react-icons/ai";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import { AiFillDislike,AiFillLike, AiFillDelete, AiFillEdit } from "react-icons/ai";
 import {GoReport as GoReport} from "react-icons/go";
 import { useParams } from 'react-router-dom';
-import { addDislike, addLike, fetchReview, getRefereeDetails, handleAddReview, removeDislike, removeLike,addReport } from '../../axios';
+import { addDislike, addLike, fetchReview, getRefereeDetails, handleAddReview, removeDislike, removeLike,addReport, deleteReview, updateReview } from '../../axios';
 import Rating from '../Referee/Rating';
 import SelectWeek from './SelectWeek';
 const RefereeProfile = () => {
@@ -17,6 +19,14 @@ const RefereeProfile = () => {
     const [data, setData] = useState({referee:id, writtenBy: user.fullname , comment:'', rating:'', week:'' });
 
  
+    const [selectedReview, setSelectedReview] = useState({rating:'', id: '' , comment:'' });
+    const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+ 
+  
   
    
     useEffect(()=>{
@@ -176,14 +186,61 @@ const filteredReview= reviews.filter(single => single.week == data.toString())
 setFilteredReviews(filteredReview)
 
 }
-// console.log(reviews);
+
+// this function is responsible to edit the comments
+const handleCommentEdit=(review)=>{
+  // update the selected review afte clicking on edit button
+  setSelectedReview(prev=>({...prev, id:review._id, rating: review.rating, comment: review.comment}))
+  handleShow()
+}
+
+// this function should be triggered when save changes button will be clicked on the modal popup
+const handleEditSubmit=()=>{
+  // send updated data to backend
+  updateReview(selectedReview).then(res=>{
+     if (res) {
+      // close the modal if update successfull
+      handleClose()
+      
+      // fetch the review and update the filteredReview review with the updated data 
+      fetchReview(id).then(res2=>{
+        setReviews(res2)
+        const r= [res.review]
+    
+        setFilteredReviews(filteredReviews.map(obj=> r.find(o=> o._id===obj._id)|| obj))
+      })
+     }
+  })
+
+}
+
+// this function is responsible to delete a comment
+const handleCommentDelete=(revid)=>{
+ // calling backend
+  deleteReview(revid).then(res=>{
+   
+    if (res) {
+      alert('Review has been deleted successfully!')
+      // filter and remove the deleted review from filterredReviews array
+      setFilteredReviews(filteredReviews.filter(e=> e._id !== revid))
+      fetchReview(id).then(res2=>{
+        setReviews(res2)
+        
+      })
+    }
+  })
+}
+
+
+
+
 
     let totalReview=0;
  
 
     if (reviews.length>0) {
         totalReview= reviews.reduce((accumulator, object) => {
-            return (accumulator + object.rating);
+           return (accumulator + object.rating*1);
           },0);
         totalReview/=reviews.length;
         
@@ -264,7 +321,17 @@ setFilteredReviews(filteredReview)
                   <p className='p-1 bg-primary col-6 text-center'>Displaying reviews for week {week.split('week')[1]}</p>
                     {filteredReviews.length>0 ? filteredReviews.map(single=>(
                         <div key={single._id} className='single-review p-2'>
-                        <h6>{single.writtenBy}</h6>
+                        <h6 className='d-flex justify-content-between'>{single.writtenBy}
+                        <span className='gap-3 d-flex justify-content-between'>
+
+                          {single.writtenBy===user.fullname&& <AiFillEdit title='edit' className='bg-warning text-warning font-size-25' onClick={()=>{ handleCommentEdit(single)}}></AiFillEdit>}
+
+                          {single.writtenBy===user.fullname&& <AiFillDelete title='delete' className='bg-danger text-danger font-size-25' onClick={()=>{ handleCommentDelete(single._id)}}></AiFillDelete>}
+
+                        </span>
+                        
+                        
+                        </h6>
                         <span><Rating rating={single.rating}/></span>
                         <span className='text-muted'>{single.createdAt.slice(0,10)}</span>
                         <p>{single.comment}</p>
@@ -324,6 +391,41 @@ setFilteredReviews(filteredReview)
                     </form>
                 </div>
             </div>
+                        
+
+            <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Update your comment</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea2">
+        <Form.Label>Rating</Form.Label>
+        <Form.Select name='rating' aria-label="Default select example" required defaultValue={selectedReview.rating} onChange={(e)=>setSelectedReview(prev=>({...prev, rating:e.target.value}))}>
+     
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </Form.Select>
+      </Form.Group>
+    <Form.Group className="mb-3" name='comment' controlId="exampleForm.ControlTextarea2">
+        <Form.Label>Comment</Form.Label>
+        <Form.Control as="textarea" onChange={(e)=>setSelectedReview(prev=>({...prev, comment:e.target.value}))} required name='comment' rows={3} value={selectedReview.comment} />
+      </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleEditSubmit}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
         </div>
     );
 };
