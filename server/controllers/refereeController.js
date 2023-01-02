@@ -80,7 +80,18 @@ export const addReferee = async (req, res) => {
   
     }
     catch (error) {
-      return res.status(400).send({ message: error.message });
+      return
+    }
+  };
+  export const removeRating = async (id,rating) => {
+
+    try {
+      const referee = await Referee.findOneAndUpdate({_id : id}, {$inc : {'reviewcount' : -1, 'rating': -rating}})
+      return true
+  
+    }
+    catch (error) {
+      return;
     }
   };
   export const updateReferee = async (req, res) => {

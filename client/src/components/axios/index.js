@@ -272,3 +272,15 @@ export const addReport = async (id, user) => {
 
   return res;
 };
+
+
+export const deleteReview = async (id) => {
+  const { data: res } = await HTTP.delete(`/review/delete/${id}`);
+
+  return res;
+};
+
+export const updateReview = async (data) => {
+  const { data: res } = await HTTP.put(`/review/update/${data.id}`, {rating: data.rating, comment: data.comment});
+  return res
+};
