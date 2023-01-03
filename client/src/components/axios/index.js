@@ -172,6 +172,28 @@ export const requestOneMatch = async (matchId) => {
   }
 };
 
+export const requestTeams = async (leagueId) => {
+  try {
+    const { data } = await axios.get(
+      "https://v3.football.api-sports.io/league",
+      {
+        params: { id: leagueId },
+        headers: {
+          "x-rapidapi-host": process.env.REACT_APP_FOOTBALL_API_HOST,
+          "x-rapidapi-key": process.env.REACT_APP_FOOTBALL_API_KEY,
+        },
+      }
+    );
+
+    console.log(JSON.stringify(data.response[0]));
+    return data.response[0];
+  } catch (error) {
+    console.log("ERROR");
+    return [];
+  }
+};
+
+
 /**
  * Get all the standings in the desired parameters in a specific format.
  * @param {int} seasonNumber - the season year in which the standings takes/took place

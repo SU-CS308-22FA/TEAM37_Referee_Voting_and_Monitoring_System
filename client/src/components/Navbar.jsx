@@ -10,6 +10,7 @@ export default function Navbar() {
       </Link>
       <ul>
         {user && <CustomLink to="/matches">Matches</CustomLink>}
+        {user && <CustomLink to="/teams">Teams</CustomLink>}
         {user && <CustomLink to="/referees">Referees</CustomLink>}
 
      
