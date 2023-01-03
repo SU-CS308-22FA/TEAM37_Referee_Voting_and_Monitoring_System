@@ -5,7 +5,9 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@mui/material": "^5.10.11",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.3",
+    "@mui/x-data-grid": "^5.17.17",
     "@react-oauth/google": "^0.5.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -21,6 +23,7 @@
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.2",
     "react-scripts": "^5.0.1",
     "react-select": "^5.7.0",
