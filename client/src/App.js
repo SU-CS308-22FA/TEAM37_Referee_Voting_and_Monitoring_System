@@ -20,7 +20,7 @@ import ForgotPassword from "./components/Screens/ForgotPassword";
 import PasswordReset from "./components/Screens/PasswordReset";
 
 import RefereeProfile from "./components/Screens/referee-profile/RefereeProfile";
-import AddReferee from "./components/Screens/HomePage/add-referee/AddReferee";
+import AddReferee from "./components/Screens/RefereeAdmin/AddReferee";
 import RefereeAdminPanel from "./components/Screens/RefereeAdmin/AdminPanel";
 import UpdateReferee from "./components/Screens/RefereeAdmin/UpdateReferee";
 import DeleteReferee from "./components/Screens/RefereeAdmin/DeleteReferee";
@@ -56,12 +56,16 @@ function App() {
           exact
           element={<DeleteReferee />}
         />
+        <Route
+          path="/refereePanel/addReferee"
+          exact
+          element={<AddReferee />}
+        />
         <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/password-reset/:id/:token" element={<PasswordReset />} />
 
         <Route path="/referee/:id" exact element={<RefereeProfile />} />
-        <Route path="/addreferee" exact element={<AddReferee />} />
         <Route path="/standing" exact element={<Standings />} />
         <Route path="/matches" exact element={<Matches />} />
         <Route path="/matches/matchdetails/:id" element={<Match />} />

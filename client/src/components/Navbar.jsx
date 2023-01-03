@@ -15,7 +15,6 @@ export default function Navbar() {
      
         { <CustomLink to="/standing">Standings</CustomLink>}
 
-        {user && user.userType ==='ADMIN' && <CustomLink to="/addreferee">Add Referee</CustomLink>}
 
         {user && user.userType ==='ADMIN' && <CustomLink to="/refereePanel">RefereePanel</CustomLink>}
 

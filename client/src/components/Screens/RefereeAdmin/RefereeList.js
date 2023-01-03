@@ -28,7 +28,8 @@ const RefereeList = ({referee}) => {
                         {single.description.slice(0,80)+'...'}
                       </Card.Text>               
                       <Card.Link variant ="danger" href={`/refereePanel/updateReferee/${single._id}`}>Update</Card.Link>
-                      <Card.Link variant ="danger" href={`/refereePanel/deleteReferee/${single._id}`}>Delete</Card.Link>                         
+                      <Card.Link variant ="danger" href={`/refereePanel/deleteReferee/${single._id}`}>Delete</Card.Link>
+                      <Card.Link variant ="danger" href="/refereePanel/addReferee/" >Add </Card.Link>                            
                     </Card.Body>
                   </Card>
                 </div>

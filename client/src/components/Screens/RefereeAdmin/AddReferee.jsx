@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { handleAddReferee } from "../../../axios";
+import { handleAddReferee } from "../../axios";
 import styles from "./styles.module.css";
 
 
@@ -25,7 +25,7 @@ if (data.name==='' || data.imageurl==='' || data.age==='' || data.matches==='' |
 handleAddReferee(data)
               .then((res) => {
                 e.target.reset()
-                 navigate("/referees");
+                 navigate("/refereePanel");
               })
               .catch((err) => console.log(err.response.data.message)) 
 
@@ -33,7 +33,7 @@ handleAddReferee(data)
 
   function handleCancelClicked() {
 
-    navigate("/referees");
+    navigate("/refereePanel");
   }
 
   return (
