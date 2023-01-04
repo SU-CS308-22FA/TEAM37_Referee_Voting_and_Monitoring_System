@@ -36,7 +36,7 @@ export const addReferee = async (req, res) => {
 
     try {
 
-      const referee = await Referee.find({  });
+      const referee = await Referee.find({  }).sort({ averagerating: -1 });;
 
       if (!referee) {
        return
@@ -75,7 +75,10 @@ export const addReferee = async (req, res) => {
   export const updateRating = async (id,rating) => {
 
     try {
+      
       const referee = await Referee.findOneAndUpdate({_id : id}, {$inc : {'reviewcount' : 1, 'rating': rating}})
+      const temp = await Referee.findOne({_id : id})
+      const referee2 = await Referee.findOneAndUpdate({_id : id}, {$set : {'averagerating' : temp.rating /temp.reviewcount}})
       return true
   
     }
@@ -87,6 +90,8 @@ export const addReferee = async (req, res) => {
 
     try {
       const referee = await Referee.findOneAndUpdate({_id : id}, {$inc : {'reviewcount' : -1, 'rating': -rating}})
+      const temp = await Referee.findOne({_id : id})
+      const referee2 = await Referee.findOneAndUpdate({_id : id}, {$set : {'averagerating' : temp.rating /temp.reviewcount}})
       return true
   
     }

@@ -59,8 +59,7 @@ export const addReview = async (req, res) => {
    
     try {
       const done= await Review.findOneAndUpdate({_id: id}, {$push:{likedislike:user}}, {new: true})
-
-      
+      const temp= await Review.findOneAndUpdate({_id: id},{$inc : {'likecount' : 1}})
       res.status(200).json(done);
       
     } catch (error) {
@@ -75,7 +74,7 @@ export const addReview = async (req, res) => {
    
     try {
       const done= await Review.findOneAndUpdate({_id: id}, {$push:{dislike:user}}, {new: true})
-
+      const temp= await Review.findOneAndUpdate({_id: id},{$inc : {'dislikecount' : 1}})
       
       res.status(200).json(done);
       
@@ -89,6 +88,7 @@ export const addReview = async (req, res) => {
     const { id,user } = req.body;
     try {
       const done= await Review.findByIdAndUpdate({_id: id}, {$pull:{likedislike:user}}, {new: true})
+      const temp= await Review.findByIdAndUpdate({_id: id},{$inc : {'likecount' : -1}})
 
       res.status(200).json( done );
       
@@ -103,6 +103,7 @@ export const addReview = async (req, res) => {
     const { id,user } = req.body;
     try {
       const done= await Review.findByIdAndUpdate({_id: id}, {$pull:{dislike:user}}, {new: true})
+      const temp= await Review.findByIdAndUpdate({_id: id},{$inc : {'dislikecount' : -1}})
 
       res.status(200).json(done);
       
@@ -159,5 +160,27 @@ removeRating(done.referee, done.rating)
         .json({ review: reviewUpdate, message: "Informations changed succesfully", success: true });
     } catch (error) {
       return res.status(400).json({ message: error.message });
+    }
+  };
+  export const getAllReview = async (req, res) => {
+
+  
+
+    try {
+
+      const review = await Review.find({  }).sort({ likedislike: 1 });;
+
+      if (!review) {
+       return
+      }
+      else {
+        
+        
+        return res.status(200).json({ review});
+      }
+  
+    }
+    catch (error) {
+      return res.status(400).send({ message: error.message });
     }
   };

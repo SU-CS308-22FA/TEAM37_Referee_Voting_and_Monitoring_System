@@ -1,6 +1,12 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import React from "react";
+import {React, useEffect, useState} from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { themeSettings } from "./theme";
+import { useSelector, Provider} from "react-redux";
+
+
 
 import HomePage from "./components/Screens/HomePage";
 import Signup from "./components/Screens/SignUp";
@@ -14,7 +20,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import UserPage from "./components/Screens/UserPage/UserPage";
 import Ref from "./components/Screens/Referee";
-
+import { useMemo } from "react";
+import { createTheme } from "@mui/material/styles";
 import EmailVerify from "./components/Screens/EmailVerify";
 import ForgotPassword from "./components/Screens/ForgotPassword";
 import PasswordReset from "./components/Screens/PasswordReset";
@@ -33,47 +40,66 @@ import TeamElement from "./components/Screens/Teams/TeamElement";
 
 function App() {
   const user = localStorage.getItem("token");
+  const [mode, setMode] = useState(['light']);
+  useEffect(()=>{
+    async function init() {
+      const data = await localStorage.getItem('mode'); 
+      setMode(data);
+      
+    }
+    init();
+  },[])
+
+  
+  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   return (
+
     <GoogleOAuthProvider clientId="330490937140-hmot7hf3u41oijddu2efks7j3ffvoig0.apps.googleusercontent.com">
-      <Navbar />
-      <Routes>
-        {user && <Route path="/" exact element={<HomePage />} />}
-        <Route path="/signup" exact element={<Signup />} />
-        <Route path="/login" exact element={<Login />} />
-        <Route path="/" element={<Navigate replace to="/login" />} />
+     <Navbar />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
 
-        <Route path="/profile" exact element={<UserPage />} />
-        <Route path="/profile/update" exact element={<UserProfile />} />
-        <Route path="/profile/delete" exact element={<DeleteProfile />} />
+        <Routes>
+     
+          {user && <Route path="/" exact element={<HomePage />} />}
+        
+          <Route path="/signup" exact element={<Signup />} />
+          <Route path="/login" exact element={<Login />} />
+          <Route path="/" element={<Navigate replace to="/login" />} />
 
-        <Route path="/referees" exact element={<Ref />} />
-        <Route path="/refereePanel" exact element={<RefereeAdminPanel />} />
-        <Route
-          path="/refereePanel/updateReferee/:id"
-          exact
-          element={<UpdateReferee />}
-        />
-        <Route
-          path="/refereePanel/deleteReferee/:id"
-          exact
-          element={<DeleteReferee />}
-        />
-        <Route
-          path="/refereePanel/addReferee"
-          exact
-          element={<AddReferee />}
-        />
-        <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/password-reset/:id/:token" element={<PasswordReset />} />
+          <Route path="/profile" exact element={<UserPage />} />
+          <Route path="/profile/update" exact element={<UserProfile />} />
+          <Route path="/profile/delete" exact element={<DeleteProfile />} />
 
-        <Route path="/referee/:id" exact element={<RefereeProfile />} />
-        <Route path="/standing" exact element={<Standings />} />
-        <Route path="/matches" exact element={<Matches />} />
-        <Route path="/matches/matchdetails/:id" element={<Match />} />
-        <Route path="/teams" exact element={<Teams />} />
-        <Route path="/teams/:id" element={<TeamElement />} />
-      </Routes>
+          <Route path="/referees" exact element={<Ref />} />
+          <Route path="/refereePanel" exact element={<RefereeAdminPanel />} />
+          <Route
+            path="/refereePanel/updateReferee/:id"
+            exact
+            element={<UpdateReferee />}
+          />
+          <Route
+            path="/refereePanel/deleteReferee/:id"
+            exact
+            element={<DeleteReferee />}
+          />
+          <Route
+            path="/refereePanel/addReferee"
+            exact
+            element={<AddReferee />}
+          />
+          <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/password-reset/:id/:token" element={<PasswordReset />} />
+
+          <Route path="/referee/:id" exact element={<RefereeProfile />} />
+          <Route path="/standing" exact element={<Standings />} />
+          <Route path="/matches" exact element={<Matches />} />
+          <Route path="/matches/matchdetails/:id" element={<Match />} />
+          <Route path="/teams" exact element={<Teams />} />
+          <Route path="/teams/:id" element={<TeamElement />} />
+        </Routes>
+      </ThemeProvider>
     </GoogleOAuthProvider>
   );
 }

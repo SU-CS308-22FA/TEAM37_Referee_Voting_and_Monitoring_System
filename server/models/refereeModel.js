@@ -47,6 +47,10 @@ const refereeSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
+    averagerating: {
+        type: Number,
+        default: 0
+    },
 })
 
 export default mongoose.model('Referee', refereeSchema)
