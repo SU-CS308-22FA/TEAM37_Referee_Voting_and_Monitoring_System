@@ -35,6 +35,8 @@ import DeleteReferee from "./components/Screens/RefereeAdmin/DeleteReferee";
 import Standings from "./components/Screens/Standings";
 import Matches from "./components/Screens/Matches";
 import Match from "./components/Screens/Matches/MatchDetails";
+import Teams from "./components/Screens/Teams";
+import TeamElement from "./components/Screens/Teams/TeamElement";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -53,7 +55,7 @@ function App() {
   return (
 
     <GoogleOAuthProvider clientId="330490937140-hmot7hf3u41oijddu2efks7j3ffvoig0.apps.googleusercontent.com">
-    <Navbar />
+     <Navbar />
       <ThemeProvider theme={theme}>
         <CssBaseline />
 
@@ -94,6 +96,8 @@ function App() {
           <Route path="/standing" exact element={<Standings />} />
           <Route path="/matches" exact element={<Matches />} />
           <Route path="/matches/matchdetails/:id" element={<Match />} />
+          <Route path="/teams" exact element={<Teams />} />
+          <Route path="/teams/:id" element={<TeamElement />} />
         </Routes>
       </ThemeProvider>
     </GoogleOAuthProvider>
