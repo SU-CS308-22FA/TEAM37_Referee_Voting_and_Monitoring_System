@@ -1,0 +1,25 @@
+.select-option-team {
+  font-weight: bold;
+  width: 400px;
+  margin: 15px;
+  justify-content: space-between;
+  display: flex;
+}
+
+.team-page-general-info-container{
+  margin-bottom: 25px;
+  border-radius: 12px;
+  background-color: whitesmoke;
+  color: black;
+
+  width: 100%;
+  height: 400px;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.team-page-logo{
+  position: absolute;
+}
