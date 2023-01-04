@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
-import "./TeamElement.css";
 import { useParams } from "react-router-dom";
 import { requestSquads } from "../../axios";
 import Table from "react-bootstrap/Table";
