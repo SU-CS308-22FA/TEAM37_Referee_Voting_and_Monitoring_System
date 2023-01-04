@@ -91,7 +91,7 @@ const MatchHighlights = ({ data, sortedData }) => {
                           <span className="penalty-goal">Penalty</span>
                         </div>
                       </div>
-                      <img src={PenaltyIcon} width={25}/>
+                      <img src={PenaltyIcon} width={25} />
                     </div>
                     <span className="highlight-time">
                       {convertHighlightTime(event)}
@@ -141,6 +141,7 @@ const MatchHighlights = ({ data, sortedData }) => {
                     <div className="match-highlight-left">
                       <a>{event.player.name}</a>
                       <img
+                        width={25}
                         src={
                           homePlayerYellowCards.includes(event.player.name)
                             ? DoubleYellowCard
@@ -228,7 +229,7 @@ const MatchHighlights = ({ data, sortedData }) => {
                 return (
                   <li className={"highlight-item-container"}>
                     <div className="match-highlight-right">
-                      <img src={PenaltyIcon} width={25}/>
+                      <img src={PenaltyIcon} width={25} />
                       <div className="goal-container-playername">
                         <div className="playername-goal">
                           <a>{event.player.name}</a>
@@ -285,6 +286,7 @@ const MatchHighlights = ({ data, sortedData }) => {
                   <li className={"highlight-item-container"}>
                     <div className="match-highlight-right">
                       <img
+                        width={25}
                         src={
                           awayPlayerYellowCards.includes(event.player.name)
                             ? DoubleYellowCard

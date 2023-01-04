@@ -172,6 +172,48 @@ export const requestOneMatch = async (matchId) => {
   }
 };
 
+export const requestTeams = async (leagueId, seasonId) => {
+  try {
+    const { data } = await axios.get(
+      "https://v3.football.api-sports.io/teams",
+      {
+        params: { league: leagueId, season: seasonId },
+        headers: {
+          "x-rapidapi-host": process.env.REACT_APP_FOOTBALL_API_HOST,
+          "x-rapidapi-key": process.env.REACT_APP_FOOTBALL_API_KEY,
+        },
+      }
+    );
+
+    console.log(JSON.stringify(data.response));
+    return data.response;
+  } catch (error) {
+    console.log("ERROR");
+    return [];
+  }
+};
+
+export const requestSquads = async (teamId) => {
+  try {
+    const { data } = await axios.get(
+      "https://v3.football.api-sports.io/players/squads",
+      {
+        params: { team: teamId },
+        headers: {
+          "x-rapidapi-host": process.env.REACT_APP_FOOTBALL_API_HOST,
+          "x-rapidapi-key": process.env.REACT_APP_FOOTBALL_API_KEY,
+        },
+      }
+    );
+
+    console.log(JSON.stringify(data.response[0]));
+    return data.response[0];
+  } catch (error) {
+    console.log("ERROR");
+    return [];
+  }
+};
+
 /**
  * Get all the standings in the desired parameters in a specific format.
  * @param {int} seasonNumber - the season year in which the standings takes/took place
@@ -273,7 +315,6 @@ export const addReport = async (id, user) => {
   return res;
 };
 
-
 export const deleteReview = async (id) => {
   const { data: res } = await HTTP.delete(`/review/delete/${id}`);
 
@@ -281,6 +322,9 @@ export const deleteReview = async (id) => {
 };
 
 export const updateReview = async (data) => {
-  const { data: res } = await HTTP.put(`/review/update/${data.id}`, {rating: data.rating, comment: data.comment});
-  return res
+  const { data: res } = await HTTP.put(`/review/update/${data.id}`, {
+    rating: data.rating,
+    comment: data.comment,
+  });
+  return res;
 };
