@@ -284,3 +284,7 @@ export const updateReview = async (data) => {
   const { data: res } = await HTTP.put(`/review/update/${data.id}`, {rating: data.rating, comment: data.comment});
   return res
 };
+export const getallReview = async () => {
+  const { data: res } = await HTTP.get(`/review/getallreview`);
+  return res.review;
+};

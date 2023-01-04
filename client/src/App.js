@@ -1,10 +1,12 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import React from "react";
+import {React, useEffect, useState} from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { themeSettings } from "./components/Screens/HomePage/components/theme";
-import { useSelector } from "react-redux";
+import { themeSettings } from "./theme";
+import { useSelector, Provider} from "react-redux";
+
+
 
 import HomePage from "./components/Screens/HomePage";
 import Signup from "./components/Screens/SignUp";
@@ -36,13 +38,25 @@ import Match from "./components/Screens/Matches/MatchDetails";
 
 function App() {
   const user = localStorage.getItem("token");
-  const theme = useMemo(() => createTheme(themeSettings('light')), ['light']);
+  const [mode, setMode] = useState(['light']);
+  useEffect(()=>{
+    async function init() {
+      const data = await localStorage.getItem('mode'); 
+      setMode(data);
+      
+    }
+    init();
+  },[])
+
+  
+  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   return (
-    
+
     <GoogleOAuthProvider clientId="330490937140-hmot7hf3u41oijddu2efks7j3ffvoig0.apps.googleusercontent.com">
-       <Navbar />
+    <Navbar />
       <ThemeProvider theme={theme}>
         <CssBaseline />
+
         <Routes>
      
           {user && <Route path="/" exact element={<HomePage />} />}

@@ -1,72 +1,148 @@
 import styles from "./styles.module.css";
 import { googleLogout } from "@react-oauth/google";
-import { useEffect, useState } from "react";
-import React from "react";
-import { fetchReferee, fetchReview} from "../../axios";
+import { React, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { fetchReferee, getallReview} from "../../axios";
 import FlexBetween from "./components/FlexBetween";
 import Header from "./components/Header";
+import { useNavigate} from "react-router-dom";
 import {
   DownloadOutlined,
   Email,
   PointOfSale,
   PersonAdd,
   Traffic,
+  LightModeOutlined,
+  DarkModeOutlined,
+  SettingsOutlined
 } from "@mui/icons-material";
-import LogoutIcon from '@mui/icons-material/Logout';
+import  LogoutIcon from '@mui/icons-material/Logout';
 import {
   Box,
   IconButton,
   Typography,
   useTheme,
   useMediaQuery,
+  Avatar,
 } from "@mui/material";
 import { DataGrid,} from "@mui/x-data-grid";
 
-//import { useGetDashboardQuery } from "state/api";
-import StatBox from "./components/StatBox";
+
 const HomePage = () => {
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     googleLogout();
     window.location.reload();
   };
+  const handleMode = () => {
+
+    console.log(localStorage.getItem('mode'))
+    //console.log(theme.palette.mode);
+    if(theme.palette.mode === "dark"){
+      localStorage.setItem("mode", "light");
+      theme.palette.mode = "light";
+      //console.log(theme.palette.mode);
+      
+    }
+    else{
+      localStorage.setItem("mode", "dark");
+      theme.palette.mode = "dark";
+      //console.log(theme.palette.mode);
+    }
+   
+  };
+
   const theme = useTheme();
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
   const data = 3;
  
-  const [data1, setData] = useState([]);
+  const [referee, setReferee] = useState([]);
   useEffect(()=>{
     fetchReferee().then(res=>{
-      setData(res)
+      setReferee(res)
     })
   },[])
-  console.log(data1);
+  const [review, setReview] = useState([]);
+  useEffect(()=>{
+    getallReview().then(res=>{
+      setReview(res)
+      
+    })
+  },[])
 
+  console.log(review)
 
   const columns = [
     {
+      field: "imageurl",
+      headerName: "Photo",
+      flex: 0.3,
+      renderCell: (params) => <Avatar src={params.value} />,
+    },
+    {
       field: "name",
-      headerName: "Name of the Referee",
-      flex: 1,
+      headerName: "Name",
+      flex: 0.5,
     },
     {
       field: 'averagerating',
-      headerName: "Rating of the Referee",
-      flex: 1,
+      headerName: "Rating out of 5",
+      flex: 0.5,
       renderCell: (params) => `${Number(params.value).toFixed(2)}`,
     },
   ];
-  const handleOnCellClick = (params) => {
-    console.log("test");
-  };
-  const handleEvent: GridEventListener<'rowClick'> = (
+  const columns1 = [
+    
+    {
+      field: "writtenBy",
+      headerName: "From",
+      flex: 0.3,
+    },
+    {
+      field: 'comment',
+      headerName: "Comment",
+      flex: 0.3,
+      sortable: false,
+    },
+    {
+      field: "week",
+      headerName: "Week",
+      flex: 0.3, 
+    },
+    {
+      field: "likecount",
+      headerName: "Likes",
+      flex: 0.3, 
+      type: Number,
+    },
+    {
+      field: "dislikecount",
+      headerName: "Dislikes",
+      flex: 0.3, 
+      type: Number,
+    },
+  ];
+  const navigate = useNavigate();
+
+  const handleReferee: GridEventListener<'rowClick'> = (
     params,  // GridRowParams
     event,   // MuiEvent<React.MouseEvent<HTMLElement>>
     details, // GridCallbackDetails
   ) => {
     console.log(params)
+    navigate(`/referee/${params.id}`);
   }
+  const handleReview: GridEventListener<'rowClick'> = (
+    params,  // GridRowParams
+    event,   // MuiEvent<React.MouseEvent<HTMLElement>>
+    details, // GridCallbackDetails
+  ) => {
+    console.log(params)
+    navigate(`/referee/${params.row.referee}`);
+  }
+ 
   return (
 
       <Box m="1.5rem 2.5rem">
@@ -87,6 +163,14 @@ const HomePage = () => {
             LogOut
           </IconButton>
 
+          <IconButton onClick={() => handleMode()}>
+            {theme.palette.mode === "dark" ? (
+              <DarkModeOutlined sx={{ fontSize: "25px" }} />
+            ) : (
+              <LightModeOutlined sx={{ fontSize: "25px" }} />
+            )}
+          </IconButton>
+
         </Box>
       </FlexBetween>
 
@@ -101,63 +185,95 @@ const HomePage = () => {
         }}
       >
         {/* ROW 1 */}
-        <StatBox
-          title="Total Customers"
-          value={data && data.totalCustomers}
-          increase="+14%"
-          description="Since last month"
-          icon={
-            <Email
-              sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
-            />
-          }
-        />
-        <StatBox
-          title="Sales Today"
-          value={1}
-          increase="+21%"
-          description="Since last month"
-          icon={
-            <PointOfSale
-              sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
-            />
-          }
-        />
         <Box
           gridColumn="span 8"
           gridRow="span 2"
           backgroundColor={theme.palette.background.alt}
-          p="1rem"
+          p="1.5rem"
           borderRadius="0.55rem"
         >
-          
+          <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
+            Sales By Category
+          </Typography>
+         
+          <Typography
+            p="0 0.6rem"
+            fontSize="0.8rem"
+            sx={{ color: theme.palette.secondary[200] }}
+          >
+            Breakdown of real states and information via category for revenue
+            made for this year and total sales.
+          </Typography>
         </Box>
-        <StatBox
-          title="Monthly Sales"
-          value={data}
-          increase="+5%"
-          description="Since last month"
-          icon={
-            <PersonAdd
-              sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
-            />
-          }
-        />
-        <StatBox
-          title="Yearly Sales"
-          value={data && data.yearlySalesTotal}
-          increase="+43%"
-          description="Since last month"
-          icon={
-            <Traffic
-              sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
-            />
-          }
-        />
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          sx={{
+            "& .MuiDataGrid-root": {
+              border: "none",
+              borderRadius: "5rem",
+            },
+            "& .MuiDataGrid-cell": {
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-columnHeaders": {
+              backgroundColor: theme.palette.background.alt,
+              color: theme.palette.secondary[100],
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-virtualScroller": {
+              backgroundColor: theme.palette.background.alt,
+            },
+            "& .MuiDataGrid-footerContainer": {
+              backgroundColor: theme.palette.background.alt,
+              color: theme.palette.secondary[100],
+              borderTop: "none",
+            },
+            "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+              color: `${theme.palette.secondary[200]} !important`,
+            },
+          }}
+        >
+          <DataGrid
+            loading={ !review}
+            getRowId={(row) => row._id}
+            rows={(review && review) || []}
+            columns={columns1}
+            rowsPerPageOptions={[50, 100, 150]}
+            initialState={{
+              sorting: {
+                sortModel: [{ field: 'likecount', sort: 'desc' }],
+              },
+            }} 
+            onRowClick = {handleReview}
+            
+          />
+        </Box>
 
         {/* ROW 2 */}
+        
         <Box
           gridColumn="span 8"
+          gridRow="span 3"
+          backgroundColor={theme.palette.background.alt}
+          p="1.5rem"
+          borderRadius="0.55rem"
+        >
+          <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
+            Sales By Category
+          </Typography>
+         
+          <Typography
+            p="0 0.6rem"
+            fontSize="0.8rem"
+            sx={{ color: theme.palette.secondary[200] }}
+          >
+            Breakdown of real states and information via category for revenue
+            made for this year and total sales.
+          </Typography>
+        </Box>
+        <Box
+          gridColumn="span 4"
           gridRow="span 3"
           sx={{
             "& .MuiDataGrid-root": {
@@ -186,35 +302,20 @@ const HomePage = () => {
           }}
         >
           <DataGrid
-            loading={ !data1}
+            loading={ !referee}
             getRowId={(row) => row._id}
-            rows={(data1 && data1) || []}
+            rows={(referee && referee) || []}
             columns={columns}
             rowsPerPageOptions={[5, 10, 100]}
-            //onCellClick={handleOnCellClick(params: 	GridRowId)}
-            onRowClick = {handleEvent}
+            initialState={{
+              pagination: {
+                pageSize: 5,
+              },}}
+              rowHeight={85}
+              
+            onRowClick = {handleReferee}
             
           />
-        </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 3"
-          backgroundColor={theme.palette.background.alt}
-          p="1.5rem"
-          borderRadius="0.55rem"
-        >
-          <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
-            Sales By Category
-          </Typography>
-         
-          <Typography
-            p="0 0.6rem"
-            fontSize="0.8rem"
-            sx={{ color: theme.palette.secondary[200] }}
-          >
-            Breakdown of real states and information via category for revenue
-            made for this year and total sales.
-          </Typography>
         </Box>
       </Box>
     </Box>

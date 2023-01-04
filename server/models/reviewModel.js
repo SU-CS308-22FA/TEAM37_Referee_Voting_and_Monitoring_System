@@ -18,11 +18,19 @@ const reviewSchema = mongoose.Schema(
       type: String,
      }
     ],
+    likecount: {
+      type: Number,
+      default: 0,
+  },
     dislike: [
      {
       type: String,
      }
     ],
+    dislikecount: {
+      type: Number,
+      default: 0,
+  },
     report:[
       {
       type: String,    
