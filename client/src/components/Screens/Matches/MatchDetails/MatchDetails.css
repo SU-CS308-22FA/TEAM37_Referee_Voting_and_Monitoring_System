@@ -363,8 +363,8 @@ img.Image.team-icon {
 .game-time-container span {
   left: 50%;
   top: 30px;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 800;
   transform: translate(-50%);
   line-height: 1.2;
   margin-right: -22px;

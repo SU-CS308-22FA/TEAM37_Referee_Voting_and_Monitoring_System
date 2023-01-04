@@ -1,12 +1,14 @@
 .select-option-team {
   font-weight: bold;
-  width: 400px;
-  margin: 15px;
+  width: 380px;
+  margin: 30px;
+  margin-left: 0px;
+  margin-top: 0px;
   justify-content: space-between;
   display: flex;
 }
 
-.team-page-general-info-container{
+.team-page-general-info-container {
   margin-bottom: 25px;
   border-radius: 12px;
   background-color: whitesmoke;
@@ -20,6 +22,48 @@
   margin-left: auto;
 }
 
-.team-page-logo{
+.team-page-logo {
   position: absolute;
+}
+
+.team-info {
+  display: grid;
+  justify-content: space-evenly;
+  justify-items: center;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.team-detail-item {
+  display: block;
+  padding-right: 20px;
+  padding-left: 20px;
+  color: black;
+}
+
+.team-detail-item svg {
+  width: 17px;
+  height: 17px;
+  margin-right: 5px;
+}
+
+.team-detail-item p {
+  font-size: 15px;
+  font-weight: 700;
+  text-align: left;
+  margin: 0;
+}
+.team-detail-item span {
+  display: block;
+}
+.table td p{
+  text-align: center;
+  justify-content: center;
+  margin-top: 12px;
+}
+.table td img {
+  text-align: center;
+  justify-content: center;
+  margin-top: 4px;
 }

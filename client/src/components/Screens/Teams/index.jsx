@@ -7,7 +7,6 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import ListGroup from "react-bootstrap/ListGroup";
 
 import Select from "react-select";
 
@@ -15,6 +14,7 @@ const Teams = () => {
   const leagueOptions = [
     {
       value: 203,
+      name: "Super League",
       label: (
         <span>
           <img
@@ -23,6 +23,7 @@ const Teams = () => {
             }
             height="30px"
             width="25px"
+            alt="super league logo"
           />
           {" Super League"}
         </span>
@@ -30,6 +31,7 @@ const Teams = () => {
     },
     {
       value: 204,
+      name: "TFF 1. League",
       label: (
         <span>
           <img
@@ -38,6 +40,7 @@ const Teams = () => {
             }
             height="30px"
             width="25px"
+            alt="tff league 1 logo"
           />
           {" TFF 1. League"}
         </span>
@@ -45,6 +48,7 @@ const Teams = () => {
     },
     {
       value: 205,
+      name: "TFF 2. League",
       label: (
         <span>
           <img
@@ -53,6 +57,7 @@ const Teams = () => {
             }
             height="30px"
             width="25px"
+            alt="tff league 2 logo"
           />
           {" TFF 2. League"}
         </span>
@@ -60,6 +65,7 @@ const Teams = () => {
     },
     {
       value: 552,
+      name: "TFF 3. League 1",
       label: (
         <span>
           <img
@@ -68,6 +74,7 @@ const Teams = () => {
             }
             height="30px"
             width="25px"
+            alt="tff league 3.1 logo"
           />
           {" TFF 3. League 1"}
         </span>
@@ -75,6 +82,7 @@ const Teams = () => {
     },
     {
       value: 553,
+      name: "TFF 3. League 2",
       label: (
         <span>
           <img
@@ -83,6 +91,7 @@ const Teams = () => {
             }
             height="30px"
             width="25px"
+            alt="tff league 3.2 logo"
           />
           {" TFF 3. League 2"}
         </span>
@@ -90,6 +99,7 @@ const Teams = () => {
     },
     {
       value: 554,
+      name: "TFF 3. League 3",
       label: (
         <span>
           <img
@@ -98,6 +108,7 @@ const Teams = () => {
             }
             height="30px"
             width="25px"
+            alt="tff league 3.3 logo"
           />
           {" TFF 3. League 3"}
         </span>
@@ -121,16 +132,17 @@ const Teams = () => {
 
   const [teamData, setTeamData] = useState(null);
   useEffect(() => {
-    requestTeams(203).then((data) => {
+    requestTeams(
+      selectedLeagueOption["value"],
+      selectedSeasonOption["value"]
+    ).then((data) => {
       setTeamData(data);
     });
-  }, []);
+  }, [selectedSeasonOption]);
 
   if (teamData == null) {
     return null;
   }
-
-  console.log(teamData);
 
   return (
     <Container className="p-5">
@@ -147,45 +159,33 @@ const Teams = () => {
           isSearchable={true}
         />
       </div>
+
       <Row className="g-4">
         {teamData.length > 0 ? (
           teamData.map((teamElement, teamIdx) => (
-            <Col>
-              <Link to={`/teams/${teamElement.team.id}`}>
-                <Card border="success" style={{ width: "18rem" }} key={teamIdx}>
+            <Col key={teamIdx}>
+              <Link to={`/teams/${teamElement.team.id}`} state={teamElement}>
+                <Card
+                  border="success"
+                  style={{ width: "180px", height: "270px", padding: "5px" }}
+                  key={teamElement.team.id}
+                >
                   <Card.Img variant="top" src={teamElement.team.logo} />
+
                   <Card.Body>
                     <Card.Title>{teamElement.team.name}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">
                       {teamElement.team.country}, {teamElement.venue.city}
                     </Card.Subtitle>
-                    <ListGroup className="list-group-flush">
-                      <ListGroup.Item>
-                        <b>
-                          <em>Founded: </em>
-                        </b>
-                        {teamElement.team.founded}
-                      </ListGroup.Item>
-                      <ListGroup.Item>
-                        <b>
-                          <em>Venue: </em>
-                        </b>
-                        {teamElement.venue.name}
-                      </ListGroup.Item>
-                      <ListGroup.Item>
-                        <b>
-                          <em>Capacity: </em>
-                        </b>
-                        {teamElement.venue.capacity}
-                      </ListGroup.Item>
-                    </ListGroup>
                   </Card.Body>
                 </Card>
               </Link>
             </Col>
           ))
         ) : (
-          <p className="">No matches found for the selected criteria</p>
+          <p className="no-matches-container">
+            No matches found for the selected criteria
+          </p>
         )}
       </Row>
     </Container>

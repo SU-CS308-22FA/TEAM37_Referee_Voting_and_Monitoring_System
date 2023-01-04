@@ -35,7 +35,7 @@ const MatchScoreBoard = ({ data }) => {
       </div>
 
       <header className="general-scoreboard">
-        <a>
+        <Link to={`/teams/`}>
           <div className="home-team">
             <span className="teamName">
               <span>{data.teams.home.name}</span>
@@ -48,14 +48,14 @@ const MatchScoreBoard = ({ data }) => {
               src={data.teams.home.logo}
             />
           </div>
-        </a>
+        </Link>
         <div className="match-info">
           <span className="match-info-top">
             {data.goals.home} : {data.goals.away}
           </span>
           <span className="match-info-bottom">{data.fixture.status.long}</span>
         </div>
-        <a>
+        <Link to={`/teams/`}>
           <div className="away-team">
             <img
               alt="Away team logo"
@@ -68,7 +68,7 @@ const MatchScoreBoard = ({ data }) => {
               <span>{data.teams.away.name}</span>
             </span>
           </div>
-        </a>
+        </Link>
       </header>
 
       <div className="match-goals">
