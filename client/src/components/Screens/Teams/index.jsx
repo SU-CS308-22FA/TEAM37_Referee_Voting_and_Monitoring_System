@@ -183,9 +183,11 @@ const Teams = () => {
             </Col>
           ))
         ) : (
-          <p className="no-matches-container">
-            No matches found for the selected criteria
-          </p>
+          <div className="team-page-not-found-container">
+            <p className="no-matches-container">
+              No teams found for the selected criteria
+            </p>
+          </div>
         )}
       </Row>
     </Container>

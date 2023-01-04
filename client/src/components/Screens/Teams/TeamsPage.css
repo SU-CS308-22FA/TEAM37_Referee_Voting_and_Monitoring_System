@@ -57,13 +57,29 @@
 .team-detail-item span {
   display: block;
 }
-.table td p{
+
+.table td p {
   text-align: center;
   justify-content: center;
   margin-top: 12px;
 }
+
 .table td img {
   text-align: center;
   justify-content: center;
   margin-top: 4px;
+}
+
+.team-page-not-found-container {
+  margin-bottom: 25px;
+  border-radius: 12px;
+  background-color: whitesmoke;
+  color: black;
+
+  width: 100%;
+  height: 50px;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
 }
