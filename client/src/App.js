@@ -5,7 +5,8 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { themeSettings } from "./theme";
 import { useSelector, Provider} from "react-redux";
-
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
 
 
 import HomePage from "./components/Screens/HomePage";
@@ -13,12 +14,11 @@ import Signup from "./components/Screens/SignUp";
 import Login from "./components/Screens/Signin";
 import Navbar from "./components/Navbar";
 
-import UserProfile from "./components/Screens/UserPage/UpdateProfile";
+import UpdateProfile from "./components/Screens/UserPage/UpdateProfile";
 
 import DeleteProfile from "./components/Screens/UserPage/DeleteProfile";
-import "react-toastify/dist/ReactToastify.css";
-import "./App.css";
-import UserPage from "./components/Screens/UserPage/UserPage";
+
+import UserProfile from "./components/Screens/UserPage/UserProfile";
 import Ref from "./components/Screens/Referee";
 import { useMemo } from "react";
 import { createTheme } from "@mui/material/styles";
@@ -67,8 +67,8 @@ function App() {
           <Route path="/login" exact element={<Login />} />
           <Route path="/" element={<Navigate replace to="/login" />} />
 
-          <Route path="/profile" exact element={<UserPage />} />
-          <Route path="/profile/update" exact element={<UserProfile />} />
+          <Route path="/profile" exact element={<UserProfile />} />
+          <Route path="/profile/update" exact element={<UpdateProfile />} />
           <Route path="/profile/delete" exact element={<DeleteProfile />} />
 
           <Route path="/referees" exact element={<Ref />} />
