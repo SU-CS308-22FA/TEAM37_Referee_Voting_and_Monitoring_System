@@ -38,7 +38,6 @@ const HomePage = () => {
   };
   const handleMode = () => {
 
-    console.log(localStorage.getItem('mode'))
     //console.log(theme.palette.mode);
     if(theme.palette.mode === "dark"){
       localStorage.setItem("mode", "light");
@@ -72,7 +71,6 @@ const HomePage = () => {
     })
   },[])
 
-  console.log(review)
 
   const columns = [
     {
@@ -140,7 +138,7 @@ const HomePage = () => {
     details, // GridCallbackDetails
   ) => {
     console.log(params)
-    navigate(`/referee/${params.row.referee}`);
+    navigate(`/user/${params.row.user}`);
   }
  
   return (

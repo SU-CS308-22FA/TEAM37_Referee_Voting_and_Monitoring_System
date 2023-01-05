@@ -175,3 +175,21 @@ export const sendVerifyEmail = async (req, res) => {
     res.status(500).send({ message: "Internal Server Error" });
   }
 };
+export const getUserDetails = async (req, res) => {
+
+  try {
+
+    const user = await User.findById({_id: req.params.id });
+
+    if (!user) {
+     return
+    }
+    else {
+      
+      return res.status(200).json({ user});
+    }
+  }
+  catch (error) {
+    return res.status(400).send({ message: error.message });
+  }
+};

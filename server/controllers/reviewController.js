@@ -3,11 +3,11 @@ import Review from "../models/reviewModel.js";
 import { removeRating, updateRating } from "./refereeController.js";
 
 export const addReview = async (req, res) => {
-    const { referee, comment, rating, writtenBy, week } = req.body;
+    const { referee, comment, rating, writtenBy, week, user } = req.body;
   
     try {
         
-        if (!referee || !comment || !rating || !week)
+        if (!referee || !comment || !rating || !week || !user)
         {
           return res.status(400).json({ message: "All fields required" });
         }
@@ -15,6 +15,7 @@ export const addReview = async (req, res) => {
   
       const createdUser = await Review.create({
         referee,
+        user,
         comment,
         rating,
         writtenBy,
