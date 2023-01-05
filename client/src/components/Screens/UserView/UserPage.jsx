@@ -56,7 +56,7 @@ const UserPage = () => {
               <h4>Email</h4>
               <p>{user1.email}</p>
               
-              <p className={styles.sent_message}>{user1.email}</p>
+              <p className={styles.sent_message}>{}</p>
             </div>
 
             <div className={styles.data}>

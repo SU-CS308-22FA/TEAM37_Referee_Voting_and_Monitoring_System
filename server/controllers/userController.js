@@ -97,11 +97,11 @@ export const signup = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  const { fullname, nickname, email } = req.body;
+  const { fullname, nickname, email, imageurl } = req.body;
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      { $set: { fullname, nickname, email } },
+      { $set: { fullname, nickname, email, imageurl } },
       { new: true }
     );
     return res
