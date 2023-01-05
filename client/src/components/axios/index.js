@@ -329,4 +329,13 @@ export const getallReview = async () => {
   const { data: res } = await HTTP.get(`/review/getallreview`);
   return res.review;
 };
+export const getUserDetails = async (id) => {
+  
+  const { data: res } = await HTTP.get(`/users/${id}`);
+  return res;
+};
+export const getallReviewByUserId = async (id) => {
+  const { data: res } = await HTTP.get(`/review/${id}`);
+  return res;
+};
 

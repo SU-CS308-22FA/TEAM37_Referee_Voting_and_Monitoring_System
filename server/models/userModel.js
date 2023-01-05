@@ -26,6 +26,10 @@ const userSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  imageurl: {
+    type: String,
+    default: "https://listelist.com/wp-content/uploads/2016/04/zeki-yunus-kelly-620x375.jpg"
+},
 });
 
 export default mongoose.model("User", userSchema);

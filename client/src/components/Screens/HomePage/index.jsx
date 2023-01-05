@@ -38,7 +38,6 @@ const HomePage = () => {
   };
   const handleMode = () => {
 
-    console.log(localStorage.getItem('mode'))
     //console.log(theme.palette.mode);
     if(theme.palette.mode === "dark"){
       localStorage.setItem("mode", "light");
@@ -72,7 +71,6 @@ const HomePage = () => {
     })
   },[])
 
-  console.log(review)
 
   const columns = [
     {
@@ -140,7 +138,7 @@ const HomePage = () => {
     details, // GridCallbackDetails
   ) => {
     console.log(params)
-    navigate(`/referee/${params.row.referee}`);
+    navigate(`/user/${params.row.user}`);
   }
  
   return (
@@ -193,7 +191,7 @@ const HomePage = () => {
           borderRadius="0.55rem"
         >
           <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
-            Sales By Category
+            Empty Space for upcoming updates
           </Typography>
          
           <Typography
@@ -201,8 +199,7 @@ const HomePage = () => {
             fontSize="0.8rem"
             sx={{ color: theme.palette.secondary[200] }}
           >
-            Breakdown of real states and information via category for revenue
-            made for this year and total sales.
+            Updates coming soon!!!
           </Typography>
         </Box>
         <Box
@@ -260,7 +257,7 @@ const HomePage = () => {
           borderRadius="0.55rem"
         >
           <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
-            Sales By Category
+          Empty Space for upcoming updates
           </Typography>
          
           <Typography
@@ -268,8 +265,7 @@ const HomePage = () => {
             fontSize="0.8rem"
             sx={{ color: theme.palette.secondary[200] }}
           >
-            Breakdown of real states and information via category for revenue
-            made for this year and total sales.
+            Updates coming soon!!!
           </Typography>
         </Box>
         <Box
