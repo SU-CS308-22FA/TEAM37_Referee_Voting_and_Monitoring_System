@@ -7,7 +7,7 @@ import styles from "./styles.module.css";
 
 const UserProfile = () => {
   const user = JSON.parse(localStorage.getItem("user"));
-
+  console.log(user)
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [msg, setMsg] = useState("");
@@ -27,7 +27,7 @@ const UserProfile = () => {
     <div className={styles.wrapper}>
       <div className={styles.left}>
         <img
-          src="https://i.imgur.com/tdi3NGa_d.webp?maxwidth=760&fidelity=grand"
+          src={user.imageurl}
           alt="user"
           width="100"
         ></img>

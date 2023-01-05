@@ -114,6 +114,38 @@ const Teams = () => {
         </span>
       ),
     },
+    {
+      value: 206,
+      name: "Turkish Cup",
+      label: (
+        <span>
+          <img
+            src={
+              "https://upload.wikimedia.org/wikipedia/tr/6/61/Ziraat_Türkiye_Kupası_logosu.png"
+            }
+            height="30px"
+            width="25px"
+          />
+          {" Turkish Cup"}
+        </span>
+      ),
+    },
+    {
+      value: 551,
+      name: "Super Cup",
+      label: (
+        <span>
+          <img
+            src={
+              "https://upload.wikimedia.org/wikipedia/tr/6/61/Türkiye_Süper_Kupası_logo.png"
+            }
+            height="30px"
+            width="25px"
+          />
+          {" Super Cup"}
+        </span>
+      ),
+    },
   ];
   const seasonOptions = [];
   for (let i = 0; i < 11; i++) {

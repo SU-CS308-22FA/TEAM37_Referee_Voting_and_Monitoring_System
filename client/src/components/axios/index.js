@@ -333,4 +333,13 @@ export const requestUsers = async () => {
   const { data: res } = await HTTP.get(`/users/requestusers`);
   return res;
 };
+export const getUserDetails = async (id) => {
+  
+  const { data: res } = await HTTP.get(`/users/${id}`);
+  return res;
+};
+export const getallReviewByUserId = async (id) => {
+  const { data: res } = await HTTP.get(`/review/${id}`);
+  return res;
+};
 

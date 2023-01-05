@@ -16,8 +16,8 @@ const RefereeProfile = () => {
     const [likeCount, setLikeCount] = useState(0);
     const [filteredReviews, setFilteredReviews] = useState([]);
     const [week, setWeek] = useState('week1');
-    const [data, setData] = useState({referee:id, writtenBy: user.fullname , comment:'', rating:'', week:'' });
-
+    const [data, setData] = useState({referee:id, user: user._id, writtenBy: user.fullname , comment:'', rating:'', week:'' });
+    console.log(user)
  
     const [selectedReview, setSelectedReview] = useState({rating:'', id: '' , comment:'' });
     const [show, setShow] = useState(false);
@@ -32,6 +32,7 @@ const RefereeProfile = () => {
     useEffect(()=>{
       getRefereeDetails(id).then(res=>{
         setReferee(res)
+        console.log(referee)
       })
       fetchReview(id, week).then(res=>{
         setReviews(res)

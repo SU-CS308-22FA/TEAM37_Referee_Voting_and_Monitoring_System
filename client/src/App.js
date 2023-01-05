@@ -15,10 +15,10 @@ import Login from "./components/Screens/Signin";
 import Navbar from "./components/Navbar";
 
 import UpdateProfile from "./components/Screens/UserPage/UpdateProfile";
-
 import DeleteProfile from "./components/Screens/UserPage/DeleteProfile";
-
 import UserProfile from "./components/Screens/UserPage/UserProfile";
+import UserPage from "./components/Screens/UserView/UserPage";
+
 import Ref from "./components/Screens/Referee";
 import { useMemo } from "react";
 import { createTheme } from "@mui/material/styles";
@@ -70,24 +70,14 @@ function App() {
           <Route path="/profile" exact element={<UserProfile />} />
           <Route path="/profile/update" exact element={<UpdateProfile />} />
           <Route path="/profile/delete" exact element={<DeleteProfile />} />
+          <Route path="/user/:id" exact element={<UserPage />} />
 
           <Route path="/referees" exact element={<Ref />} />
           <Route path="/refereePanel" exact element={<RefereeAdminPanel />} />
-          <Route
-            path="/refereePanel/updateReferee/:id"
-            exact
-            element={<UpdateReferee />}
-          />
-          <Route
-            path="/refereePanel/deleteReferee/:id"
-            exact
-            element={<DeleteReferee />}
-          />
-          <Route
-            path="/refereePanel/addReferee"
-            exact
-            element={<AddReferee />}
-          />
+          <Route path="/refereePanel/updateReferee/:id" exact element={<UpdateReferee />}/>
+          <Route path="/refereePanel/deleteReferee/:id" exact element={<DeleteReferee />} />
+          <Route path="/refereePanel/addReferee" exact element={<AddReferee />}/>
+
           <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/password-reset/:id/:token" element={<PasswordReset />} />

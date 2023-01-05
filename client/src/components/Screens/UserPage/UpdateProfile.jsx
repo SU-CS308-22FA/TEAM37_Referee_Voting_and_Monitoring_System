@@ -13,7 +13,7 @@ export default function UserProfile({}) {
  
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const [data, setData] = useState({fullname: user.fullname , nickname: user.nickname, email: user.email });
+  const [data, setData] = useState({fullname: user.fullname , nickname: user.nickname, email: user.email, imageurl: user.imageurl });
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -61,6 +61,15 @@ export default function UserProfile({}) {
                onChange={handleChange}
                className={styles.input}
             />
+             <input
+               type="text"
+               placeholder="Image URL"
+               name="image"
+               value={data.imageurl}
+               onChange={handleChange}
+               className={styles.input}
+            />
+           
             
             <button type="submit" className={styles.green_btn}>           
               Save
