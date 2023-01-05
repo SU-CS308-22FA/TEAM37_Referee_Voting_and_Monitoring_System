@@ -36,22 +36,14 @@ const UserPage = () => {
 
   const columns1 = [
     
-    {
-      field: "writtenBy",
-      headerName: "From",
-      flex: 0.3,
-    },
+ 
     {
       field: 'comment',
       headerName: "Comment",
       flex: 0.3,
       sortable: false,
     },
-    {
-      field: "week",
-      headerName: "Week",
-      flex: 0.3, 
-    },
+
     {
       field: "likecount",
       headerName: "Likes",
@@ -73,7 +65,7 @@ const UserPage = () => {
     details, // GridCallbackDetails
   ) => {
     console.log(params)
-    //navigate(`/referee/${params.id}`);
+    navigate(`/referee/${params.row.referee}`);
   }
   return (
     <div className={styles.wrapper}>
