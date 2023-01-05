@@ -185,3 +185,24 @@ removeRating(done.referee, done.rating)
       return res.status(400).send({ message: error.message });
     }
   };
+  export const getAllReviewByUserId = async (req, res) => {
+    
+  
+
+    try {
+
+      const review = await Review.find({user: req.params.id });
+      if (!review) {
+       return
+      }
+      else {
+        
+        
+        return res.status(200).json({ review});
+      }
+  
+    }
+    catch (error) {
+      return res.status(400).send({ message: error.message });
+    }
+  };

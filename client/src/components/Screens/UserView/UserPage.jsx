@@ -1,20 +1,24 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FcCheckmark, FcCancel } from "react-icons/fc";
-import { getUserDetails } from "../../axios";
-
+import { getUserDetails, getallReviewByUserId } from "../../axios";
+import { DataGrid,} from "@mui/x-data-grid";
 import styles from "./styles.module.css";
+import {
+  Box,
+  useTheme,
+} from "@mui/material";
 
 const UserPage = () => {
 
   let { id } = useParams();
-
+  const theme = useTheme();
 
   const [user1, setUser] = useState({});
-
+  const [review, setReview] = useState({});
   const handleDelete = () => {
     console.log("inside page")
-    console.log(user1)
+    console.log(user1._id)
 
   };
 
@@ -22,11 +26,55 @@ const UserPage = () => {
     getUserDetails(id).then(res=>{
       setUser(res.user) 
       console.log('inside effect') 
-      console.log(res.user)
+      
     })
-  },[])
+    getallReviewByUserId(id).then(res=>{
+      setReview(res.review)
+    })
+      
+  },[id])
 
+  const columns1 = [
+    
+    {
+      field: "writtenBy",
+      headerName: "From",
+      flex: 0.3,
+    },
+    {
+      field: 'comment',
+      headerName: "Comment",
+      flex: 0.3,
+      sortable: false,
+    },
+    {
+      field: "week",
+      headerName: "Week",
+      flex: 0.3, 
+    },
+    {
+      field: "likecount",
+      headerName: "Likes",
+      flex: 0.3, 
+      type: Number,
+    },
+    {
+      field: "dislikecount",
+      headerName: "Dislikes",
+      flex: 0.3, 
+      type: Number,
+    },
+  ];
+  const navigate = useNavigate();
 
+  const handleReview: GridEventListener<'rowClick'> = (
+    params,  // GridRowParams
+    event,   // MuiEvent<React.MouseEvent<HTMLElement>>
+    details, // GridCallbackDetails
+  ) => {
+    console.log(params)
+    //navigate(`/referee/${params.id}`);
+  }
   return (
     <div className={styles.wrapper}>
       <div className={styles.left}>
@@ -79,8 +127,55 @@ const UserPage = () => {
             </div>
           </div>
         </div>
+
       </div>
-    </div>
+      
+    
+    <Box
+    gridColumn="span 4"
+    gridRow="span 2"
+    sx={{
+      "& .MuiDataGrid-root": {
+        border: "none",
+        borderRadius: "5rem",
+      },
+      "& .MuiDataGrid-cell": {
+        borderBottom: "none",
+      },
+      "& .MuiDataGrid-columnHeaders": {
+        backgroundColor: theme.palette.background.alt,
+        color: theme.palette.secondary[100],
+        borderBottom: "none",
+      },
+      "& .MuiDataGrid-virtualScroller": {
+        backgroundColor: theme.palette.background.alt,
+      },
+      "& .MuiDataGrid-footerContainer": {
+        backgroundColor: theme.palette.background.alt,
+        color: theme.palette.secondary[100],
+        borderTop: "none",
+      },
+      "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+        color: `${theme.palette.secondary[200]} !important`,
+      },
+    }}
+  >
+    <DataGrid
+      loading={ !review}
+      getRowId={(row) => row._id}
+      rows={(review && review) || []}
+      columns={columns1}
+      rowsPerPageOptions={[50, 100, 150]}
+      initialState={{
+        sorting: {
+          sortModel: [{ field: 'likecount', sort: 'desc' }],
+        },
+      }} 
+      onRowClick = {handleReview}
+      
+    />
+  </Box>
+  </div>
   );
 };
 
