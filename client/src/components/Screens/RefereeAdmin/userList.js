@@ -20,15 +20,10 @@ const UserList = ({users}) => {
                 <div key={single._id} className="col-md-4 col-lg-3 mb-5 ref-card">
                 
                 <Card style={{ width: '10.5rem' }}>
-                    <Card.Img variant="top" src={single.imageurl} />
-                    <Card.Body>
-                      <Card.Title>{single.name}</Card.Title>
-
-                      <Card.Text>
-                        {single.description.slice(0,80)+'...'}
-                      </Card.Text>               
-                      <Card.Link variant ="danger" href={`/refereePanel/updateUser/${single._id}`}>Update</Card.Link>
-                      <Card.Link variant ="danger" href={`/refereePanel/deleteUser/${single._id}`}>Delete</Card.Link>                      
+                    
+                    <Card.Body>             
+                      <Card.Link variant ="danger" href={`/profile/update/`}>Update</Card.Link>
+                      <Card.Link variant ="danger" href={`/profile/delete`}>Delete</Card.Link>                      
                     </Card.Body>
                   </Card>
                 </div>

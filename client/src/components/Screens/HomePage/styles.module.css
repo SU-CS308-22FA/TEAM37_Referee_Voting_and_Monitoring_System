@@ -10,4 +10,85 @@
   cursor: pointer;
   margin: 20px;
 }
+@import url('https://fonts.googleapis.com/css2?family=Roboto');
+*{
+    margin: 0;
+    padding: 20;
+    outline: 0;
+    font-family: 'Roboto', sans-serif;
+    text-align: match-parent;
+}
 
+body{
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.container{
+    position: absolute;
+    padding: 16px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 50%;
+    background-color:#FAFAFA;
+    
+    border-radius: 4px;
+    text-transform: uppercase;
+    
+}
+
+.title-box{
+    margin: 25px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    font-size: 1.5em;
+   
+    
+}
+.title-box #goals{
+    font-size: 1.8em;
+}
+.team{
+    width: 100px;
+}
+.team img{
+    height: 54px;
+    width: 54px;
+}
+.matches-table{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+.match-tile{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+.match-tile img{
+    width: 52px;
+    height: 52px;
+}
+.match-tile p{
+    font-size: 1.2rem;
+}
+
+.match-tile #goals{
+    font-size: 1.8rem;
+}
+.match-tile .team{
+    width: 100px;
+}

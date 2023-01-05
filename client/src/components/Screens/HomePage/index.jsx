@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { fetchReferee, getallReview} from "../../axios";
 import FlexBetween from "./components/FlexBetween";
 import Header from "./components/Header";
+import ReactDOM from 'react-dom';
 import { useNavigate} from "react-router-dom";
 import {
   DownloadOutlined,
@@ -26,9 +27,10 @@ import {
   Avatar,
 } from "@mui/material";
 import { DataGrid,} from "@mui/x-data-grid";
-
+import Scoreboard from './scoreBoard';
 
 const HomePage = () => {
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -124,6 +126,7 @@ const HomePage = () => {
       type: Number,
     },
   ];
+
   const navigate = useNavigate();
 
   const handleReferee: GridEventListener<'rowClick'> = (
@@ -144,7 +147,7 @@ const HomePage = () => {
   }
  
   return (
-
+      
       <Box m="1.5rem 2.5rem">
       <FlexBetween>
         <Header title="Home Page" subtitle="Welcome to System" />
@@ -272,6 +275,7 @@ const HomePage = () => {
             made for this year and total sales.
           </Typography>
         </Box>
+    
         <Box
           gridColumn="span 4"
           gridRow="span 3"
@@ -317,9 +321,10 @@ const HomePage = () => {
             
           />
         </Box>
+      
       </Box>
     </Box>
   );
 };
-
+//ReactDOM.render(<HomePage />, document.getElementById('root'));
 export default HomePage;

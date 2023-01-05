@@ -19,7 +19,7 @@ const RefereeList = ({referee}) => {
             {referee? referee.map(single=>(
                 <div key={single._id} className="col-md-4 col-lg-3 mb-5 ref-card">
                 
-                <Card >
+                <Card style={{ width: '10.5rem' }}>
                     <Card.Img variant="top" src={single.imageurl} />
                     <Card.Body>
                       <Card.Title>{single.name}</Card.Title>

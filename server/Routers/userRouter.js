@@ -2,7 +2,7 @@ import express from "express";
 
 const router = express.Router();
 
-import { Gsignin,signup,signin, updateUser,deleteUser,verifyEmail,sendVerifyEmail}  from "../controllers/userController.js";
+import { Gsignin,signup,signin, updateUser,deleteUser,verifyEmail,sendVerifyEmail,requestUsers}  from "../controllers/userController.js";
 
 
 router.post("/Gsignin", Gsignin);
@@ -17,7 +17,7 @@ router.post("/signin", signin);
 router.put("/:id", updateUser);
 
 router.delete("/:id",deleteUser);
-
+router.get("/requestusers", requestUsers);
 router.get("/:id/verify/:token", verifyEmail);
 
 router.post("/sendMeMail", sendVerifyEmail);
